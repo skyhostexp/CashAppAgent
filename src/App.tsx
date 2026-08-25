@@ -65,6 +65,7 @@ export default function App() {
   }, [savedOrders]);
 
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const totalCartAmount = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
 
   const handleAddToCart = (product: AccountProduct) => {
     setCart((prev) => {
@@ -127,6 +128,7 @@ export default function App() {
       {/* Header with Navigation & Announcement bar */}
       <Header
         cartCount={totalCartCount}
+        cartTotal={totalCartAmount}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
         onSelectCategory={(cat) => {
