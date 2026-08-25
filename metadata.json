@@ -1,0 +1,7 @@
+{
+  "name": "CashappsAgent",
+  "description": "Buy Verified Cash App Accounts (BTC Enabled & Non-BTC) with instant delivery and secure crypto checkout at CashappsAgent.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
