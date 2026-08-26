@@ -186,47 +186,25 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
             <ul className="space-y-2">
               <li>
                 <a 
-                  href="/accounts"
-                  data-full-url="https://cashappagent.com/accounts"
-                  onClick={(e) => handleLinkClick('all-accounts', e)} 
-                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
-                >
-                  <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>All Accounts Catalog</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/btc-accounts"
-                  data-full-url="https://cashappagent.com/btc-accounts"
-                  onClick={(e) => handleLinkClick('btc-accounts', e)} 
-                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
-                >
-                  <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>BTC Enabled Accounts</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/non-btc-accounts"
-                  data-full-url="https://cashappagent.com/non-btc-accounts"
-                  onClick={(e) => handleLinkClick('non-btc-accounts', e)} 
-                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
-                >
-                  <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>Non-BTC USD Accounts</span>
-                </a>
-              </li>
-              <li>
-                <a 
                   href="/blog"
                   data-full-url="https://cashappagent.com/blog"
                   onClick={(e) => handleLinkClick('blog', e)} 
-                  className="text-white hover:text-[#00D632] font-semibold transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer group"
                 >
-                  <ArrowRight className="w-3 h-3 text-[#00D632]" />
-                  <span>Official Blog &amp; Guides</span>
-                  <span className="bg-[#00D632]/20 text-[#00D632] text-[9px] font-bold px-1.5 py-0.5 rounded">NEW</span>
+                  <ArrowRight className="w-3 h-3 text-[#00D632] group-hover:translate-x-0.5 transition-transform" />
+                  <span className="font-semibold text-white">Blog &amp; Guides</span>
+                  <span className="bg-[#00D632]/20 text-[#00D632] text-[9px] font-bold px-1.5 py-0.2 rounded">NEW</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/faq"
+                  data-full-url="https://cashappagent.com/faq"
+                  onClick={(e) => handleLinkClick('faq', e)} 
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer group"
+                >
+                  <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-[#00D632] group-hover:translate-x-0.5 transition-all" />
+                  <span>FAQ &amp; Warranty</span>
                 </a>
               </li>
               <li>
@@ -234,10 +212,10 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
                   href="/safety-guide"
                   data-full-url="https://cashappagent.com/safety-guide"
                   onClick={(e) => handleLinkClick('safety-guide', e)} 
-                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer group"
                 >
-                  <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>7-Day Anti-Ban Blueprint</span>
+                  <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-[#00D632] group-hover:translate-x-0.5 transition-all" />
+                  <span>Safety Guide (Anti-Ban)</span>
                 </a>
               </li>
               <li>
@@ -245,40 +223,40 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
                   href="/bulk-orders"
                   data-full-url="https://cashappagent.com/bulk-orders"
                   onClick={(e) => handleLinkClick('bulk-orders', e)} 
-                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer group"
                 >
-                  <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>Agency Bulk Bundles</span>
+                  <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-[#00D632] group-hover:translate-x-0.5 transition-all" />
+                  <span>Bulk Orders &amp; Bundles</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/accounts"
+                  data-full-url="https://cashappagent.com/accounts"
+                  onClick={(e) => handleLinkClick('all-accounts', e)} 
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer group"
+                >
+                  <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-[#00D632] group-hover:translate-x-0.5 transition-all" />
+                  <span>All Accounts Catalog</span>
                 </a>
               </li>
               <li>
                 <button
                   onClick={onOpenOrderLookup}
-                  className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1.5 transition-colors cursor-pointer group"
                 >
-                  <Search className="w-3 h-3 text-emerald-400" />
-                  <span>Track Existing Order</span>
+                  <Search className="w-3 h-3 text-[#00D632] group-hover:scale-110 transition-transform" />
+                  <span>Track Order</span>
                 </button>
-              </li>
-              <li>
-                <a 
-                  href="/faq"
-                  data-full-url="https://cashappagent.com/faq"
-                  onClick={(e) => handleLinkClick('faq', e)} 
-                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
-                >
-                  <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>FAQs &amp; Guarantees</span>
-                </a>
               </li>
               <li>
                 <a 
                   href="/contact"
                   data-full-url="https://cashappagent.com/contact"
                   onClick={(e) => handleLinkClick('contact', e)} 
-                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer group"
                 >
-                  <ArrowRight className="w-3 h-3 text-slate-600" />
+                  <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-[#00D632] group-hover:translate-x-0.5 transition-all" />
                   <span>Contact 24/7 Desk</span>
                 </a>
               </li>
