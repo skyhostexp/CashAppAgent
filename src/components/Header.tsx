@@ -10,11 +10,6 @@ import {
   Menu, 
   X, 
   ShieldCheck, 
-  Zap,
-  Flame,
-  Lock,
-  Headphones,
-  Sparkles,
   ChevronRight
 } from 'lucide-react';
 
@@ -131,27 +126,19 @@ export const Header: React.FC<HeaderProps> = ({
           </a>
         </div>
 
-        {/* Live Stock Pill Badge (Desktop Only) */}
-        <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/40 rounded-full text-xs font-semibold text-emerald-300 shadow-inner">
-          <Flame className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-          <span>14 Accounts In Stock</span>
-          <span className="w-1 h-1 rounded-full bg-emerald-400" />
-          <span className="text-[11px] text-slate-400">Auto-Email Dispatch</span>
-        </div>
-
         {/* Desktop Navigation Tabs */}
-        <nav className="hidden lg:flex items-center gap-1.5 p-1 bg-slate-900/60 border border-slate-800/80 rounded-2xl">
+        <nav className="hidden lg:flex items-center gap-1.5 p-1 bg-slate-900/80 border border-emerald-950/80 rounded-2xl shadow-inner">
           {navLinks.map((link) => (
             <a
               key={link.label}
               id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
               href={link.href}
               onClick={link.onClick}
-              className="relative px-3.5 py-2 text-xs xl:text-sm font-semibold text-slate-300 hover:text-white rounded-xl hover:bg-emerald-500/10 hover:text-emerald-300 transition-all flex items-center gap-1.5 group"
+              className="relative px-3.5 py-2 text-xs xl:text-sm font-semibold text-slate-300 hover:text-[#00D632] rounded-xl hover:bg-[#00D632]/10 hover:border-[#00D632]/30 border border-transparent hover:shadow-[0_0_15px_rgba(0,214,50,0.18)] transition-all duration-200 flex items-center gap-1.5 group"
             >
-              <span>{link.label}</span>
+              <span className="group-hover:drop-shadow-[0_0_8px_rgba(0,214,50,0.4)]">{link.label}</span>
               {link.badge && (
-                <span className="bg-gradient-to-r from-amber-500 to-[#00D632] text-black text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase shadow-sm">
+                <span className="bg-gradient-to-r from-amber-400 via-[#00D632] to-[#00FF50] text-black text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase shadow-sm">
                   {link.badge}
                 </span>
               )}
@@ -159,22 +146,8 @@ export const Header: React.FC<HeaderProps> = ({
           ))}
         </nav>
 
-        {/* Action Controls (Support, Track Order, Cart) */}
+        {/* Action Controls (Track Order, Cart) */}
         <div className="flex items-center gap-2 sm:gap-3">
-          
-          {/* Quick Telegram Support Button (Desktop/Tablet) */}
-          <a
-            id="header-telegram-quick-btn"
-            href={CONTACT_INFO.telegramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-sky-300 bg-sky-950/40 hover:bg-sky-900/60 border border-sky-800/40 rounded-xl transition-all"
-            title="Chat directly with our verified Telegram agent"
-          >
-            <Headphones className="w-3.5 h-3.5 text-sky-400" />
-            <span>24/7 Agent</span>
-          </a>
-
           {/* Order Tracking Radar Button */}
           <button
             id="header-track-order-btn"
@@ -217,15 +190,6 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#0c1117] border-b border-emerald-900/40 px-4 py-5 space-y-4 animate-in slide-in-from-top-2 shadow-2xl">
-          {/* Mobile Stock & Dispatch Badge */}
-          <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-xs font-semibold text-emerald-300">
-            <div className="flex items-center gap-2">
-              <Flame className="w-4 h-4 text-amber-400" />
-              <span>14 Accounts In Stock Ready</span>
-            </div>
-            <span className="text-[11px] text-[#00D632] font-bold">5-15 min dispatch</span>
-          </div>
-
           {/* Mobile Fast Action Buttons */}
           <div className="grid grid-cols-2 gap-2">
             <button
@@ -259,16 +223,16 @@ export const Header: React.FC<HeaderProps> = ({
                   if (link.onClick) link.onClick();
                   setMobileMenuOpen(false);
                 }}
-                className="flex items-center justify-between p-3 rounded-xl text-slate-200 font-semibold text-sm hover:bg-slate-800/80 hover:text-emerald-300 transition-colors border border-transparent hover:border-slate-700"
+                className="flex items-center justify-between p-3 rounded-xl text-slate-200 font-semibold text-sm hover:bg-[#00D632]/10 hover:text-[#00D632] hover:border-[#00D632]/30 transition-all duration-200 border border-transparent group"
               >
-                <span>{link.label}</span>
+                <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
                 <div className="flex items-center gap-2">
                   {link.badge && (
-                    <span className="bg-gradient-to-r from-amber-500 to-[#00D632] text-black text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    <span className="bg-gradient-to-r from-amber-400 via-[#00D632] to-[#00FF50] text-black text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">
                       {link.badge}
                     </span>
                   )}
-                  <ChevronRight className="w-4 h-4 text-slate-500" />
+                  <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-[#00D632] transition-colors" />
                 </div>
               </a>
             ))}
