@@ -47,7 +47,7 @@ export const FloatingContactBar: React.FC<FloatingContactBarProps> = () => {
           title="Chat on Telegram @CashappsAgent"
         >
           <Send className="w-4 h-4" />
-          <span className="hidden sm:inline">Telegram Support</span>
+          <span className="hidden sm:inline">Telegram</span>
         </a>
 
         {/* Floating WhatsApp Button */}

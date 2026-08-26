@@ -19,6 +19,7 @@ import { CryptoCheckoutModal } from './components/CryptoCheckoutModal';
 import { CartDrawer } from './components/CartDrawer';
 import { OrderLookupModal } from './components/OrderLookupModal';
 import { FloatingContactBar } from './components/FloatingContactBar';
+import { LiveOrderNotification } from './components/LiveOrderNotification';
 import { PageTransitionLoader } from './components/PageTransitionLoader';
 
 // Dedicated Page View Components
@@ -382,10 +383,15 @@ export default function App() {
         savedOrders={savedOrders}
       />
 
-      {/* Floating Telegram, WhatsApp & Cart Bar */}
+      {/* Floating Telegram & WhatsApp Bar (Bottom Right) */}
       <FloatingContactBar
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
+      />
+
+      {/* Real-time Live Order Notification (Bottom Left) */}
+      <LiveOrderNotification
+        onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
       />
     </div>
   );
