@@ -2,6 +2,7 @@ export type AccountCategory = 'btc-enabled' | 'non-btc';
 
 export type PageView = 
   | 'home' 
+  | 'blog'
   | 'all-accounts' 
   | 'btc-accounts' 
   | 'non-btc-accounts' 

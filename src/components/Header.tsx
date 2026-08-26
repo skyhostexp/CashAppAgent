@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CashAppLogo } from './CashAppLogo';
 import { CONTACT_INFO } from '../data/cryptoGateways';
 import { PageView } from '../types';
+import { PAGE_ROUTES } from '../utils/navigation';
 import { 
   Send, 
   Phone, 
@@ -13,14 +14,18 @@ import {
   ShieldCheck, 
   ChevronRight,
   Zap,
-  Sparkles
+  Sparkles,
+  BookOpen,
+  RotateCw
 } from 'lucide-react';
 
 interface HeaderProps {
   cartCount: number;
   cartTotal?: number;
   currentPage?: PageView;
+  isReloading?: boolean;
   onNavigate: (page: PageView) => void;
+  onReload?: () => void;
   onOpenCart: () => void;
   onOpenOrderLookup: () => void;
 }
@@ -29,7 +34,9 @@ export const Header: React.FC<HeaderProps> = ({
   cartCount,
   cartTotal = 0,
   currentPage = 'home',
+  isReloading = false,
   onNavigate,
+  onReload,
   onOpenCart,
   onOpenOrderLookup
 }) => {
@@ -62,6 +69,7 @@ export const Header: React.FC<HeaderProps> = ({
     { label: 'All Accounts', page: 'all-accounts' },
     { label: 'BTC Enabled', page: 'btc-accounts', badge: 'Hot' },
     { label: 'Non-BTC', page: 'non-btc-accounts' },
+    { label: 'Blog', page: 'blog', badge: 'New' },
     { label: 'Safety Guide', page: 'safety-guide' },
     { label: 'Bulk Orders', page: 'bulk-orders' },
     { label: 'FAQ', page: 'faq' },
@@ -72,7 +80,6 @@ export const Header: React.FC<HeaderProps> = ({
     if (e) e.preventDefault();
     onNavigate(page);
     setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -103,8 +110,32 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Direct Support Badges */}
-          <div className="flex items-center gap-2.5 shrink-0 text-xs font-semibold">
+          {/* Direct Support Badges, Track Order & Quick Reload Option */}
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 text-xs font-semibold">
+            {/* Top Header Track Order */}
+            <button
+              id="top-bar-track-order-btn"
+              onClick={onOpenOrderLookup}
+              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-emerald-950/70 hover:bg-emerald-900/90 border border-emerald-500/40 text-emerald-300 hover:text-emerald-100 transition-all text-[11px] font-bold shadow-sm cursor-pointer active:scale-95"
+              title="Track Order Status & Credentials"
+            >
+              <Search className="w-3 h-3 text-[#00D632]" />
+              <span>Track Order</span>
+            </button>
+
+            {onReload && (
+              <button
+                id="header-reload-btn"
+                onClick={onReload}
+                disabled={isReloading}
+                title="Reload Current Page Data"
+                className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-700/40 text-[11px] text-emerald-300 hover:text-white transition-all cursor-pointer disabled:opacity-50"
+              >
+                <RotateCw className={`w-3 h-3 text-[#00D632] ${isReloading ? 'animate-spin' : ''}`} />
+                <span className="hidden sm:inline">Reload</span>
+              </button>
+            )}
+
             <a
               id="top-bar-telegram-link"
               href={CONTACT_INFO.telegramUrl}
@@ -136,25 +167,30 @@ export const Header: React.FC<HeaderProps> = ({
         
         {/* Brand Logo (Navigates to Home) */}
         <div className="flex items-center gap-3">
-          <button 
+          <a
             id="brand-logo-btn"
+            href={PAGE_ROUTES.home.path}
+            data-full-url={PAGE_ROUTES.home.fullUrl}
             onClick={(e) => handleNavClick('home', e)}
             className="flex items-center gap-2.5 group cursor-pointer text-left focus:outline-none"
           >
             <CashAppLogo size="md" />
-          </button>
+          </a>
         </div>
 
         {/* Desktop Navigation Menu */}
         <nav className="hidden lg:flex items-center gap-1 p-1 bg-slate-900/80 border border-emerald-900/40 rounded-2xl shadow-inner backdrop-blur-md">
           {navLinks.map((link) => {
             const isActive = currentPage === link.page;
+            const route = PAGE_ROUTES[link.page];
             return (
-              <button
+              <a
                 key={link.label}
                 id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                href={route.path}
+                data-full-url={route.fullUrl}
                 onClick={(e) => handleNavClick(link.page, e)}
-                className={`relative px-3.5 py-2 text-xs xl:text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1.5 group cursor-pointer ${
+                className={`relative px-3 py-2 text-xs xl:text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1.5 group cursor-pointer ${
                   isActive
                     ? 'text-[#00D632] bg-[#00D632]/15 border border-[#00D632]/40 shadow-[0_0_15px_rgba(0,214,50,0.2)] font-bold'
                     : 'text-slate-300 hover:text-[#00D632] hover:bg-[#00D632]/10 hover:border-[#00D632]/30 border border-transparent hover:shadow-[0_0_15px_rgba(0,214,50,0.18)]'
@@ -166,45 +202,35 @@ export const Header: React.FC<HeaderProps> = ({
                     {link.badge}
                   </span>
                 )}
-              </button>
+              </a>
             );
           })}
         </nav>
 
-        {/* Action Controls (Track Order, Cart & Mobile Toggle) */}
+        {/* Action Controls (Cart & Mobile Toggle) */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Order Tracking Radar Button */}
-          <button
-            id="header-track-order-btn"
-            onClick={onOpenOrderLookup}
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-700/40 hover:border-emerald-500/50 rounded-xl transition-all active:scale-95 shadow-sm cursor-pointer"
-            title="Track Order Status & Credentials"
-          >
-            <Search className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Track Order</span>
-          </button>
-
-          {/* High-Tech Checkout / Cart Button */}
+          {/* High-Tech Cart Button */}
           <button
             id="header-cart-button"
             onClick={onOpenCart}
-            className="relative flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#00A827] via-[#00D632] to-[#00FF3D] hover:from-[#00B92B] hover:to-[#00FF50] text-black font-black text-xs sm:text-sm rounded-xl shadow-lg shadow-[#00D632]/25 hover:shadow-[#00D632]/45 active:scale-95 transition-all cursor-pointer ring-1 ring-white/30"
+            aria-label="View Shopping Cart"
+            title="View Shopping Cart"
+            className="relative flex items-center justify-center gap-2 px-3.5 py-2.5 bg-gradient-to-r from-[#00A827] via-[#00D632] to-[#00FF3D] hover:from-[#00B92B] hover:to-[#00FF50] text-black font-black text-xs sm:text-sm rounded-xl shadow-lg shadow-[#00D632]/25 hover:shadow-[#00D632]/45 active:scale-95 transition-all cursor-pointer ring-1 ring-white/30"
           >
             <ShoppingBag className="w-4 h-4 text-black stroke-[2.5]" />
-            <span>Checkout</span>
-            {cartCount > 0 ? (
+            {cartCount > 0 && (
               <span className="bg-black text-[#00D632] text-xs font-black px-2 py-0.5 rounded-full flex items-center gap-1">
                 <span>{cartCount}</span>
                 {cartTotal > 0 && <span className="text-[10px] text-slate-300 font-bold border-l border-slate-700 pl-1">${cartTotal}</span>}
               </span>
-            ) : null}
+            )}
           </button>
 
           {/* Mobile Menu Toggle Button */}
           <button
             id="mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700/60 text-slate-300 hover:text-[#00D632] hover:border-[#00D632]/40 transition-colors"
+            className="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700/60 text-slate-300 hover:text-[#00D632] hover:border-[#00D632]/40 transition-colors cursor-pointer"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -240,7 +266,9 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Navigation Links */}
           <div className="space-y-1 pt-1">
-            <button
+            <a
+              href={PAGE_ROUTES.home.path}
+              data-full-url={PAGE_ROUTES.home.fullUrl}
               onClick={(e) => handleNavClick('home', e)}
               className={`w-full flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
                 currentPage === 'home'
@@ -250,13 +278,16 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <span>Home Overview</span>
               <ChevronRight className="w-4 h-4 text-slate-500" />
-            </button>
+            </a>
 
             {navLinks.map((link) => {
               const isActive = currentPage === link.page;
+              const route = PAGE_ROUTES[link.page];
               return (
-                <button
+                <a
                   key={link.label}
+                  href={route.path}
+                  data-full-url={route.fullUrl}
                   onClick={(e) => handleNavClick(link.page, e)}
                   className={`w-full flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all duration-200 border ${
                     isActive
@@ -273,7 +304,7 @@ export const Header: React.FC<HeaderProps> = ({
                     )}
                     <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-[#00D632] transition-colors" />
                   </div>
-                </button>
+                </a>
               );
             })}
           </div>

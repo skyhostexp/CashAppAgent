@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { AccountCategory, AccountProduct, CartItem, OrderDetails, PageView } from './types';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
@@ -19,32 +19,25 @@ import { CryptoCheckoutModal } from './components/CryptoCheckoutModal';
 import { CartDrawer } from './components/CartDrawer';
 import { OrderLookupModal } from './components/OrderLookupModal';
 import { FloatingContactBar } from './components/FloatingContactBar';
+import { PageTransitionLoader } from './components/PageTransitionLoader';
 
 // Dedicated Page View Components
 import { AllAccountsPage } from './components/pages/AllAccountsPage';
 import { BtcAccountsPage } from './components/pages/BtcAccountsPage';
 import { NonBtcAccountsPage } from './components/pages/NonBtcAccountsPage';
+import { BlogPage } from './components/pages/BlogPage';
 import { FaqPage } from './components/pages/FaqPage';
 import { SafetyGuidePage } from './components/pages/SafetyGuidePage';
 import { BulkOrdersPage } from './components/pages/BulkOrdersPage';
 import { ContactPage } from './components/pages/ContactPage';
 
+import { getPageFromLocation, setBrowserPage } from './utils/navigation';
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageView>(() => {
-    try {
-      const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (hash === 'all-accounts' || hash === 'accounts' || hash === 'catalog') return 'all-accounts';
-      if (hash === 'btc-accounts' || hash === 'btc-enabled' || hash === 'btc') return 'btc-accounts';
-      if (hash === 'non-btc-accounts' || hash === 'non-btc') return 'non-btc-accounts';
-      if (hash === 'faq' || hash === 'help') return 'faq';
-      if (hash === 'safety-guide' || hash === 'safety') return 'safety-guide';
-      if (hash === 'bulk-orders' || hash === 'bulk') return 'bulk-orders';
-      if (hash === 'contact' || hash === 'support') return 'contact';
-      return 'home';
-    } catch {
-      return 'home';
-    }
-  });
+  const [currentPage, setCurrentPage] = useState<PageView>(() => getPageFromLocation());
+  const [isReloading, setIsReloading] = useState(false);
+  const [targetLoadingPage, setTargetLoadingPage] = useState<PageView>(currentPage);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   const [selectedCategory, setSelectedCategory] = useState<'all' | AccountCategory>('all');
   
@@ -71,22 +64,19 @@ export default function App() {
   const [checkoutItems, setCheckoutItems] = useState<CartItem[]>([]);
   const [isOrderLookupOpen, setIsOrderLookupOpen] = useState(false);
 
-  // Sync hash with browser navigation
+  // Sync browser back/forward history and hash changes
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (hash === 'all-accounts' || hash === 'accounts' || hash === 'catalog') setCurrentPage('all-accounts');
-      else if (hash === 'btc-accounts' || hash === 'btc-enabled' || hash === 'btc') setCurrentPage('btc-accounts');
-      else if (hash === 'non-btc-accounts' || hash === 'non-btc') setCurrentPage('non-btc-accounts');
-      else if (hash === 'faq' || hash === 'help') setCurrentPage('faq');
-      else if (hash === 'safety-guide' || hash === 'safety') setCurrentPage('safety-guide');
-      else if (hash === 'bulk-orders' || hash === 'bulk') setCurrentPage('bulk-orders');
-      else if (hash === 'contact' || hash === 'support') setCurrentPage('contact');
-      else if (hash === '' || hash === 'home') setCurrentPage('home');
+    const handleLocationChange = () => {
+      const page = getPageFromLocation();
+      setCurrentPage(page);
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
   // Sync cart to local storage
@@ -153,10 +143,46 @@ export default function App() {
     setCart([]);
   };
 
-  const navigateTo = (page: PageView) => {
-    setCurrentPage(page);
-    window.location.hash = page === 'home' ? '' : page;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  /**
+   * Smooth animated page transition with reload indicator and URL pushState update
+   */
+  const navigateTo = useCallback((page: PageView) => {
+    setTargetLoadingPage(page);
+    setIsReloading(true);
+    setLoadingProgress(25);
+
+    setTimeout(() => {
+      setLoadingProgress(70);
+    }, 100);
+
+    setTimeout(() => {
+      setLoadingProgress(100);
+      setCurrentPage(page);
+      setBrowserPage(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      setTimeout(() => {
+        setIsReloading(false);
+        setLoadingProgress(0);
+      }, 250);
+    }, 280);
+  }, []);
+
+  /**
+   * Manual Reload Trigger
+   */
+  const handleReload = () => {
+    setIsReloading(true);
+    setLoadingProgress(30);
+    setTimeout(() => setLoadingProgress(75), 150);
+    setTimeout(() => {
+      setLoadingProgress(100);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        setIsReloading(false);
+        setLoadingProgress(0);
+      }, 200);
+    }, 350);
   };
 
   const scrollToAccounts = () => {
@@ -175,19 +201,28 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0f12] text-slate-100 selection:bg-[#00D632] selection:text-black flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
-      {/* Header with Navigation & Announcement bar */}
+    <div className="min-h-screen bg-[#0b0f12] text-slate-100 selection:bg-[#00D632] selection:text-black flex flex-col font-['Plus_Jakarta_Sans',sans-serif] relative">
+      {/* Top Reload / Route Progress Bar & Indicator */}
+      <PageTransitionLoader
+        isLoading={isReloading}
+        targetPage={targetLoadingPage}
+        progress={loadingProgress}
+      />
+
+      {/* Header with Navigation, Reload button & Announcement bar */}
       <Header
         cartCount={totalCartCount}
         cartTotal={totalCartAmount}
         currentPage={currentPage}
+        isReloading={isReloading}
         onNavigate={navigateTo}
+        onReload={handleReload}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
       />
 
       <main className="flex-grow">
-        {/* VIEW 1: Dedicated All Accounts Page */}
+        {/* VIEW 1: Dedicated All Accounts Page (/accounts) */}
         {currentPage === 'all-accounts' && (
           <AllAccountsPage
             onBuyNow={handleBuyNow}
@@ -196,7 +231,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 2: Dedicated BTC Enabled Accounts Page */}
+        {/* VIEW 2: Dedicated BTC Enabled Accounts Page (/btc-accounts) */}
         {currentPage === 'btc-accounts' && (
           <BtcAccountsPage
             onBuyNow={handleBuyNow}
@@ -205,7 +240,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 3: Dedicated Non-BTC USD Accounts Page */}
+        {/* VIEW 3: Dedicated Non-BTC USD Accounts Page (/non-btc-accounts) */}
         {currentPage === 'non-btc-accounts' && (
           <NonBtcAccountsPage
             onBuyNow={handleBuyNow}
@@ -214,7 +249,15 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 4: Dedicated FAQ & Warranty Page */}
+        {/* VIEW 4: Dedicated Official Blog & Guides Page (/blog) */}
+        {currentPage === 'blog' && (
+          <BlogPage
+            onNavigateHome={() => navigateTo('home')}
+            onExploreAccounts={() => navigateTo('all-accounts')}
+          />
+        )}
+
+        {/* VIEW 5: Dedicated FAQ & Warranty Page (/faq) */}
         {currentPage === 'faq' && (
           <FaqPage
             onNavigateHome={() => navigateTo('home')}
@@ -222,7 +265,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 5: Dedicated Safety & Anti-Ban Warm-up Guide Page */}
+        {/* VIEW 6: Dedicated Safety & Anti-Ban Warm-up Guide Page (/safety-guide) */}
         {currentPage === 'safety-guide' && (
           <SafetyGuidePage
             onNavigateHome={() => navigateTo('home')}
@@ -230,7 +273,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 6: Dedicated Bulk Orders & Wholesale Page */}
+        {/* VIEW 7: Dedicated Bulk Orders & Wholesale Page (/bulk-orders) */}
         {currentPage === 'bulk-orders' && (
           <BulkOrdersPage
             onNavigateHome={() => navigateTo('home')}
@@ -241,7 +284,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 7: Dedicated Contact & Official Support Desk Page */}
+        {/* VIEW 8: Dedicated Contact & Official Support Desk Page (/contact) */}
         {currentPage === 'contact' && (
           <ContactPage
             onNavigateHome={() => navigateTo('home')}
@@ -249,7 +292,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 8: Primary Home Overview */}
+        {/* VIEW 9: Primary Home Overview (/) */}
         {currentPage === 'home' && (
           <>
             {/* Hero Section */}

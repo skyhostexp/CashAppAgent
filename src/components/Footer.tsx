@@ -185,49 +185,71 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
             </h4>
             <ul className="space-y-2">
               <li>
-                <button 
+                <a 
+                  href="/accounts"
+                  data-full-url="https://cashappagent.com/accounts"
                   onClick={(e) => handleLinkClick('all-accounts', e)} 
                   className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>All Accounts Catalog</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button 
+                <a 
+                  href="/btc-accounts"
+                  data-full-url="https://cashappagent.com/btc-accounts"
                   onClick={(e) => handleLinkClick('btc-accounts', e)} 
                   className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>BTC Enabled Accounts</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button 
+                <a 
+                  href="/non-btc-accounts"
+                  data-full-url="https://cashappagent.com/non-btc-accounts"
                   onClick={(e) => handleLinkClick('non-btc-accounts', e)} 
                   className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>Non-BTC USD Accounts</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button 
+                <a 
+                  href="/blog"
+                  data-full-url="https://cashappagent.com/blog"
+                  onClick={(e) => handleLinkClick('blog', e)} 
+                  className="text-white hover:text-[#00D632] font-semibold transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                >
+                  <ArrowRight className="w-3 h-3 text-[#00D632]" />
+                  <span>Official Blog &amp; Guides</span>
+                  <span className="bg-[#00D632]/20 text-[#00D632] text-[9px] font-bold px-1.5 py-0.5 rounded">NEW</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/safety-guide"
+                  data-full-url="https://cashappagent.com/safety-guide"
                   onClick={(e) => handleLinkClick('safety-guide', e)} 
                   className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>7-Day Anti-Ban Blueprint</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button 
+                <a 
+                  href="/bulk-orders"
+                  data-full-url="https://cashappagent.com/bulk-orders"
                   onClick={(e) => handleLinkClick('bulk-orders', e)} 
                   className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>Agency Bulk Bundles</span>
-                </button>
+                </a>
               </li>
               <li>
                 <button
@@ -239,22 +261,26 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
                 </button>
               </li>
               <li>
-                <button 
+                <a 
+                  href="/faq"
+                  data-full-url="https://cashappagent.com/faq"
                   onClick={(e) => handleLinkClick('faq', e)} 
                   className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>FAQs &amp; Guarantees</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button 
+                <a 
+                  href="/contact"
+                  data-full-url="https://cashappagent.com/contact"
                   onClick={(e) => handleLinkClick('contact', e)} 
                   className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>Contact 24/7 Desk</span>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
