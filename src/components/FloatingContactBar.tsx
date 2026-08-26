@@ -44,7 +44,7 @@ export const FloatingContactBar: React.FC<FloatingContactBarProps> = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-[#229ED9] hover:bg-[#1E88E5] text-white font-extrabold text-xs shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-105 active:scale-95 transition-all"
-          title="Chat on Telegram @CashappsAgent"
+          title={`Chat on Telegram ${CONTACT_INFO.telegram}`}
         >
           <Send className="w-4 h-4" />
           <span className="hidden sm:inline">Telegram</span>

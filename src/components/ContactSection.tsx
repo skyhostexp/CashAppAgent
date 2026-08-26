@@ -21,7 +21,7 @@ export const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const encodedText = encodeURIComponent(
-      `Hello CashappsAgent Support,\n\nName: ${name}\nContact: ${contactHandle}\nInterested in: ${accountInterest}\nMessage: ${message || 'I want to purchase a verified Cash App account.'}`
+      `Hello CashappAgent Support,\n\nName: ${name}\nContact: ${contactHandle}\nInterested in: ${accountInterest}\nMessage: ${message || 'I want to purchase a verified Cash App account.'}`
     );
     window.open(`${CONTACT_INFO.telegramUrl}?text=${encodedText}`, '_blank');
     setSubmitted(true);
@@ -36,7 +36,7 @@ export const ContactSection: React.FC = () => {
             Need Help? Contact Us 24/7
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight font-['Outfit',sans-serif]">
-            Get in Touch with <span className="text-[#00D632]">CashappsAgent</span>
+            Get in Touch with <span className="text-[#00D632]">CashappAgent</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
             Our specialized team is available 24/7/365 to assist with bulk custom orders, custom limit requests, and instant account dispatch inquiries.
@@ -207,7 +207,7 @@ export const ContactSection: React.FC = () => {
 
               {submitted && (
                 <div className="p-3 rounded-xl bg-emerald-950/80 border border-emerald-700/60 text-emerald-300 text-xs font-bold text-center">
-                  Chat opened! Our Telegram agent (@CashappsAgent) will respond immediately.
+                  Chat opened! Our Telegram agent ({CONTACT_INFO.telegram}) will respond immediately.
                 </div>
               )}
             </form>

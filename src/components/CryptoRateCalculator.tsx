@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CRYPTO_GATEWAYS } from '../data/cryptoGateways';
+import { CRYPTO_GATEWAYS, CONTACT_INFO } from '../data/cryptoGateways';
 import { CryptoCurrency } from '../types';
 import { 
   Coins, 
@@ -187,7 +187,7 @@ export const CryptoRateCalculator: React.FC = () => {
               )}
 
               <p className="text-[11px] text-slate-400 leading-relaxed text-center sm:text-left">
-                ℹ️ {gateway.instruction} After sending, you can complete your instant order via our checkout modal or send your TXID to Telegram <strong>@CashappsAgent</strong>.
+                ℹ️ {gateway.instruction} After sending, you can complete your instant order via our checkout modal or send your TXID to Telegram <strong>{CONTACT_INFO.telegram}</strong>.
               </p>
             </div>
           </div>

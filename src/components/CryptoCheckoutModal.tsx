@@ -141,7 +141,7 @@ export const CryptoCheckoutModal: React.FC<CryptoCheckoutModalProps> = ({
   const downloadReceipt = () => {
     if (!confirmedOrder) return;
     const content = `=====================================================
-CASHAPPSAGENT - OFFICIAL ORDER INVOICE & RECEIPT
+CASHAPPAGENT - OFFICIAL ORDER INVOICE & RECEIPT
 Domain: cashappagent.com
 Support Telegram: ${CONTACT_INFO.telegram}
 Support WhatsApp: ${CONTACT_INFO.whatsapp}
@@ -182,7 +182,7 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `CashappsAgent-Order-${confirmedOrder.orderId}.txt`;
+    a.download = `CashappAgent-Order-${confirmedOrder.orderId}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -200,7 +200,7 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
             </div>
             <div>
               <div className="text-sm font-black text-white flex items-center gap-2">
-                <span>CashappsAgent Crypto Checkout</span>
+                <span>CashappAgent Crypto Checkout</span>
                 <span className="bg-[#00D632]/20 text-[#00D632] border border-[#00D632]/30 text-[10px] font-bold px-2 py-0.5 rounded-full">
                   Instant Dispatch
                 </span>
@@ -515,7 +515,7 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
 
                 <a
                   id="order-telegram-dispatch-btn"
-                  href={`${CONTACT_INFO.telegramUrl}?text=Hello,%20I%20just%20placed%20Order%20${confirmedOrder.orderId}%20on%20CashappsAgent.%20Please%20expedite%20my%20delivery.`}
+                  href={`${CONTACT_INFO.telegramUrl}?text=Hello,%20I%20just%20placed%20Order%20${confirmedOrder.orderId}%20on%20CashappAgent.%20Please%20expedite%20my%20delivery.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="py-3 px-4 rounded-xl bg-sky-900/60 hover:bg-sky-800/80 border border-sky-600/50 text-sky-200 font-bold text-xs flex items-center justify-center gap-2 transition-colors"

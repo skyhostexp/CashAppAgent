@@ -42,7 +42,7 @@ export const CashAppLogo: React.FC<CashAppLogoProps> = ({
         <div className="flex flex-col">
           <div className="flex items-center gap-2 leading-none">
             <span className={`font-black tracking-tight ${textSizes[size]} text-white font-['Outfit',sans-serif]`}>
-              Cashapps<span className="text-[#00D632] drop-shadow-[0_0_12px_rgba(0,214,50,0.4)]">Agent</span>
+              Cashapp<span className="text-[#00D632] drop-shadow-[0_0_12px_rgba(0,214,50,0.4)]">Agent</span>
             </span>
             <span className="hidden sm:inline-flex items-center gap-1 bg-emerald-950/80 text-[#00D632] border border-[#00D632]/40 text-[9px] font-black px-1.5 py-0.5 rounded-md uppercase tracking-wider shadow-sm">
               <ShieldCheck className="w-2.5 h-2.5 text-[#00D632]" />

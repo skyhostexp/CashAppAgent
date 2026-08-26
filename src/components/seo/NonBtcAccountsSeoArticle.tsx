@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CONTACT_INFO } from '../../data/cryptoGateways';
 import {
   DollarSign,
   ShieldCheck,
@@ -123,7 +124,7 @@ export const NonBtcAccountsSeoArticle: React.FC = () => {
           </p>
 
           <p className="text-sm leading-relaxed text-slate-300">
-            A standard unverified Cash App account enforces punishing constraints: an unverified account is capped at sending a mere $250 within any 7-day rolling window and receiving no more than $1,000 in 30 days. When you <strong className="text-white">buy verified Non-BTC Cash App accounts</strong> from <strong className="text-[#00D632]">CashappsAgent (cashappagent.com)</strong>, you acquire an aged, pre-warmed account verified with authentic United States identification, full Social Security Number (SSN) records, confirmed residential history, and dedicated Sutton Bank ACH routing coordinates—unlocking weekly limits of <strong className="text-emerald-400 font-bold">$4,000 to $15,000+</strong> at our most competitive pricing tier.
+            A standard unverified Cash App account enforces punishing constraints: an unverified account is capped at sending a mere $250 within any 7-day rolling window and receiving no more than $1,000 in 30 days. When you <strong className="text-white">buy verified Non-BTC Cash App accounts</strong> from <strong className="text-[#00D632]">CashappAgent (cashappagent.com)</strong>, you acquire an aged, pre-warmed account verified with authentic United States identification, full Social Security Number (SSN) records, confirmed residential history, and dedicated Sutton Bank ACH routing coordinates—unlocking weekly limits of <strong className="text-emerald-400 font-bold">$4,000 to $15,000+</strong> at our most competitive pricing tier.
           </p>
 
           {/* Key Metric Bento Grid */}
@@ -486,7 +487,7 @@ export const NonBtcAccountsSeoArticle: React.FC = () => {
               },
               {
                 q: "Is there a replacement guarantee if the account has issues?",
-                a: "Yes. All purchases from CashappsAgent include a 30-Day Escrow Replacement Warranty. If any unexpected technical or security checkpoint arises during regular warmup, our concierge desk issues a fresh replacement immediately."
+                a: "Yes. All purchases from CashappAgent include a 30-Day Escrow Replacement Warranty. If any unexpected technical or security checkpoint arises during regular warmup, our concierge desk issues a fresh replacement immediately."
               },
               {
                 q: "Can I use the Virtual Cash Card immediately?",
@@ -540,7 +541,7 @@ export const NonBtcAccountsSeoArticle: React.FC = () => {
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <a
-              href="https://t.me/CashappsAgent"
+              href={CONTACT_INFO.telegramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2.5 rounded-xl bg-[#00D632] hover:bg-[#00FF3D] text-black font-extrabold text-xs shadow-lg shadow-[#00D632]/20 transition-all hover:scale-105 active:scale-95"

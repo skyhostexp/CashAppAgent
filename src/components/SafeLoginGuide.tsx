@@ -59,7 +59,7 @@ export const SafeLoginGuide: React.FC = () => {
   ];
 
   const handleCopyBlueprint = () => {
-    const text = `=== CASHAPPSAGENT SAFE LOGIN & WARMUP PROTOCOL ===\n\n` +
+    const text = `=== CASHAPPAGENT SAFE LOGIN & WARMUP PROTOCOL ===\n\n` +
       WARMUP_TIMELINE.map(w => `${w.day}: ${w.title}\n- Action: ${w.desc}\n- Target Volume: ${w.recommendedVolume}\n`).join('\n') +
       `\nGuaranteed with 30-day warranty at cashappagent.com`;
     navigator.clipboard.writeText(text);

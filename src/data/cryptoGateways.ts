@@ -1,14 +1,14 @@
 import { CryptoCurrency, CryptoGateway, FaqItem, Testimonial } from '../types';
 
 export const CONTACT_INFO = {
-  telegram: '@CashappsAgent',
-  telegramUrl: 'https://t.me/CashappsAgent',
+  telegram: '@CashappAgentTeam',
+  telegramUrl: 'https://t.me/CashappAgentTeam',
   whatsapp: '+1 (253) 408-0049',
   whatsappUrl: 'https://wa.me/12534080049',
   email: 'support@cashappagent.com',
   emailUrl: 'mailto:support@cashappagent.com',
   domain: 'cashappagent.com',
-  brandName: 'CashappsAgent',
+  brandName: 'CashappAgent',
   businessHours: '24/7/365 Live Support',
   deliveryTime: '5 - 15 Minutes Instant Delivery'
 };
@@ -95,7 +95,7 @@ export const TESTIMONIALS: Testimonial[] = [
     rating: 5,
     accountBought: 'BTC Enable 25k Cash App Account',
     date: '2 days ago',
-    review: 'Received my 25k limit BTC Cash App account in less than 7 minutes after sending TRX USDT! The credentials worked seamlessly, original email was provided with recovery codes, and the Bitcoin withdrawal feature works like a charm without any holds. Outstanding service by CashappsAgent.',
+    review: 'Received my 25k limit BTC Cash App account in less than 7 minutes after sending TRX USDT! The credentials worked seamlessly, original email was provided with recovery codes, and the Bitcoin withdrawal feature works like a charm without any holds. Outstanding service by CashappAgent.',
     verifiedPurchase: true
   },
   {
@@ -138,7 +138,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq-1',
     category: 'General',
     question: 'What do I receive when I buy a verified Cash App account?',
-    answer: 'When you purchase any verified Cash App account from CashappsAgent, you receive a complete turnkey package containing: 1) Cash App login email & password, 2) Primary Email access (Gmail/Outlook) with recovery keys, 3) 2-Factor Authentication backup details or linked phone access, 4) Cash Card 16-digit number, Expiry, CVV & PIN, 5) Sutton/Bancorp Direct Deposit routing & account numbers, 6) Full identity documentation (SSN + Driving License / Passport scans), and 7) A step-by-step setup guide ensuring zero flags or triggers.'
+    answer: 'When you purchase any verified Cash App account from CashappAgent, you receive a complete turnkey package containing: 1) Cash App login email & password, 2) Primary Email access (Gmail/Outlook) with recovery keys, 3) 2-Factor Authentication backup details or linked phone access, 4) Cash Card 16-digit number, Expiry, CVV & PIN, 5) Sutton/Bancorp Direct Deposit routing & account numbers, 6) Full identity documentation (SSN + Driving License / Passport scans), and 7) A step-by-step setup guide ensuring zero flags or triggers.'
   },
   {
     id: 'faq-2',
@@ -156,7 +156,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq-4',
     category: 'Security',
     question: 'Is there a replacement warranty or guarantee?',
-    answer: 'Yes! Every verified account purchased on CashappsAgent includes our comprehensive 30-Day Full Replacement Warranty. If you encounter any unexpected restriction or verification issue that cannot be resolved while following our safe login guidelines, our support team will provide a brand new replacement account free of charge.'
+    answer: 'Yes! Every verified account purchased on CashappAgent includes our comprehensive 30-Day Full Replacement Warranty. If you encounter any unexpected restriction or verification issue that cannot be resolved while following our safe login guidelines, our support team will provide a brand new replacement account free of charge.'
   },
   {
     id: 'faq-5',

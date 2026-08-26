@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CONTACT_INFO } from '../data/cryptoGateways';
 import { 
   BookOpen, 
   ShieldCheck, 
@@ -54,7 +55,7 @@ export const SeoContentArticle: React.FC = () => {
             Cash App (developed by Block, Inc., formerly Square) has emerged as one of the world's most versatile, widely adopted peer-to-peer (P2P) payment and financial technology platforms. However, standard unverified Cash App profiles are severely constrained by restrictive limitations: an unverified account only allows users to send up to $250 within any 7-day period and receive a maximum of $1,000 within any 30-day window. Furthermore, unverified profiles completely lack cryptocurrency functionality, preventing users from depositing, buying, selling, or withdrawing Bitcoin (BTC) on-chain.
           </p>
           <p className="text-sm leading-relaxed text-slate-300">
-            When you <strong className="text-white">buy verified Cash App accounts</strong> from <strong className="text-[#00D632]">CashappsAgent (cashappagent.com)</strong>, you acquire an established, aged account that has already completed full identity verification (Know Your Customer / KYC). This includes verified Social Security Numbers (SSN), government-issued photo ID (Driver's License or Passport scans), confirmed residential addresses, and verified email and telephone credentials. Consequently, your weekly sending and receiving ceilings expand up to <strong className="text-emerald-400 font-bold">$4,000, $10,000, or $25,000</strong>, unlocking unlimited financial agility for e-commerce enterprises, crypto investors, freelancers, and digital agencies worldwide.
+            When you <strong className="text-white">buy verified Cash App accounts</strong> from <strong className="text-[#00D632]">CashappAgent (cashappagent.com)</strong>, you acquire an established, aged account that has already completed full identity verification (Know Your Customer / KYC). This includes verified Social Security Numbers (SSN), government-issued photo ID (Driver's License or Passport scans), confirmed residential addresses, and verified email and telephone credentials. Consequently, your weekly sending and receiving ceilings expand up to <strong className="text-emerald-400 font-bold">$4,000, $10,000, or $25,000</strong>, unlocking unlimited financial agility for e-commerce enterprises, crypto investors, freelancers, and digital agencies worldwide.
           </p>
         </section>
 
@@ -128,7 +129,7 @@ export const SeoContentArticle: React.FC = () => {
             3. What You Receive: Full Ownership &amp; Document Bundle
           </h3>
           <p className="text-sm leading-relaxed text-slate-300">
-            At CashappsAgent, every account is prepared according to strict security protocols. We do not sell temporary shared access; you receive 100% permanent, exclusive ownership of both the financial account and its associated primary credentials:
+            At CashappAgent, every account is prepared according to strict security protocols. We do not sell temporary shared access; you receive 100% permanent, exclusive ownership of both the financial account and its associated primary credentials:
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
@@ -185,14 +186,14 @@ export const SeoContentArticle: React.FC = () => {
           </div>
         </section>
 
-        {/* Section 5: Why CashappsAgent is the #1 Ranked Trusted Vendor */}
+        {/* Section 5: Why CashappAgent is the #1 Ranked Trusted Vendor */}
         <section className="space-y-4 border-t border-slate-800/80 pt-8">
           <h3 className="text-2xl font-black text-white flex items-center gap-2 font-['Outfit',sans-serif]">
             <TrendingUp className="w-6 h-6 text-[#00D632] shrink-0" />
-            5. Why Buy from CashappsAgent (cashappagent.com)?
+            5. Why Buy from CashappAgent (cashappagent.com)?
           </h3>
           <p className="text-sm leading-relaxed text-slate-300">
-            Since our inception, CashappsAgent has served over 4,500+ satisfied clients across North America, Europe, and Asia. We pride ourselves on three core pillars:
+            Since our inception, CashappAgent has served over 4,500+ satisfied clients across North America, Europe, and Asia. We pride ourselves on three core pillars:
           </p>
           <ul className="space-y-2.5 text-xs text-slate-300">
             <li className="flex items-start gap-2">
@@ -205,7 +206,7 @@ export const SeoContentArticle: React.FC = () => {
             </li>
             <li className="flex items-start gap-2">
               <Check className="w-4 h-4 text-[#00D632] shrink-0 mt-0.5" />
-              <span><strong>Dedicated Human Support:</strong> Have questions before ordering? Our concierge support team is available live on Telegram (<strong className="text-sky-400">@CashappsAgent</strong>) and WhatsApp (<strong className="text-emerald-400">+1 253 408-0049</strong>) round the clock.</span>
+              <span><strong>Dedicated Human Support:</strong> Have questions before ordering? Our concierge support team is available live on Telegram (<strong className="text-sky-400">{CONTACT_INFO.telegram}</strong>) and WhatsApp (<strong className="text-emerald-400">{CONTACT_INFO.whatsapp}</strong>) round the clock.</span>
             </li>
           </ul>
         </section>

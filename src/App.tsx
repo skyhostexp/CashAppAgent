@@ -44,7 +44,7 @@ export default function App() {
   
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
-      const saved = localStorage.getItem('cashappsagent_cart');
+      const saved = localStorage.getItem('cashappagent_cart') || localStorage.getItem('cashappsagent_cart');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -53,7 +53,7 @@ export default function App() {
 
   const [savedOrders, setSavedOrders] = useState<OrderDetails[]>(() => {
     try {
-      const saved = localStorage.getItem('cashappsagent_orders');
+      const saved = localStorage.getItem('cashappagent_orders') || localStorage.getItem('cashappsagent_orders');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -83,7 +83,7 @@ export default function App() {
   // Sync cart to local storage
   useEffect(() => {
     try {
-      localStorage.setItem('cashappsagent_cart', JSON.stringify(cart));
+      localStorage.setItem('cashappagent_cart', JSON.stringify(cart));
     } catch {
       // safe fallback
     }
@@ -92,7 +92,7 @@ export default function App() {
   // Sync orders to local storage
   useEffect(() => {
     try {
-      localStorage.setItem('cashappsagent_orders', JSON.stringify(savedOrders));
+      localStorage.setItem('cashappagent_orders', JSON.stringify(savedOrders));
     } catch {
       // safe fallback
     }

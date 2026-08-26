@@ -15,63 +15,63 @@ export const PAGE_ROUTES: Record<PageView, PageRouteInfo> = {
     page: 'home',
     path: '/',
     fullUrl: `${SITE_ORIGIN}/`,
-    title: 'Buy Verified Cash App Accounts | BTC & Non-BTC - CashappsAgent',
+    title: 'Buy Verified Cash App Accounts | BTC & Non-BTC - CashappAgent',
     label: 'Home'
   },
   blog: {
     page: 'blog',
     path: '/blog',
     fullUrl: `${SITE_ORIGIN}/blog`,
-    title: 'Official Blog & Guides | CashappsAgent',
+    title: 'Official Blog & Guides | CashappAgent',
     label: 'Blog'
   },
   'all-accounts': {
     page: 'all-accounts',
     path: '/accounts',
     fullUrl: `${SITE_ORIGIN}/accounts`,
-    title: 'All Verified Accounts Catalog | CashappsAgent',
+    title: 'All Verified Accounts Catalog | CashappAgent',
     label: 'All Accounts'
   },
   'btc-accounts': {
     page: 'btc-accounts',
     path: '/btc-accounts',
     fullUrl: `${SITE_ORIGIN}/btc-accounts`,
-    title: 'BTC Enabled Cash App Accounts | CashappsAgent',
+    title: 'BTC Enabled Cash App Accounts | CashappAgent',
     label: 'BTC Enabled'
   },
   'non-btc-accounts': {
     page: 'non-btc-accounts',
     path: '/non-btc-accounts',
     fullUrl: `${SITE_ORIGIN}/non-btc-accounts`,
-    title: 'Non-BTC USD Cash App Accounts | CashappsAgent',
+    title: 'Non-BTC USD Cash App Accounts | CashappAgent',
     label: 'Non-BTC'
   },
   'safety-guide': {
     page: 'safety-guide',
     path: '/safety-guide',
     fullUrl: `${SITE_ORIGIN}/safety-guide`,
-    title: '7-Day Anti-Ban Warmup Blueprint | CashappsAgent',
+    title: '7-Day Anti-Ban Warmup Blueprint | CashappAgent',
     label: 'Safety Guide'
   },
   'bulk-orders': {
     page: 'bulk-orders',
     path: '/bulk-orders',
     fullUrl: `${SITE_ORIGIN}/bulk-orders`,
-    title: 'Agency Wholesale & Bulk Bundles | CashappsAgent',
+    title: 'Agency Wholesale & Bulk Bundles | CashappAgent',
     label: 'Bulk Orders'
   },
   faq: {
     page: 'faq',
     path: '/faq',
     fullUrl: `${SITE_ORIGIN}/faq`,
-    title: 'Frequently Asked Questions & Warranty | CashappsAgent',
+    title: 'Frequently Asked Questions & Warranty | CashappAgent',
     label: 'FAQ'
   },
   contact: {
     page: 'contact',
     path: '/contact',
     fullUrl: `${SITE_ORIGIN}/contact`,
-    title: 'Official 24/7 Support Desk | CashappsAgent',
+    title: 'Official 24/7 Support Desk | CashappAgent',
     label: 'Contact'
   }
 };

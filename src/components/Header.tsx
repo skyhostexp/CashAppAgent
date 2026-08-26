@@ -124,7 +124,7 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <Send className="w-3 h-3 text-sky-400" />
               <span className="hidden sm:inline">Telegram:</span>
-              <span className="font-bold">@CashappsAgent</span>
+              <span className="font-bold">{CONTACT_INFO.telegram}</span>
             </a>
             
             <a

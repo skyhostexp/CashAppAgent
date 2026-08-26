@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CONTACT_INFO } from '../../data/cryptoGateways';
 import {
   Bitcoin,
   ShieldCheck,
@@ -121,7 +122,7 @@ export const BtcAccountsSeoArticle: React.FC = () => {
           </p>
 
           <p className="text-sm leading-relaxed text-slate-300">
-            When you purchase a <strong className="text-white">pre-verified BTC Enabled Cash App Account</strong> from <strong className="text-[#00D632]">CashappsAgent (cashappagent.com)</strong>, you bypass manual compliance holdups, algorithmic ID rejections, and regional licensing bottlenecks. You acquire a pristine, aged financial profile equipped with a fully activated on-chain Bitcoin wallet node capable of receiving external crypto, buying Bitcoin directly from balance, and dispatching on-chain BTC to cold storage, hardware wallets (Trezor/Ledger), or foreign cryptocurrency exchanges within seconds.
+            When you purchase a <strong className="text-white">pre-verified BTC Enabled Cash App Account</strong> from <strong className="text-[#00D632]">CashappAgent (cashappagent.com)</strong>, you bypass manual compliance holdups, algorithmic ID rejections, and regional licensing bottlenecks. You acquire a pristine, aged financial profile equipped with a fully activated on-chain Bitcoin wallet node capable of receiving external crypto, buying Bitcoin directly from balance, and dispatching on-chain BTC to cold storage, hardware wallets (Trezor/Ledger), or foreign cryptocurrency exchanges within seconds.
           </p>
 
           {/* Key Metric Bento Grid */}
@@ -474,7 +475,7 @@ export const BtcAccountsSeoArticle: React.FC = () => {
             {[
               {
                 q: "Can I withdraw Bitcoin directly to my personal hardware wallet (Ledger, Trezor)?",
-                a: "Yes, 100%. All BTC-enabled accounts sold on CashappsAgent have passed on-chain KYC verification. You can paste any external Native SegWit (bc1q), Taproot (bc1p), or Legacy (1...) Bitcoin address and withdraw funds directly to your private cold storage."
+                a: "Yes, 100%. All BTC-enabled accounts sold on CashappAgent have passed on-chain KYC verification. You can paste any external Native SegWit (bc1q), Taproot (bc1p), or Legacy (1...) Bitcoin address and withdraw funds directly to your private cold storage."
               },
               {
                 q: "What is the daily and weekly limit for Bitcoin transactions?",
@@ -540,7 +541,7 @@ export const BtcAccountsSeoArticle: React.FC = () => {
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <a
-              href="https://t.me/CashappsAgent"
+              href={CONTACT_INFO.telegramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2.5 rounded-xl bg-[#F7931A] hover:bg-amber-500 text-black font-extrabold text-xs shadow-lg shadow-[#F7931A]/20 transition-all hover:scale-105 active:scale-95"

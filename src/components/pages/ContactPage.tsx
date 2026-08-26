@@ -58,7 +58,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
             Fastest response channel with live human verification agents.
           </p>
           <div className="text-xs font-mono font-bold text-sky-400">
-            @CashappsAgent
+            {CONTACT_INFO.telegram}
           </div>
         </a>
 

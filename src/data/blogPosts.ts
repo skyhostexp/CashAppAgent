@@ -20,7 +20,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Security',
     readTime: '6 min read',
     publishDate: 'August 2026',
-    author: 'CashappsAgent Security Desk',
+    author: 'CashappAgent Security Desk',
     tags: ['Security', 'Warmup', 'Anti-Ban', 'Proxy Setup'],
     content: `
 ### The Importance of Device & IP Warm-up
@@ -98,7 +98,7 @@ Cash App operates banking services through Sutton Bank and Lincoln Savings Bank 
     category: 'Limits',
     readTime: '7 min read',
     publishDate: 'August 2026',
-    author: 'CashappsAgent Business Desk',
+    author: 'CashappAgent Business Desk',
     tags: ['Tier Guide', 'Limits', 'High Volume', 'Merchant'],
     content: `
 ### Choosing the Right Limit Tier

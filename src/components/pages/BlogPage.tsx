@@ -201,7 +201,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
               <span>OFFICIAL INSIGHTS &bull; https://cashappagent.com/blog</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight font-['Outfit',sans-serif]">
-              CashappsAgent <span className="text-[#00D632]">Knowledge Hub &amp; Blog</span>
+              CashappAgent <span className="text-[#00D632]">Knowledge Hub &amp; Blog</span>
             </h1>
             <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
               Technical blueprints, limit guides, Bitcoin on-chain clearance breakdowns, and account warm-up safety protocols curated by our compliance specialists.

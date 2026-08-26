@@ -122,7 +122,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
               <CashAppLogo size="lg" />
             </button>
             <p className="text-xs leading-relaxed text-slate-400 max-w-sm">
-              <strong className="text-white">CashappsAgent (cashappagent.com)</strong> is the premier verified vendor for aged, 100% identity-verified Cash App accounts with Bitcoin withdrawal capabilities and limits up to $25,000. All accounts include primary email access and full identity documentation.
+              <strong className="text-white">CashappAgent (cashappagent.com)</strong> is the premier verified vendor for aged, 100% identity-verified Cash App accounts with Bitcoin withdrawal capabilities and limits up to $25,000. All accounts include primary email access and full identity documentation.
             </p>
             <div className="pt-2 flex items-center gap-3 text-slate-400 text-xs">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400 font-semibold">
@@ -259,7 +259,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
         <div className="mt-12 pt-8 border-t border-slate-800/80 space-y-3">
           <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
             <Sparkles className="w-3 h-3 text-[#00D632]" />
-            <span>Popular Verified Tags &bull; CashappsAgent (cashappagent.com)</span>
+            <span>Popular Verified Tags &bull; CashappAgent (cashappagent.com)</span>
           </div>
           <div className="flex flex-wrap gap-1.5 text-[10px] text-slate-400">
             <span className="bg-slate-900/90 border border-slate-800/80 hover:border-emerald-500/40 px-2.5 py-1 rounded-lg transition-colors">Buy Verified Cash App Accounts</span>
@@ -279,7 +279,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
         {/* Bottom Disclaimer & Copyright */}
         <div className="mt-8 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
           <div>
-            &copy; {new Date().getFullYear()} <strong className="text-white">CashappsAgent</strong> (cashappagent.com). All rights reserved.
+            &copy; {new Date().getFullYear()} <strong className="text-white">CashappAgent</strong> (cashappagent.com). All rights reserved.
           </div>
 
           <div className="flex items-center gap-4">

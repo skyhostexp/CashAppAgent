@@ -85,7 +85,7 @@ export const AccountFeatures: React.FC = () => {
             Turnkey <span className="text-[#00D632]">Account Deliverables</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            Every Cash App account from CashappsAgent is delivered with 100% full ownership credentials and identity proof archives.
+            Every Cash App account from CashappAgent is delivered with 100% full ownership credentials and identity proof archives.
           </p>
         </div>
 
@@ -164,7 +164,7 @@ export const AccountFeatures: React.FC = () => {
               className="px-6 py-3 rounded-xl bg-[#00D632] hover:bg-[#00FF3D] text-black font-black text-xs sm:text-sm shrink-0 flex items-center gap-2 cursor-pointer shadow-lg shadow-[#00D632]/25"
             >
               <Send className="w-4 h-4" />
-              <span>Message @CashappsAgent</span>
+              <span>Message {CONTACT_INFO.telegram}</span>
             </a>
           </div>
         </div>
