@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="cashGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FF50" />
+      <stop offset="50%" stop-color="#00D632" />
+      <stop offset="100%" stop-color="#00A827" />
+    </linearGradient>
+    <linearGradient id="innerGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.2" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Background Rounded Square -->
+  <rect width="512" height="512" rx="128" fill="url(#cashGradient)" />
+  
+  <!-- Subtle Highlight Overlay -->
+  <rect width="512" height="512" rx="128" fill="url(#innerGlow)" />
+  
+  <!-- Border Stroke -->
+  <rect x="4" y="4" width="504" height="504" rx="124" fill="none" stroke="#ffffff" stroke-width="8" stroke-opacity="0.3" />
+
+  <!-- Cash App Iconic Dollar Sign -->
+  <g transform="translate(256, 256) rotate(-7) scale(1.05)" filter="url(#shadow)">
+    <!-- Dollar Sign Vertical Bar -->
+    <path d="M -12, -180 L 12, -180 C 18, -180 24, -174 24, -168 L 24, 168 C 24, 174 18, 180 12, 180 L -12, 180 C -18, 180 -24, 174 -24, 168 L -24, -168 C -24, -174 -18, -180 -12, -180 Z" fill="#000000" />
+    
+    <!-- Dollar Sign Main Body 'S' -->
+    <path d="M 65, -100 C 65, -145 25, -165 -35, -165 C -85, -165 -130, -140 -130, -95 C -130, -35 -40, -15 35, 10 C 105, 32 125, 70 125, 115 C 125, 165 75, 195 -25, 195 C -85, 195 -135, 165 -145, 115 C -147, 102 -135, 92 -122, 92 L -78, 92 C -68, 92 -60, 98 -55, 108 C -48, 125 -15, 138 20, 138 C 55, 138 72, 122 72, 100 C 72, 50 -25, 30 -95, 5 C -150, -15 -178, -55 -178, -100 C -178, -145 -125, -195 -15, -195 C 45, -195 95, -170 115, -125 C 120, -114 112, -100 100, -100 Z" fill="#000000" />
+  </g>
+</svg>

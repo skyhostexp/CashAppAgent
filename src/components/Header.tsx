@@ -10,7 +10,9 @@ import {
   Menu, 
   X, 
   ShieldCheck, 
-  ChevronRight
+  ChevronRight,
+  Zap,
+  Sparkles
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -33,9 +35,9 @@ export const Header: React.FC<HeaderProps> = ({
   const [tickerIndex, setTickerIndex] = useState(0);
 
   const announcements = [
-    { text: '⚡ Instant Auto-Delivery via Email in 5–15 Mins', highlight: '⚡ Fast Dispatch' },
-    { text: '🛡️ 30-Day Full Replacement & Escrow Warranty', highlight: '🛡️ 100% Guaranteed' },
-    { text: '🇺🇸 Sutton Bank Routing + Bitcoin On-Chain Clearance', highlight: '🇺🇸 US Verified' },
+    { text: 'Instant Automated Email Delivery (5–15 Mins)', highlight: '⚡ Fast Dispatch' },
+    { text: '30-Day Full Replacement & Escrow Warranty', highlight: '🛡️ 100% Guaranteed' },
+    { text: 'Sutton Bank US Routing + Bitcoin On-Chain Clearance', highlight: '🇺🇸 US Verified' },
   ];
 
   useEffect(() => {
@@ -54,30 +56,31 @@ export const Header: React.FC<HeaderProps> = ({
   }, [announcements.length]);
 
   const navLinks = [
-    { label: 'Accounts', href: '#accounts', onClick: () => onSelectCategory('all') },
+    { label: 'All Accounts', href: '#accounts', onClick: () => onSelectCategory('all') },
     { label: 'BTC Enabled', href: '#accounts', onClick: () => onSelectCategory('btc-enabled'), badge: 'Hot' },
     { label: 'Non-BTC', href: '#accounts', onClick: () => onSelectCategory('non-btc') },
+    { label: 'Calculator', href: '#calculator' },
     { label: 'FAQ', href: '#faq' },
   ];
 
   return (
     <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${
       scrolled 
-        ? 'backdrop-blur-2xl bg-[#090d11]/95 border-b border-emerald-500/20 shadow-[0_12px_32px_rgba(0,0,0,0.5)]' 
-        : 'backdrop-blur-xl bg-[#0b0f14]/90 border-b border-emerald-950/50'
+        ? 'backdrop-blur-2xl bg-[#090d12]/95 border-b border-emerald-500/20 shadow-[0_12px_36px_rgba(0,0,0,0.6)]' 
+        : 'backdrop-blur-xl bg-[#0b0f14]/90 border-b border-emerald-950/60'
     }`}>
-      {/* Top Ambient Glow Line */}
+      {/* Top Ambient Green Aura Line */}
       <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#00D632] to-transparent opacity-80" />
 
-      {/* Top Utility & Live Dispatch Ticker Bar */}
-      <div className="bg-gradient-to-r from-[#06140b] via-[#092212] to-[#06140b] text-xs py-1.5 px-3 sm:px-6 border-b border-emerald-800/30">
+      {/* Top Announcement Bar */}
+      <div className="bg-gradient-to-r from-[#05130a] via-[#082011] to-[#05130a] text-xs py-1.5 px-3 sm:px-6 border-b border-emerald-900/30">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
           
           {/* Live Dispatch Indicator & Rotating Announcements */}
           <div className="flex items-center gap-2.5 overflow-hidden">
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/40 text-[10px] font-extrabold text-[#00D632] shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00D632] animate-ping" />
-              <span className="hidden xs:inline tracking-wider">LIVE</span>
+              <span className="tracking-wider">LIVE</span>
             </div>
 
             <div className="text-slate-300 font-medium text-[11px] sm:text-xs truncate transition-all duration-500">
@@ -88,18 +91,18 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Quick Direct Support Channels */}
-          <div className="flex items-center gap-3 shrink-0 text-xs font-semibold">
+          {/* Direct Support Badges */}
+          <div className="flex items-center gap-2.5 shrink-0 text-xs font-semibold">
             <a
               id="top-bar-telegram-link"
               href={CONTACT_INFO.telegramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-sky-950/50 hover:bg-sky-900/60 border border-sky-600/30 text-sky-300 hover:text-sky-200 transition-all text-[11px]"
+              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-sky-950/60 hover:bg-sky-900/80 border border-sky-500/30 text-sky-300 hover:text-sky-100 transition-all text-[11px] shadow-sm"
             >
               <Send className="w-3 h-3 text-sky-400" />
               <span className="hidden sm:inline">Telegram:</span>
-              <span>@CashappsAgent</span>
+              <span className="font-bold">@CashappsAgent</span>
             </a>
             
             <a
@@ -107,7 +110,7 @@ export const Header: React.FC<HeaderProps> = ({
               href={CONTACT_INFO.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-950/50 hover:bg-emerald-900/60 border border-emerald-600/30 text-emerald-300 hover:text-emerald-200 transition-all text-[11px]"
+              className="hidden md:flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-500/30 text-emerald-300 hover:text-emerald-100 transition-all text-[11px] shadow-sm"
             >
               <Phone className="w-3 h-3 text-emerald-400" />
               <span>{CONTACT_INFO.whatsapp}</span>
@@ -116,18 +119,18 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Main Navigation Bar */}
+      {/* Main Navigation Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
         
-        {/* Brand Logo with Live Domain Badge */}
+        {/* Brand Logo */}
         <div className="flex items-center gap-3">
           <a href="#" className="flex items-center gap-2.5 group">
             <CashAppLogo size="md" />
           </a>
         </div>
 
-        {/* Desktop Navigation Tabs */}
-        <nav className="hidden lg:flex items-center gap-1.5 p-1 bg-slate-900/80 border border-emerald-950/80 rounded-2xl shadow-inner">
+        {/* Desktop Navigation Menu */}
+        <nav className="hidden lg:flex items-center gap-1.5 p-1 bg-slate-900/80 border border-emerald-900/40 rounded-2xl shadow-inner backdrop-blur-md">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -146,13 +149,13 @@ export const Header: React.FC<HeaderProps> = ({
           ))}
         </nav>
 
-        {/* Action Controls (Track Order, Cart) */}
+        {/* Action Controls (Track Order, Cart & Mobile Toggle) */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Order Tracking Radar Button */}
           <button
             id="header-track-order-btn"
             onClick={onOpenOrderLookup}
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-700/40 rounded-xl transition-all active:scale-95"
+            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-700/40 hover:border-emerald-500/50 rounded-xl transition-all active:scale-95 shadow-sm"
             title="Track Order Status & Credentials"
           >
             <Search className="w-3.5 h-3.5 text-emerald-400" />
@@ -179,7 +182,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700/60 text-slate-300 hover:text-white transition-colors"
+            className="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700/60 text-slate-300 hover:text-[#00D632] hover:border-[#00D632]/40 transition-colors"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -189,7 +192,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#0c1117] border-b border-emerald-900/40 px-4 py-5 space-y-4 animate-in slide-in-from-top-2 shadow-2xl">
+        <div className="lg:hidden bg-[#0a0f14]/98 backdrop-blur-2xl border-b border-emerald-900/40 px-4 py-5 space-y-4 animate-in slide-in-from-top-2 shadow-2xl">
           {/* Mobile Fast Action Buttons */}
           <div className="grid grid-cols-2 gap-2">
             <button
@@ -199,7 +202,7 @@ export const Header: React.FC<HeaderProps> = ({
               }}
               className="flex items-center justify-center gap-2 p-3 rounded-xl bg-emerald-950/60 border border-emerald-700/50 text-xs font-bold text-emerald-300 hover:bg-emerald-900/60 transition-colors"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-4 h-4 text-emerald-400" />
               <span>Track Order</span>
             </button>
             <a
@@ -208,7 +211,7 @@ export const Header: React.FC<HeaderProps> = ({
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 p-3 rounded-xl bg-sky-950/60 border border-sky-700/50 text-xs font-bold text-sky-300 hover:bg-sky-900/60 transition-colors"
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-4 h-4 text-sky-400" />
               <span>Telegram Chat</span>
             </a>
           </div>
@@ -239,7 +242,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Verified Guarantee & Direct Contact Footer */}
-          <div className="pt-3 border-t border-slate-800 space-y-2.5">
+          <div className="pt-3 border-t border-slate-800/80 space-y-2.5">
             <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-semibold uppercase tracking-wider">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00D632]" />
               <span>Verified Escrow Support</span>
@@ -250,14 +253,14 @@ export const Header: React.FC<HeaderProps> = ({
                 href={CONTACT_INFO.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-800/30 text-xs text-emerald-300 font-semibold"
+                className="flex items-center gap-2 p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-800/30 text-xs text-emerald-300 font-semibold hover:bg-emerald-900/40 transition-colors"
               >
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span className="truncate">WhatsApp: {CONTACT_INFO.whatsapp}</span>
               </a>
               <a
                 href={CONTACT_INFO.emailUrl}
-                className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 font-semibold"
+                className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 font-semibold hover:bg-slate-800/80 transition-colors"
               >
                 <Mail className="w-4 h-4 text-slate-400 shrink-0" />
                 <span className="truncate">Email Support</span>
