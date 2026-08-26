@@ -77,7 +77,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
             }`}
           >
             <Bitcoin className="w-4 h-4 text-[#F7931A]" />
-            <span>BTC Enabled Tiers ({btcCount})</span>
+            <span>BTC Enabled CashApp ({btcCount})</span>
             <span className="bg-black/30 text-white text-[10px] px-1.5 py-0.2 rounded-full">
               Hot
             </span>
@@ -93,7 +93,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
             }`}
           >
             <ShieldCheck className="w-4 h-4" />
-            <span>Non-BTC USD Tiers ({nonBtcCount})</span>
+            <span>Non-BTC CashApp ({nonBtcCount})</span>
           </button>
         </div>
 

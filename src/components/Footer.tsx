@@ -76,31 +76,31 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
       {/* Trust & Guarantee Highlights Strip */}
       <div className="border-b border-slate-900 bg-[#070b0f] py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center sm:text-left">
-            <div className="flex items-center justify-center sm:justify-start gap-2.5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="flex items-center justify-center gap-2.5 text-center">
               <Zap className="w-4 h-4 text-[#00D632] shrink-0" />
-              <div className="text-[11px] leading-tight">
+              <div className="text-[11px] leading-tight text-center">
                 <span className="font-bold text-white block">5–15 Min Delivery</span>
                 <span className="text-slate-500 text-[10px]">Instant Auto-Dispatch</span>
               </div>
             </div>
-            <div className="flex items-center justify-center sm:justify-start gap-2.5">
+            <div className="flex items-center justify-center gap-2.5 text-center">
               <Shield className="w-4 h-4 text-emerald-400 shrink-0" />
-              <div className="text-[11px] leading-tight">
+              <div className="text-[11px] leading-tight text-center">
                 <span className="font-bold text-white block">30-Day Guarantee</span>
                 <span className="text-slate-500 text-[10px]">Full Replacement Escrow</span>
               </div>
             </div>
-            <div className="flex items-center justify-center sm:justify-start gap-2.5">
+            <div className="flex items-center justify-center gap-2.5 text-center">
               <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0" />
-              <div className="text-[11px] leading-tight">
+              <div className="text-[11px] leading-tight text-center">
                 <span className="font-bold text-white block">100% US Verified</span>
                 <span className="text-slate-500 text-[10px]">Sutton Bank + SSN ID</span>
               </div>
             </div>
-            <div className="flex items-center justify-center sm:justify-start gap-2.5">
+            <div className="flex items-center justify-center gap-2.5 text-center">
               <Bitcoin className="w-4 h-4 text-[#F7931A] shrink-0" />
-              <div className="text-[11px] leading-tight">
+              <div className="text-[11px] leading-tight text-center">
                 <span className="font-bold text-white block">BTC On-Chain Ready</span>
                 <span className="text-slate-500 text-[10px]">Full Crypto Withdrawal</span>
               </div>
@@ -136,7 +136,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
           <div className="space-y-3">
             <h4 className="text-sm font-black text-white font-['Outfit',sans-serif] flex items-center gap-1.5 pb-1 border-b border-slate-800">
               <Bitcoin className="w-4 h-4 text-[#F7931A]" />
-              BTC Enabled Tiers
+              BTC Enabled CashApp
             </h4>
             <ul className="space-y-2.5">
               {ACCOUNT_PRODUCTS.filter(p => p.btcEnabled).map((p) => (
@@ -159,7 +159,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
           <div className="space-y-3">
             <h4 className="text-sm font-black text-white font-['Outfit',sans-serif] flex items-center gap-1.5 pb-1 border-b border-slate-800">
               <ShieldCheck className="w-4 h-4 text-[#00D632]" />
-              Non-BTC USD Tiers
+              Non-BTC CashApp
             </h4>
             <ul className="space-y-2.5">
               {ACCOUNT_PRODUCTS.filter(p => !p.btcEnabled).map((p) => (
@@ -239,15 +239,6 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
                   <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-[#00D632] group-hover:translate-x-0.5 transition-all" />
                   <span>All Accounts Catalog</span>
                 </a>
-              </li>
-              <li>
-                <button
-                  onClick={onOpenOrderLookup}
-                  className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1.5 transition-colors cursor-pointer group"
-                >
-                  <Search className="w-3 h-3 text-[#00D632] group-hover:scale-110 transition-transform" />
-                  <span>Track Order</span>
-                </button>
               </li>
               <li>
                 <a 
