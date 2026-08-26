@@ -209,14 +209,12 @@ export default function App() {
         progress={loadingProgress}
       />
 
-      {/* Header with Navigation, Reload button & Announcement bar */}
+      {/* Header with Navigation & Announcement bar */}
       <Header
         cartCount={totalCartCount}
         cartTotal={totalCartAmount}
         currentPage={currentPage}
-        isReloading={isReloading}
         onNavigate={navigateTo}
-        onReload={handleReload}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
       />

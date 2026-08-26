@@ -15,17 +15,14 @@ import {
   ChevronRight,
   Zap,
   Sparkles,
-  BookOpen,
-  RotateCw
+  BookOpen
 } from 'lucide-react';
 
 interface HeaderProps {
   cartCount: number;
   cartTotal?: number;
   currentPage?: PageView;
-  isReloading?: boolean;
   onNavigate: (page: PageView) => void;
-  onReload?: () => void;
   onOpenCart: () => void;
   onOpenOrderLookup: () => void;
 }
@@ -34,9 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
   cartCount,
   cartTotal = 0,
   currentPage = 'home',
-  isReloading = false,
   onNavigate,
-  onReload,
   onOpenCart,
   onOpenOrderLookup
 }) => {
@@ -66,6 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
   }, [announcements.length]);
 
   const navLinks: { label: string; page: PageView; badge?: string }[] = [
+    { label: 'Home', page: 'home' },
     { label: 'All Accounts', page: 'all-accounts' },
     { label: 'BTC Enabled', page: 'btc-accounts', badge: 'Hot' },
     { label: 'Non-BTC', page: 'non-btc-accounts' },
@@ -106,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Direct Support Badges, Track Order & Quick Reload Option */}
+          {/* Direct Support Badges & Track Order */}
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 text-xs font-semibold">
             {/* Top Header Track Order */}
             <button
@@ -118,19 +114,6 @@ export const Header: React.FC<HeaderProps> = ({
               <Search className="w-3 h-3 text-[#00D632]" />
               <span>Track Order</span>
             </button>
-
-            {onReload && (
-              <button
-                id="header-reload-btn"
-                onClick={onReload}
-                disabled={isReloading}
-                title="Reload Current Page Data"
-                className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-700/40 text-[11px] text-emerald-300 hover:text-white transition-all cursor-pointer disabled:opacity-50"
-              >
-                <RotateCw className={`w-3 h-3 text-[#00D632] ${isReloading ? 'animate-spin' : ''}`} />
-                <span className="hidden sm:inline">Reload</span>
-              </button>
-            )}
 
             <a
               id="top-bar-telegram-link"
@@ -262,20 +245,6 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Navigation Links */}
           <div className="space-y-1 pt-1">
-            <a
-              href={PAGE_ROUTES.home.path}
-              data-full-url={PAGE_ROUTES.home.fullUrl}
-              onClick={(e) => handleNavClick('home', e)}
-              className={`w-full flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                currentPage === 'home'
-                  ? 'bg-[#00D632]/15 text-[#00D632] border border-[#00D632]/40 font-bold'
-                  : 'text-slate-200 hover:bg-[#00D632]/10 hover:text-[#00D632]'
-              }`}
-            >
-              <span>Home Overview</span>
-              <ChevronRight className="w-4 h-4 text-slate-500" />
-            </a>
-
             {navLinks.map((link) => {
               const isActive = currentPage === link.page;
               const route = PAGE_ROUTES[link.page];

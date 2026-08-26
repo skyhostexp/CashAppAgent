@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { CONTACT_INFO } from '../data/cryptoGateways';
-import { Send, Phone, ShoppingBag, ArrowUp } from 'lucide-react';
+import { Send, Phone, ArrowUp } from 'lucide-react';
 
 interface FloatingContactBarProps {
-  cartCount: number;
-  onOpenCart: () => void;
+  cartCount?: number;
+  onOpenCart?: () => void;
 }
 
-export const FloatingContactBar: React.FC<FloatingContactBarProps> = ({
-  cartCount,
-  onOpenCart
-}) => {
+export const FloatingContactBar: React.FC<FloatingContactBarProps> = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -65,18 +62,6 @@ export const FloatingContactBar: React.FC<FloatingContactBarProps> = ({
           <Phone className="w-4 h-4 fill-black" />
           <span className="hidden sm:inline">WhatsApp</span>
         </a>
-
-        {/* Floating Cart Pill if items exist */}
-        {cartCount > 0 && (
-          <button
-            id="floating-cart-btn"
-            onClick={onOpenCart}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#00A827] to-[#00D632] text-black font-black text-xs shadow-xl shadow-[#00D632]/30 hover:scale-105 active:scale-95 transition-all cursor-pointer animate-pulse"
-          >
-            <ShoppingBag className="w-4 h-4" />
-            <span>Cart ({cartCount})</span>
-          </button>
-        )}
       </div>
     </div>
   );
