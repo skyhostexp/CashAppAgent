@@ -1,21 +1,16 @@
 import React from 'react';
 import { CashAppLogo } from './CashAppLogo';
-import { CONTACT_INFO, CRYPTO_GATEWAYS } from '../data/cryptoGateways';
+import { CRYPTO_GATEWAYS } from '../data/cryptoGateways';
 import { ACCOUNT_PRODUCTS } from '../data/products';
-import { AccountProduct } from '../types';
+import { AccountProduct, PageView } from '../types';
 import { 
-  Send, 
-  Phone, 
-  Mail, 
   ShieldCheck, 
   Lock, 
   Bitcoin, 
-  ExternalLink,
   CheckCircle2,
   Zap,
   ArrowRight,
   Shield,
-  Clock,
   Sparkles,
   Search
 } from 'lucide-react';
@@ -23,9 +18,18 @@ import {
 interface FooterProps {
   onSelectProduct: (product: AccountProduct) => void;
   onOpenOrderLookup: () => void;
+  onNavigate?: (page: PageView) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLookup }) => {
+export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLookup, onNavigate }) => {
+  const handleLinkClick = (page: PageView, e?: React.MouseEvent) => {
+    if (onNavigate) {
+      if (e) e.preventDefault();
+      onNavigate(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-[#060a0d] border-t border-emerald-950/80 text-slate-400 text-xs relative overflow-hidden">
       {/* Top Ambient Glow Gradient */}
@@ -111,55 +115,20 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
           
           {/* Brand Info (2 cols) */}
           <div className="lg:col-span-2 space-y-4">
-            <CashAppLogo size="lg" />
+            <button 
+              onClick={(e) => handleLinkClick('home', e)} 
+              className="cursor-pointer text-left focus:outline-none"
+            >
+              <CashAppLogo size="lg" />
+            </button>
             <p className="text-xs leading-relaxed text-slate-400 max-w-sm">
               <strong className="text-white">CashappsAgent (cashappagent.com)</strong> is the premier verified vendor for aged, 100% identity-verified Cash App accounts with Bitcoin withdrawal capabilities and limits up to $25,000. All accounts include primary email access and full identity documentation.
             </p>
-
-            <div className="space-y-2.5 pt-2">
-              <div className="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#00D632] animate-pulse" />
-                <span>24/7 Verified Support Channels:</span>
-              </div>
-              
-              <div className="flex flex-col gap-2">
-                <a
-                  href={CONTACT_INFO.telegramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 p-2 rounded-xl bg-sky-950/30 hover:bg-sky-950/60 border border-sky-600/30 text-sky-300 hover:text-sky-100 font-semibold transition-all group max-w-xs"
-                >
-                  <Send className="w-4 h-4 text-sky-400 group-hover:scale-110 transition-transform" />
-                  <div className="flex flex-col">
-                    <span className="text-xs">Telegram Support</span>
-                    <span className="text-[10px] text-sky-400/80 font-normal">@CashappsAgent (Live)</span>
-                  </div>
-                </a>
-
-                <a
-                  href={CONTACT_INFO.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 p-2 rounded-xl bg-emerald-950/30 hover:bg-emerald-950/60 border border-emerald-600/30 text-emerald-300 hover:text-emerald-100 font-semibold transition-all group max-w-xs"
-                >
-                  <Phone className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-                  <div className="flex flex-col">
-                    <span className="text-xs">WhatsApp Direct</span>
-                    <span className="text-[10px] text-emerald-400/80 font-normal">{CONTACT_INFO.whatsapp}</span>
-                  </div>
-                </a>
-
-                <a
-                  href={CONTACT_INFO.emailUrl}
-                  className="flex items-center gap-2.5 p-2 rounded-xl bg-slate-900/50 hover:bg-slate-900 border border-slate-800 text-slate-300 hover:text-white font-semibold transition-all group max-w-xs"
-                >
-                  <Mail className="w-4 h-4 text-slate-400 group-hover:scale-110 transition-transform" />
-                  <div className="flex flex-col">
-                    <span className="text-xs">Email Desk</span>
-                    <span className="text-[10px] text-slate-400 font-normal">{CONTACT_INFO.email}</span>
-                  </div>
-                </a>
-              </div>
+            <div className="pt-2 flex items-center gap-3 text-slate-400 text-xs">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400 font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#00D632]" />
+                <span>Escrow Protected &bull; 100% Verified</span>
+              </span>
             </div>
           </div>
 
@@ -174,7 +143,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
                 <li key={p.id}>
                   <button
                     onClick={() => onSelectProduct(p)}
-                    className="text-left text-slate-400 hover:text-[#00D632] transition-all flex items-center justify-between w-full p-1.5 rounded-lg hover:bg-white/5 group"
+                    className="text-left text-slate-400 hover:text-[#00D632] transition-all flex items-center justify-between w-full p-1.5 rounded-lg hover:bg-white/5 group cursor-pointer"
                   >
                     <span className="group-hover:translate-x-0.5 transition-transform">{p.name}</span>
                     <span className="text-[#00D632] font-mono font-bold bg-[#00D632]/10 px-1.5 py-0.5 rounded text-[11px]">
@@ -197,7 +166,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
                 <li key={p.id}>
                   <button
                     onClick={() => onSelectProduct(p)}
-                    className="text-left text-slate-400 hover:text-[#00D632] transition-all flex items-center justify-between w-full p-1.5 rounded-lg hover:bg-white/5 group"
+                    className="text-left text-slate-400 hover:text-[#00D632] transition-all flex items-center justify-between w-full p-1.5 rounded-lg hover:bg-white/5 group cursor-pointer"
                   >
                     <span className="group-hover:translate-x-0.5 transition-transform">{p.name}</span>
                     <span className="text-[#00D632] font-mono font-bold bg-[#00D632]/10 px-1.5 py-0.5 rounded text-[11px]">
@@ -216,61 +185,76 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="#accounts" className="hover:text-[#00D632] transition-colors flex items-center gap-1.5">
+                <button 
+                  onClick={(e) => handleLinkClick('all-accounts', e)} 
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>Buy Verified Accounts</span>
-                </a>
+                  <span>All Accounts Catalog</span>
+                </button>
               </li>
               <li>
-                <a href="#calculator" className="hover:text-[#00D632] transition-colors flex items-center gap-1.5">
+                <button 
+                  onClick={(e) => handleLinkClick('btc-accounts', e)} 
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>Smart Limit Calculator</span>
-                </a>
+                  <span>BTC Enabled Accounts</span>
+                </button>
               </li>
               <li>
-                <a href="#inspector" className="hover:text-[#00D632] transition-colors flex items-center gap-1.5">
+                <button 
+                  onClick={(e) => handleLinkClick('non-btc-accounts', e)} 
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>Virtual Account Demo</span>
-                </a>
+                  <span>Non-BTC USD Accounts</span>
+                </button>
               </li>
               <li>
-                <a href="#crypto-converter" className="hover:text-[#00D632] transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>Crypto Gas &amp; Rate Tool</span>
-                </a>
-              </li>
-              <li>
-                <a href="#safety-guide" className="hover:text-[#00D632] transition-colors flex items-center gap-1.5">
+                <button 
+                  onClick={(e) => handleLinkClick('safety-guide', e)} 
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>7-Day Anti-Ban Blueprint</span>
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#bulk" className="hover:text-[#00D632] transition-colors flex items-center gap-1.5">
+                <button 
+                  onClick={(e) => handleLinkClick('bulk-orders', e)} 
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>Agency Bulk Bundles</span>
-                </a>
+                </button>
               </li>
               <li>
                 <button
                   onClick={onOpenOrderLookup}
-                  className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1.5 transition-colors"
+                  className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <Search className="w-3 h-3 text-emerald-400" />
                   <span>Track Existing Order</span>
                 </button>
               </li>
               <li>
-                <a href="#faq" className="hover:text-[#00D632] transition-colors flex items-center gap-1.5">
+                <button 
+                  onClick={(e) => handleLinkClick('faq', e)} 
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>FAQs &amp; Guarantees</span>
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#contact" className="hover:text-[#00D632] transition-colors flex items-center gap-1.5">
+                <button 
+                  onClick={(e) => handleLinkClick('contact', e)} 
+                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer"
+                >
                   <ArrowRight className="w-3 h-3 text-slate-600" />
                   <span>Contact 24/7 Desk</span>
-                </a>
+                </button>
               </li>
             </ul>
           </div>

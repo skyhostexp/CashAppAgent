@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AccountCategory, AccountProduct, CartItem, OrderDetails } from './types';
-import { ACCOUNT_PRODUCTS } from './data/products';
+import { AccountCategory, AccountProduct, CartItem, OrderDetails, PageView } from './types';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ProductGrid } from './components/ProductGrid';
@@ -21,8 +20,34 @@ import { CartDrawer } from './components/CartDrawer';
 import { OrderLookupModal } from './components/OrderLookupModal';
 import { FloatingContactBar } from './components/FloatingContactBar';
 
+// Dedicated Page View Components
+import { AllAccountsPage } from './components/pages/AllAccountsPage';
+import { BtcAccountsPage } from './components/pages/BtcAccountsPage';
+import { NonBtcAccountsPage } from './components/pages/NonBtcAccountsPage';
+import { FaqPage } from './components/pages/FaqPage';
+import { SafetyGuidePage } from './components/pages/SafetyGuidePage';
+import { BulkOrdersPage } from './components/pages/BulkOrdersPage';
+import { ContactPage } from './components/pages/ContactPage';
+
 export default function App() {
+  const [currentPage, setCurrentPage] = useState<PageView>(() => {
+    try {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (hash === 'all-accounts' || hash === 'accounts' || hash === 'catalog') return 'all-accounts';
+      if (hash === 'btc-accounts' || hash === 'btc-enabled' || hash === 'btc') return 'btc-accounts';
+      if (hash === 'non-btc-accounts' || hash === 'non-btc') return 'non-btc-accounts';
+      if (hash === 'faq' || hash === 'help') return 'faq';
+      if (hash === 'safety-guide' || hash === 'safety') return 'safety-guide';
+      if (hash === 'bulk-orders' || hash === 'bulk') return 'bulk-orders';
+      if (hash === 'contact' || hash === 'support') return 'contact';
+      return 'home';
+    } catch {
+      return 'home';
+    }
+  });
+
   const [selectedCategory, setSelectedCategory] = useState<'all' | AccountCategory>('all');
+  
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem('cashappsagent_cart');
@@ -45,6 +70,24 @@ export default function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [checkoutItems, setCheckoutItems] = useState<CartItem[]>([]);
   const [isOrderLookupOpen, setIsOrderLookupOpen] = useState(false);
+
+  // Sync hash with browser navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (hash === 'all-accounts' || hash === 'accounts' || hash === 'catalog') setCurrentPage('all-accounts');
+      else if (hash === 'btc-accounts' || hash === 'btc-enabled' || hash === 'btc') setCurrentPage('btc-accounts');
+      else if (hash === 'non-btc-accounts' || hash === 'non-btc') setCurrentPage('non-btc-accounts');
+      else if (hash === 'faq' || hash === 'help') setCurrentPage('faq');
+      else if (hash === 'safety-guide' || hash === 'safety') setCurrentPage('safety-guide');
+      else if (hash === 'bulk-orders' || hash === 'bulk') setCurrentPage('bulk-orders');
+      else if (hash === 'contact' || hash === 'support') setCurrentPage('contact');
+      else if (hash === '' || hash === 'home') setCurrentPage('home');
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Sync cart to local storage
   useEffect(() => {
@@ -107,11 +150,20 @@ export default function App() {
 
   const handleOrderCreated = (order: OrderDetails) => {
     setSavedOrders((prev) => [order, ...prev]);
-    // Clear cart if checkout contained all cart items
     setCart([]);
   };
 
+  const navigateTo = (page: PageView) => {
+    setCurrentPage(page);
+    window.location.hash = page === 'home' ? '' : page;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const scrollToAccounts = () => {
+    if (currentPage !== 'home') {
+      navigateTo('all-accounts');
+      return;
+    }
     const el = document.getElementById('accounts');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -119,8 +171,7 @@ export default function App() {
   };
 
   const handleSelectBtc = () => {
-    setSelectedCategory('btc-enabled');
-    scrollToAccounts();
+    navigateTo('btc-accounts');
   };
 
   return (
@@ -129,74 +180,140 @@ export default function App() {
       <Header
         cartCount={totalCartCount}
         cartTotal={totalCartAmount}
+        currentPage={currentPage}
+        onNavigate={navigateTo}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
-        onSelectCategory={(cat) => {
-          setSelectedCategory(cat);
-          scrollToAccounts();
-        }}
       />
 
       <main className="flex-grow">
-        {/* Hero Section */}
-        <Hero
-          onExploreClick={scrollToAccounts}
-          onSelectBtc={handleSelectBtc}
-        />
+        {/* VIEW 1: Dedicated All Accounts Page */}
+        {currentPage === 'all-accounts' && (
+          <AllAccountsPage
+            onBuyNow={handleBuyNow}
+            onAddToCart={handleAddToCart}
+            onNavigateHome={() => navigateTo('home')}
+          />
+        )}
 
-        {/* Product Cards Grid with Filters */}
-        <ProductGrid
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-          onBuyNow={handleBuyNow}
-          onAddToCart={handleAddToCart}
-        />
+        {/* VIEW 2: Dedicated BTC Enabled Accounts Page */}
+        {currentPage === 'btc-accounts' && (
+          <BtcAccountsPage
+            onBuyNow={handleBuyNow}
+            onAddToCart={handleAddToCart}
+            onNavigateHome={() => navigateTo('home')}
+          />
+        )}
 
-        {/* Smart Limit Calculator & Account Tier Recommender */}
-        <AccountCalculator onSelectProduct={handleBuyNow} />
+        {/* VIEW 3: Dedicated Non-BTC USD Accounts Page */}
+        {currentPage === 'non-btc-accounts' && (
+          <NonBtcAccountsPage
+            onBuyNow={handleBuyNow}
+            onAddToCart={handleAddToCart}
+            onNavigateHome={() => navigateTo('home')}
+          />
+        )}
 
-        {/* Interactive Virtual Account Inspector & Mockup */}
-        <VirtualAccountPreview />
+        {/* VIEW 4: Dedicated FAQ & Warranty Page */}
+        {currentPage === 'faq' && (
+          <FaqPage
+            onNavigateHome={() => navigateTo('home')}
+            onOpenContact={() => navigateTo('contact')}
+          />
+        )}
 
-        {/* Comparison Matrix */}
-        <ComparisonTable onBuyNow={handleBuyNow} />
+        {/* VIEW 5: Dedicated Safety & Anti-Ban Warm-up Guide Page */}
+        {currentPage === 'safety-guide' && (
+          <SafetyGuidePage
+            onNavigateHome={() => navigateTo('home')}
+            onExploreAccounts={() => navigateTo('all-accounts')}
+          />
+        )}
 
-        {/* Live Crypto Price & Network Fee Estimator */}
-        <CryptoRateCalculator />
+        {/* VIEW 6: Dedicated Bulk Orders & Wholesale Page */}
+        {currentPage === 'bulk-orders' && (
+          <BulkOrdersPage
+            onNavigateHome={() => navigateTo('home')}
+            onBulkCheckout={(items) => {
+              setCheckoutItems(items);
+              setIsCheckoutOpen(true);
+            }}
+          />
+        )}
 
-        {/* Anti-Ban 7-Day Warm-up Blueprint & Checklist */}
-        <SafeLoginGuide />
+        {/* VIEW 7: Dedicated Contact & Official Support Desk Page */}
+        {currentPage === 'contact' && (
+          <ContactPage
+            onNavigateHome={() => navigateTo('home')}
+            onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
+          />
+        )}
 
-        {/* Wholesale & Custom Agency Bundle Builder */}
-        <BulkOrderConfigurator
-          onBulkCheckout={(items) => {
-            setCheckoutItems(items);
-            setIsCheckoutOpen(true);
-          }}
-        />
+        {/* VIEW 8: Primary Home Overview */}
+        {currentPage === 'home' && (
+          <>
+            {/* Hero Section */}
+            <Hero
+              onExploreClick={scrollToAccounts}
+              onSelectBtc={handleSelectBtc}
+            />
 
-        {/* Features & 4-Step Delivery Process */}
-        <AccountFeatures />
+            {/* Product Cards Grid with Filters */}
+            <ProductGrid
+              selectedCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+              onBuyNow={handleBuyNow}
+              onAddToCart={handleAddToCart}
+            />
 
-        {/* In-depth 1200-1500 word SEO Content Article */}
-        <SeoContentArticle />
+            {/* Smart Limit Calculator & Account Tier Recommender */}
+            <AccountCalculator onSelectProduct={handleBuyNow} />
 
-        {/* Verified Customer Reviews */}
-        <Testimonials />
+            {/* Interactive Virtual Account Inspector & Mockup */}
+            <VirtualAccountPreview />
 
-        {/* Frequently Asked Questions */}
-        <FaqSection />
+            {/* Comparison Matrix */}
+            <ComparisonTable onBuyNow={handleBuyNow} />
 
-        {/* Contact Us Channels */}
-        <ContactSection />
+            {/* Live Crypto Price & Network Fee Estimator */}
+            <CryptoRateCalculator />
+
+            {/* Anti-Ban 7-Day Warm-up Blueprint & Checklist */}
+            <SafeLoginGuide />
+
+            {/* Wholesale & Custom Agency Bundle Builder */}
+            <BulkOrderConfigurator
+              onBulkCheckout={(items) => {
+                setCheckoutItems(items);
+                setIsCheckoutOpen(true);
+              }}
+            />
+
+            {/* Features & 4-Step Delivery Process */}
+            <AccountFeatures />
+
+            {/* In-depth 1200-1500 word SEO Content Article */}
+            <SeoContentArticle />
+
+            {/* Verified Customer Reviews */}
+            <Testimonials />
+
+            {/* Frequently Asked Questions */}
+            <FaqSection />
+
+            {/* Contact Us Channels */}
+            <ContactSection />
+          </>
+        )}
       </main>
 
-      {/* Styled Cash App Header & Footer */}
+      {/* Styled Cash App Footer */}
       <Footer
         onSelectProduct={(p) => {
           handleBuyNow(p);
         }}
         onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
+        onNavigate={navigateTo}
       />
 
       {/* Crypto Checkout Modal */}

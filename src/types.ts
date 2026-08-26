@@ -1,5 +1,15 @@
 export type AccountCategory = 'btc-enabled' | 'non-btc';
 
+export type PageView = 
+  | 'home' 
+  | 'all-accounts' 
+  | 'btc-accounts' 
+  | 'non-btc-accounts' 
+  | 'faq' 
+  | 'contact' 
+  | 'safety-guide' 
+  | 'bulk-orders';
+
 export interface AccountProduct {
   id: string;
   name: string;
