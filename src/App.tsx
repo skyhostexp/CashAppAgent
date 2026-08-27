@@ -221,7 +221,7 @@ export default function App() {
       />
 
       <main className="flex-grow">
-        {/* VIEW 1: Dedicated All Accounts Page (/accounts) */}
+        {/* VIEW 1: Dedicated All Accounts Page (/Buy-Verified-CashApp-Accounts) */}
         {currentPage === 'all-accounts' && (
           <AllAccountsPage
             onBuyNow={handleBuyNow}
@@ -239,7 +239,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 3: Dedicated Non-BTC USD Accounts Page (/non-btc-accounts) */}
+        {/* VIEW 3: Dedicated Non-BTC USD Accounts Page (/Buy-non-btc-CashApp-accounts) */}
         {currentPage === 'non-btc-accounts' && (
           <NonBtcAccountsPage
             onBuyNow={handleBuyNow}

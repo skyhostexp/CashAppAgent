@@ -246,8 +246,8 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
               </li>
               <li>
                 <a 
-                  href="/accounts"
-                  data-full-url="https://cashappagent.com/accounts"
+                  href={PAGE_ROUTES['all-accounts'].path}
+                  data-full-url={PAGE_ROUTES['all-accounts'].fullUrl}
                   onClick={(e) => handleLinkClick('all-accounts', e)} 
                   className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer group"
                 >

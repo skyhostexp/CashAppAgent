@@ -27,8 +27,8 @@ export const PAGE_ROUTES: Record<PageView, PageRouteInfo> = {
   },
   'all-accounts': {
     page: 'all-accounts',
-    path: '/accounts',
-    fullUrl: `${SITE_ORIGIN}/accounts`,
+    path: '/Buy-Verified-CashApp-Accounts',
+    fullUrl: `${SITE_ORIGIN}/Buy-Verified-CashApp-Accounts`,
     title: 'All Verified Accounts Catalog | CashappAgent',
     label: 'All Accounts'
   },
@@ -41,8 +41,8 @@ export const PAGE_ROUTES: Record<PageView, PageRouteInfo> = {
   },
   'non-btc-accounts': {
     page: 'non-btc-accounts',
-    path: '/non-btc-accounts',
-    fullUrl: `${SITE_ORIGIN}/non-btc-accounts`,
+    path: '/Buy-non-btc-CashApp-accounts',
+    fullUrl: `${SITE_ORIGIN}/Buy-non-btc-CashApp-accounts`,
     title: 'Non-BTC USD Cash App Accounts | CashappAgent',
     label: 'Non-BTC'
   },
@@ -87,9 +87,9 @@ export function getPageFromLocation(): PageView {
 
   // Check path matches
   if (pathname === '/blog' || hash === 'blog') return 'blog';
-  if (pathname === '/accounts' || pathname === '/all-accounts' || hash === 'all-accounts' || hash === 'accounts' || hash === 'catalog') return 'all-accounts';
+  if (pathname === '/buy-verified-cashapp-accounts' || pathname === '/accounts' || pathname === '/all-accounts' || hash === 'buy-verified-cashapp-accounts' || hash === 'all-accounts' || hash === 'accounts' || hash === 'catalog') return 'all-accounts';
   if (pathname === '/buy-btc-enabled-cashapp-accounts' || pathname === '/btc-accounts' || pathname === '/btc' || hash === 'buy-btc-enabled-cashapp-accounts' || hash === 'btc-accounts' || hash === 'btc-enabled' || hash === 'btc') return 'btc-accounts';
-  if (pathname === '/non-btc-accounts' || pathname === '/non-btc' || hash === 'non-btc-accounts' || hash === 'non-btc') return 'non-btc-accounts';
+  if (pathname === '/buy-non-btc-cashapp-accounts' || pathname === '/non-btc-accounts' || pathname === '/non-btc' || hash === 'buy-non-btc-cashapp-accounts' || hash === 'non-btc-accounts' || hash === 'non-btc') return 'non-btc-accounts';
   if (pathname === '/safety-guide' || pathname === '/safety' || hash === 'safety-guide' || hash === 'safety') return 'safety-guide';
   if (pathname === '/bulk-orders' || pathname === '/bulk' || hash === 'bulk-orders' || hash === 'bulk') return 'bulk-orders';
   if (pathname === '/faq' || pathname === '/help' || hash === 'faq' || hash === 'help') return 'faq';
