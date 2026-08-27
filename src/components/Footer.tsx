@@ -3,6 +3,7 @@ import { CashAppLogo } from './CashAppLogo';
 import { CRYPTO_GATEWAYS } from '../data/cryptoGateways';
 import { ACCOUNT_PRODUCTS } from '../data/products';
 import { AccountProduct, PageView } from '../types';
+import { PAGE_ROUTES } from '../utils/navigation';
 import { 
   ShieldCheck, 
   Lock, 
@@ -134,9 +135,16 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
 
           {/* BTC Accounts (1 col) */}
           <div className="space-y-3">
-            <h4 className="text-sm font-black text-white font-['Outfit',sans-serif] flex items-center gap-1.5 pb-1 border-b border-slate-800">
-              <Bitcoin className="w-4 h-4 text-[#F7931A]" />
-              BTC Enabled CashApp
+            <h4 className="text-sm font-black text-white font-['Outfit',sans-serif] pb-1 border-b border-slate-800">
+              <a
+                href={PAGE_ROUTES['btc-accounts'].path}
+                data-full-url={PAGE_ROUTES['btc-accounts'].fullUrl}
+                onClick={(e) => handleLinkClick('btc-accounts', e)}
+                className="flex items-center gap-1.5 hover:text-[#F7931A] transition-colors group cursor-pointer"
+              >
+                <Bitcoin className="w-4 h-4 text-[#F7931A] group-hover:rotate-12 transition-transform" />
+                <span>BTC Enabled CashApp</span>
+              </a>
             </h4>
             <ul className="space-y-2.5">
               {ACCOUNT_PRODUCTS.filter(p => p.btcEnabled).map((p) => (
@@ -157,9 +165,16 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
 
           {/* Non-BTC Accounts (1 col) */}
           <div className="space-y-3">
-            <h4 className="text-sm font-black text-white font-['Outfit',sans-serif] flex items-center gap-1.5 pb-1 border-b border-slate-800">
-              <ShieldCheck className="w-4 h-4 text-[#00D632]" />
-              Non-BTC CashApp
+            <h4 className="text-sm font-black text-white font-['Outfit',sans-serif] pb-1 border-b border-slate-800">
+              <a
+                href={PAGE_ROUTES['non-btc-accounts'].path}
+                data-full-url={PAGE_ROUTES['non-btc-accounts'].fullUrl}
+                onClick={(e) => handleLinkClick('non-btc-accounts', e)}
+                className="flex items-center gap-1.5 hover:text-[#00D632] transition-colors group cursor-pointer"
+              >
+                <ShieldCheck className="w-4 h-4 text-[#00D632] group-hover:scale-110 transition-transform" />
+                <span>Non-BTC CashApp</span>
+              </a>
             </h4>
             <ul className="space-y-2.5">
               {ACCOUNT_PRODUCTS.filter(p => !p.btcEnabled).map((p) => (

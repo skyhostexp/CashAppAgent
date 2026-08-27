@@ -34,8 +34,8 @@ export const PAGE_ROUTES: Record<PageView, PageRouteInfo> = {
   },
   'btc-accounts': {
     page: 'btc-accounts',
-    path: '/btc-accounts',
-    fullUrl: `${SITE_ORIGIN}/btc-accounts`,
+    path: '/buy-btc-enabled-cashapp-accounts',
+    fullUrl: `${SITE_ORIGIN}/buy-btc-enabled-cashapp-accounts`,
     title: 'BTC Enabled Cash App Accounts | CashappAgent',
     label: 'BTC Enabled'
   },
@@ -88,7 +88,7 @@ export function getPageFromLocation(): PageView {
   // Check path matches
   if (pathname === '/blog' || hash === 'blog') return 'blog';
   if (pathname === '/accounts' || pathname === '/all-accounts' || hash === 'all-accounts' || hash === 'accounts' || hash === 'catalog') return 'all-accounts';
-  if (pathname === '/btc-accounts' || pathname === '/btc' || hash === 'btc-accounts' || hash === 'btc-enabled' || hash === 'btc') return 'btc-accounts';
+  if (pathname === '/buy-btc-enabled-cashapp-accounts' || pathname === '/btc-accounts' || pathname === '/btc' || hash === 'buy-btc-enabled-cashapp-accounts' || hash === 'btc-accounts' || hash === 'btc-enabled' || hash === 'btc') return 'btc-accounts';
   if (pathname === '/non-btc-accounts' || pathname === '/non-btc' || hash === 'non-btc-accounts' || hash === 'non-btc') return 'non-btc-accounts';
   if (pathname === '/safety-guide' || pathname === '/safety' || hash === 'safety-guide' || hash === 'safety') return 'safety-guide';
   if (pathname === '/bulk-orders' || pathname === '/bulk' || hash === 'bulk-orders' || hash === 'bulk') return 'bulk-orders';

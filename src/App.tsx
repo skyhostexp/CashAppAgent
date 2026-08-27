@@ -230,7 +230,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 2: Dedicated BTC Enabled Accounts Page (/btc-accounts) */}
+        {/* VIEW 2: Dedicated BTC Enabled Accounts Page (/buy-btc-enabled-cashapp-accounts) */}
         {currentPage === 'btc-accounts' && (
           <BtcAccountsPage
             onBuyNow={handleBuyNow}
