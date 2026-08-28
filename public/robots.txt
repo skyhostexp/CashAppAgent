@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cashappagent.com/sitemap.xml
+# Disallow transient endpoints
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://cashappagent.com/sitemap_index.xml
+Sitemap: https://cashappagent.com/page-sitemap.xml
+Sitemap: https://cashappagent.com/product-sitemap.xml
+Sitemap: https://cashappagent.com/post-sitemap.xml

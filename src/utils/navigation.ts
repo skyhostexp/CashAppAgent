@@ -73,6 +73,13 @@ export const PAGE_ROUTES: Record<PageView, PageRouteInfo> = {
     fullUrl: `${SITE_ORIGIN}/contact`,
     title: 'Official 24/7 Support Desk | CashappAgent',
     label: 'Contact'
+  },
+  '404': {
+    page: '404',
+    path: '/404',
+    fullUrl: `${SITE_ORIGIN}/404`,
+    title: '404 - Page Not Found | CashappAgent',
+    label: 'Not Found'
   }
 };
 
@@ -85,7 +92,10 @@ export function getPageFromLocation(): PageView {
   const pathname = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
   const hash = window.location.hash.toLowerCase().replace(/^#\/?/, '').replace(/\/$/, '');
 
-  // Check path matches
+  // Exact Root Home
+  if (pathname === '/' || pathname === '/home' || (!pathname && !hash)) return 'home';
+
+  // Check valid known paths
   if (pathname === '/blog' || hash === 'blog') return 'blog';
   if (pathname === '/buy-verified-cashapp-accounts' || pathname === '/accounts' || pathname === '/all-accounts' || hash === 'buy-verified-cashapp-accounts' || hash === 'all-accounts' || hash === 'accounts' || hash === 'catalog') return 'all-accounts';
   if (pathname === '/buy-btc-enabled-cashapp-accounts' || pathname === '/btc-accounts' || pathname === '/btc' || hash === 'buy-btc-enabled-cashapp-accounts' || hash === 'btc-accounts' || hash === 'btc-enabled' || hash === 'btc') return 'btc-accounts';
@@ -95,7 +105,8 @@ export function getPageFromLocation(): PageView {
   if (pathname === '/faq' || pathname === '/help' || hash === 'faq' || hash === 'help') return 'faq';
   if (pathname === '/contact' || pathname === '/support' || hash === 'contact' || hash === 'support') return 'contact';
 
-  return 'home';
+  // Unknown route returns 404
+  return '404';
 }
 
 /**

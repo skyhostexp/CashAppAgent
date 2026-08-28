@@ -31,6 +31,7 @@ import { FaqPage } from './components/pages/FaqPage';
 import { SafetyGuidePage } from './components/pages/SafetyGuidePage';
 import { BulkOrdersPage } from './components/pages/BulkOrdersPage';
 import { ContactPage } from './components/pages/ContactPage';
+import { NotFoundPage } from './components/pages/NotFoundPage';
 
 import { getPageFromLocation, setBrowserPage } from './utils/navigation';
 
@@ -288,6 +289,13 @@ export default function App() {
           <ContactPage
             onNavigateHome={() => navigateTo('home')}
             onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
+          />
+        )}
+
+        {/* VIEW 9: 404 Page Not Found */}
+        {currentPage === '404' && (
+          <NotFoundPage
+            onNavigate={(page) => navigateTo(page)}
           />
         )}
 
