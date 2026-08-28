@@ -43,7 +43,7 @@ export const NonBtcAccountsPage: React.FC<NonBtcAccountsPageProps> = ({
             <span>USD TRANSACTION ENGINE &bull; SUTTON BANK ROUTING</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight font-['Outfit',sans-serif]">
-            Non-BTC <span className="text-[#00D632]">USD Cash App</span> Accounts
+            Buy Non-BTC <span className="text-[#00D632]">Cash App Accounts</span>
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
             High-limit, cost-effective verified Cash App accounts for standard USD peer-to-peer transfers, direct deposits, invoicing, and debit card usage. Ideal for business operations and daily payroll transfers.

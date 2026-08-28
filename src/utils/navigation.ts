@@ -27,23 +27,23 @@ export const PAGE_ROUTES: Record<PageView, PageRouteInfo> = {
   },
   'all-accounts': {
     page: 'all-accounts',
-    path: '/Buy-Verified-CashApp-Accounts',
-    fullUrl: `${SITE_ORIGIN}/Buy-Verified-CashApp-Accounts`,
-    title: 'All Verified Accounts Catalog | CashappAgent',
+    path: '/buy-verified-cashapp-accounts',
+    fullUrl: `${SITE_ORIGIN}/buy-verified-cashapp-accounts`,
+    title: 'Buy Verified Cash App Accounts | CashappAgent',
     label: 'All Accounts'
   },
   'btc-accounts': {
     page: 'btc-accounts',
     path: '/buy-btc-enabled-cashapp-accounts',
     fullUrl: `${SITE_ORIGIN}/buy-btc-enabled-cashapp-accounts`,
-    title: 'BTC Enabled Cash App Accounts | CashappAgent',
+    title: 'Buy BTC Enabled Cash App Accounts | CashappAgent',
     label: 'BTC Enabled'
   },
   'non-btc-accounts': {
     page: 'non-btc-accounts',
-    path: '/Buy-non-btc-CashApp-accounts',
-    fullUrl: `${SITE_ORIGIN}/Buy-non-btc-CashApp-accounts`,
-    title: 'Non-BTC USD Cash App Accounts | CashappAgent',
+    path: '/buy-non-btc-cashapp-accounts',
+    fullUrl: `${SITE_ORIGIN}/buy-non-btc-cashapp-accounts`,
+    title: 'Buy Non-BTC Cash App Accounts | CashappAgent',
     label: 'Non-BTC'
   },
   'safety-guide': {

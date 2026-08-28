@@ -43,7 +43,7 @@ export const BtcAccountsPage: React.FC<BtcAccountsPageProps> = ({
             <span>INSTANT ON-CHAIN CLEARANCE &bull; 0 HOLD TIME</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight font-['Outfit',sans-serif]">
-            BTC Enabled <span className="text-[#F7931A]">Cash App</span> Accounts
+            Buy BTC Enabled <span className="text-[#F7931A]">Cash App Accounts</span>
           </h1>
           <p className="text-sm sm:text-base text-amber-100/80 leading-relaxed">
             Fully verified Bitcoin wallet functionality with instantaneous deposit, on-chain external blockchain withdrawal, and high limits up to $25,000/week. Bypass standard wait times and purchase pre-cleared crypto nodes.

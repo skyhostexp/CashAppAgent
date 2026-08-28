@@ -73,7 +73,7 @@ export const SeoContentArticle: React.FC = () => {
             <div className="p-5 rounded-2xl bg-black/40 border border-amber-500/30 space-y-3">
               <div className="flex items-center gap-2 text-amber-400 font-extrabold text-base">
                 <Bitcoin className="w-5 h-5" />
-                <span>BTC Enabled Cash App Accounts ($249 - $499)</span>
+                <span>Buy BTC Enabled Cash App Accounts ($249 - $499)</span>
               </div>
               <ul className="space-y-2 text-xs text-slate-300">
                 <li className="flex items-start gap-2">
@@ -98,7 +98,7 @@ export const SeoContentArticle: React.FC = () => {
             <div className="p-5 rounded-2xl bg-black/40 border border-emerald-500/30 space-y-3">
               <div className="flex items-center gap-2 text-emerald-400 font-extrabold text-base">
                 <ShieldCheck className="w-5 h-5 text-[#00D632]" />
-                <span>Non-BTC Verified Cash App Accounts ($189 - $259)</span>
+                <span>Buy Non-BTC Cash App Accounts ($189 - $259)</span>
               </div>
               <ul className="space-y-2 text-xs text-slate-300">
                 <li className="flex items-start gap-2">
