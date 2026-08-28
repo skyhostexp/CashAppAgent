@@ -8,188 +8,249 @@
   <xsl:template match="/">
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
       <head>
-        <title>XML Sitemap | Rank Math SEO - CashappAgent</title>
+        <title>XML Sitemap Index | Rank Math SEO - CashappAgent</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style type="text/css">
+          * {
+            box-sizing: border-box;
+          }
           body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-            color: #334155;
-            background-color: #f8fafc;
+            color: #1e293b;
+            background-color: #f1f5f9;
             margin: 0;
-            padding: 30px 20px;
+            padding: 40px 16px;
+            display: flex;
+            justify-content: center;
           }
-          #sitemap {
-            max-width: 1000px;
-            margin: 0 auto;
+          #sitemap-container {
+            width: 100%;
+            max-width: 960px;
             background: #ffffff;
             border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-            padding: 32px;
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #cbd5e1;
+            overflow: hidden;
           }
           #header {
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 24px;
-            margin-bottom: 24px;
+            background-color: #141d2e;
+            padding: 32px 36px;
+            color: #ffffff;
           }
           h1 {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 800;
-            color: #0f172a;
-            margin: 0 0 8px 0;
+            color: #ffffff;
+            margin: 0 0 10px 0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            letter-spacing: -0.5px;
           }
           .badge {
-            background-color: #00D632;
-            color: #000000;
-            font-size: 12px;
+            background-color: #2563eb;
+            color: #ffffff;
+            font-size: 11px;
             font-weight: 800;
             padding: 4px 10px;
-            border-radius: 9999px;
-            letter-spacing: 0.5px;
+            border-radius: 6px;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
           }
           p.desc {
             font-size: 14px;
-            color: #64748b;
+            color: #cbd5e1;
             margin: 0;
             line-height: 1.6;
           }
           p.desc a {
-            color: #008726;
+            color: #38bdf8;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
           }
           p.desc a:hover {
             text-decoration: underline;
+          }
+          #sub-nav {
+            background-color: #f0f4f9;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 36px;
+            font-size: 13px;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          #sub-nav .links a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 0 4px;
+          }
+          #sub-nav .links a:hover {
+            text-decoration: underline;
+          }
+          #content {
+            padding: 24px 36px 36px 36px;
           }
           table {
             width: 100%;
             border-collapse: collapse;
             font-size: 13px;
-            margin-top: 16px;
           }
           th {
-            background-color: #f8fafc;
-            color: #475569;
+            color: #64748b;
             font-weight: 700;
             text-align: left;
-            padding: 12px 14px;
+            padding: 14px 16px;
             border-bottom: 2px solid #e2e8f0;
             text-transform: uppercase;
             font-size: 11px;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
           }
           td {
-            padding: 12px 14px;
+            padding: 14px 16px;
             border-bottom: 1px solid #f1f5f9;
             vertical-align: middle;
+            color: #334155;
           }
           tr:hover td {
-            background-color: #f0fdf4;
+            background-color: #f8fafc;
           }
           td a {
             color: #0f172a;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             word-break: break-all;
           }
           td a:hover {
-            color: #008726;
+            color: #2563eb;
             text-decoration: underline;
+          }
+          .col-num {
+            width: 40px;
+            color: #94a3b8;
+            font-weight: 600;
+          }
+          .date-col {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            color: #64748b;
+            font-size: 12px;
           }
           .count-badge {
             background: #e2e8f0;
             color: #334155;
-            padding: 3px 8px;
+            padding: 2px 8px;
             border-radius: 6px;
             font-size: 11px;
             font-weight: 600;
+            display: inline-block;
           }
           .footer {
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid #f1f5f9;
+            background-color: #f8fafc;
+            padding: 16px 36px;
+            border-top: 1px solid #e2e8f0;
             font-size: 12px;
-            color: #94a3b8;
+            color: #64748b;
             text-align: center;
           }
         </style>
       </head>
       <body>
-        <div id="sitemap">
+        <div id="sitemap-container">
           <div id="header">
-            <h1>XML Sitemap <span class="badge">Rank Math SEO</span></h1>
+            <h1>XML Sitemap Index <span class="badge">RANK MATH SEO</span></h1>
             <p class="desc">
-              Generated by <strong>Rank Math SEO Pro</strong> for <a href="https://cashappagent.com/">CashappAgent</a>. This is an XML Sitemap, meant for consumption by search engines like Google, Bing, and Yahoo.
+              Generated by Rank Math SEO standard schema for <a href="https://cashappagent.com/">CashappAgent.com</a> to index all verified Cash App (BTC &amp; Non-BTC) accounts.
             </p>
           </div>
 
-          <xsl:if test="count(sitemap:sitemapindex/sitemap:sitemap) &gt; 0">
-            <p class="desc">This XML Sitemap Index file contains <strong><xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/></strong> sitemaps.</p>
-            <table>
-              <thead>
-                <tr>
-                  <th>Sitemap URL</th>
-                  <th>Last Modified</th>
-                </tr>
-              </thead>
-              <tbody>
-                <xsl:for-each select="sitemap:sitemapindex/sitemap:sitemap">
-                  <tr>
-                    <td>
-                      <a href="{sitemap:loc}"><xsl:value-of select="sitemap:loc"/></a>
-                    </td>
-                    <td>
-                      <xsl:value-of select="sitemap:lastmod"/>
-                    </td>
-                  </tr>
-                </xsl:for-each>
-              </tbody>
-            </table>
-          </xsl:if>
+          <div id="sub-nav">
+            <xsl:if test="count(sitemap:sitemapindex/sitemap:sitemap) &gt; 0">
+              <div>Sitemaps in this index: <strong><xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/></strong></div>
+              <div class="links">
+                <a href="https://cashappagent.com/sitemap_index.xml">Index XML</a> | 
+                <a href="https://cashappagent.com/product-sitemap.xml">Products XML</a> | 
+                <a href="https://cashappagent.com/page-sitemap.xml">Pages XML</a> | 
+                <a href="https://cashappagent.com/post-sitemap.xml">Posts XML</a>
+              </div>
+            </xsl:if>
+            <xsl:if test="count(sitemap:urlset/sitemap:url) &gt; 0">
+              <div>URLs in this sitemap: <strong><xsl:value-of select="count(sitemap:urlset/sitemap:url)"/></strong></div>
+              <div class="links">
+                <a href="https://cashappagent.com/sitemap_index.xml">&larr; Return to Index</a>
+              </div>
+            </xsl:if>
+          </div>
 
-          <xsl:if test="count(sitemap:urlset/sitemap:url) &gt; 0">
-            <p class="desc">This XML Sitemap contains <strong><xsl:value-of select="count(sitemap:urlset/sitemap:url)"/></strong> URLs with Google Search &amp; Image indexation.</p>
-            <table>
-              <thead>
-                <tr>
-                  <th>URL</th>
-                  <th>Images</th>
-                  <th>Changefreq</th>
-                  <th>Priority</th>
-                  <th>Last Modified</th>
-                </tr>
-              </thead>
-              <tbody>
-                <xsl:for-each select="sitemap:urlset/sitemap:url">
+          <div id="content">
+            <xsl:if test="count(sitemap:sitemapindex/sitemap:sitemap) &gt; 0">
+              <table>
+                <thead>
                   <tr>
-                    <td>
-                      <a href="{sitemap:loc}"><xsl:value-of select="sitemap:loc"/></a>
-                    </td>
-                    <td>
-                      <span class="count-badge"><xsl:value-of select="count(image:image)"/></span>
-                    </td>
-                    <td>
-                      <xsl:value-of select="sitemap:changefreq"/>
-                    </td>
-                    <td>
-                      <xsl:value-of select="sitemap:priority"/>
-                    </td>
-                    <td>
-                      <xsl:value-of select="sitemap:lastmod"/>
-                    </td>
+                    <th class="col-num">#</th>
+                    <th>SITEMAP</th>
+                    <th>LAST MODIFIED</th>
                   </tr>
-                </xsl:for-each>
-              </tbody>
-            </table>
-          </xsl:if>
+                </thead>
+                <tbody>
+                  <xsl:for-each select="sitemap:sitemapindex/sitemap:sitemap">
+                    <tr>
+                      <td class="col-num"><xsl:value-of select="position()"/></td>
+                      <td>
+                        <a href="{sitemap:loc}"><xsl:value-of select="sitemap:loc"/></a>
+                      </td>
+                      <td class="date-col">
+                        <xsl:value-of select="sitemap:lastmod"/>
+                      </td>
+                    </tr>
+                  </xsl:for-each>
+                </tbody>
+              </table>
+            </xsl:if>
+
+            <xsl:if test="count(sitemap:urlset/sitemap:url) &gt; 0">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="col-num">#</th>
+                    <th>URL</th>
+                    <th>IMAGES</th>
+                    <th>CHANGEFREQ</th>
+                    <th>PRIORITY</th>
+                    <th>LAST MODIFIED</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <xsl:for-each select="sitemap:urlset/sitemap:url">
+                    <tr>
+                      <td class="col-num"><xsl:value-of select="position()"/></td>
+                      <td>
+                        <a href="{sitemap:loc}"><xsl:value-of select="sitemap:loc"/></a>
+                      </td>
+                      <td>
+                        <span class="count-badge"><xsl:value-of select="count(image:image)"/></span>
+                      </td>
+                      <td class="date-col">
+                        <xsl:value-of select="sitemap:changefreq"/>
+                      </td>
+                      <td>
+                        <strong><xsl:value-of select="sitemap:priority"/></strong>
+                      </td>
+                      <td class="date-col">
+                        <xsl:value-of select="sitemap:lastmod"/>
+                      </td>
+                    </tr>
+                  </xsl:for-each>
+                </tbody>
+              </table>
+            </xsl:if>
+          </div>
 
           <div class="footer">
-            Rank Math XML Sitemap &bull; CashappAgent (cashappagent.com) &bull; Verified Cash App Accounts Index
+            CashappAgent.com &bull; 100% Verified Cash App Accounts &bull; Sitemaps.org Protocol 0.9 Compliant
           </div>
         </div>
       </body>

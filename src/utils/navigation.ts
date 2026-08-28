@@ -74,6 +74,13 @@ export const PAGE_ROUTES: Record<PageView, PageRouteInfo> = {
     title: 'Official 24/7 Support Desk | CashappAgent',
     label: 'Contact'
   },
+  sitemap: {
+    page: 'sitemap',
+    path: '/sitemap_index.xml',
+    fullUrl: `${SITE_ORIGIN}/sitemap_index.xml`,
+    title: 'XML Sitemap | Rank Math SEO - CashappAgent',
+    label: 'XML Sitemap'
+  },
   '404': {
     page: '404',
     path: '/404',
@@ -104,6 +111,16 @@ export function getPageFromLocation(): PageView {
   if (pathname === '/bulk-orders' || pathname === '/bulk' || hash === 'bulk-orders' || hash === 'bulk') return 'bulk-orders';
   if (pathname === '/faq' || pathname === '/help' || hash === 'faq' || hash === 'help') return 'faq';
   if (pathname === '/contact' || pathname === '/support' || hash === 'contact' || hash === 'support') return 'contact';
+  if (
+    pathname === '/sitemap_index.xml' || 
+    pathname === '/sitemap.xml' || 
+    pathname === '/page-sitemap.xml' || 
+    pathname === '/product-sitemap.xml' || 
+    pathname === '/post-sitemap.xml' ||
+    pathname === '/sitemap' ||
+    hash === 'sitemap' ||
+    hash === 'sitemap_index.xml'
+  ) return 'sitemap';
 
   // Unknown route returns 404
   return '404';

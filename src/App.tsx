@@ -32,6 +32,7 @@ import { SafetyGuidePage } from './components/pages/SafetyGuidePage';
 import { BulkOrdersPage } from './components/pages/BulkOrdersPage';
 import { ContactPage } from './components/pages/ContactPage';
 import { NotFoundPage } from './components/pages/NotFoundPage';
+import { SitemapViewerPage } from './components/pages/SitemapViewerPage';
 
 import { getPageFromLocation, setBrowserPage } from './utils/navigation';
 
@@ -295,6 +296,13 @@ export default function App() {
         {/* VIEW 9: 404 Page Not Found */}
         {currentPage === '404' && (
           <NotFoundPage
+            onNavigate={(page) => navigateTo(page)}
+          />
+        )}
+
+        {/* VIEW 10: Rank Math XML Sitemap Visual & Raw Engine */}
+        {currentPage === 'sitemap' && (
+          <SitemapViewerPage
             onNavigate={(page) => navigateTo(page)}
           />
         )}
