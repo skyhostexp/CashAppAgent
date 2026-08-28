@@ -1,27 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml-stylesheet type="text/xsl" href="/main-sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 	<url>
-		<loc>https://cashappagent.com/product/cashapp-verified-starter-4k</loc>
+		<loc>https://cashappagent.com/buy-btc-enabled-cashapp-accounts#btc-4k</loc>
 		<lastmod>2026-08-28T12:00:00+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.8</priority>
-	</url>
-	<url>
-		<loc>https://cashappagent.com/product/cashapp-verified-business-10k</loc>
-		<lastmod>2026-08-28T12:00:00+00:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.8</priority>
-	</url>
-	<url>
-		<loc>https://cashappagent.com/product/cashapp-btc-enabled-unlimited-25k</loc>
-		<lastmod>2026-08-28T12:00:00+00:00</lastmod>
-		<changefreq>weekly</changefreq>
+		<changefreq>daily</changefreq>
 		<priority>0.9</priority>
+		<image:image>
+			<image:loc>https://cashappagent.com/logo.png</image:loc>
+			<image:title>BTC Enable 4k Cash App Account - CashappAgent</image:title>
+			<image:caption>Fully verified personal Cash App account with Bitcoin buy/sell and external wallet withdrawal enabled. $4k weekly sending limit.</image:caption>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://cashappagent.com/product/cashapp-aged-vip-tier-25k</loc>
+		<loc>https://cashappagent.com/buy-btc-enabled-cashapp-accounts#btc-10k</loc>
 		<lastmod>2026-08-28T12:00:00+00:00</lastmod>
-		<changefreq>weekly</changefreq>
+		<changefreq>daily</changefreq>
 		<priority>0.9</priority>
+		<image:image>
+			<image:loc>https://cashappagent.com/logo.png</image:loc>
+			<image:title>BTC Enable 10k Cash App Account - CashappAgent</image:title>
+			<image:caption>Aged high-tier verified Cash App account with enhanced Bitcoin transaction limits and $10k weekly volume capability.</image:caption>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://cashappagent.com/buy-btc-enabled-cashapp-accounts#btc-25k</loc>
+		<lastmod>2026-08-28T12:00:00+00:00</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+		<image:image>
+			<image:loc>https://cashappagent.com/logo.png</image:loc>
+			<image:title>BTC Enable 25k Cash App Account - CashappAgent</image:title>
+			<image:caption>Premium institutional tier verified Cash App account with maximum $25,000 weekly limits and unlimited BTC trading.</image:caption>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://cashappagent.com/buy-non-btc-cashapp-accounts#non-btc-4k</loc>
+		<lastmod>2026-08-28T12:00:00+00:00</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+		<image:image>
+			<image:loc>https://cashappagent.com/logo.png</image:loc>
+			<image:title>Non BTC Enable 4k Cash App Account - CashappAgent</image:title>
+			<image:caption>Fully verified personal Cash App account with $4k weekly sending limit for standard USD peer-to-peer transfers.</image:caption>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://cashappagent.com/buy-non-btc-cashapp-accounts#non-btc-10k</loc>
+		<lastmod>2026-08-28T12:00:00+00:00</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+		<image:image>
+			<image:loc>https://cashappagent.com/logo.png</image:loc>
+			<image:title>Non BTC Enable 10k Cash App Account - CashappAgent</image:title>
+			<image:caption>Aged USD verified Cash App account with expanded $10,000 weekly volume limit for high-frequency transfers.</image:caption>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://cashappagent.com/buy-non-btc-cashapp-accounts#non-btc-15k</loc>
+		<lastmod>2026-08-28T12:00:00+00:00</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+		<image:image>
+			<image:loc>https://cashappagent.com/logo.png</image:loc>
+			<image:title>Non BTC Enable 15k Cash App Account - CashappAgent</image:title>
+			<image:caption>Maximum limit Non-BTC verified Cash App account supporting up to $15,000 weekly turnover for seamless money transfers.</image:caption>
+		</image:image>
 	</url>
 </urlset>

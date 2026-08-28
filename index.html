@@ -34,7 +34,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Schema.org JSON-LD Structured Data for SEO -->
+    <!-- Schema.org JSON-LD Structured Data for Rank Math SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -44,7 +44,11 @@
           "@id": "https://cashappagent.com/#organization",
           "name": "CashappAgent",
           "url": "https://cashappagent.com/",
-          "logo": "https://cashappagent.com/logo.png",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://cashappagent.com/logo.png",
+            "caption": "CashappAgent Official Brand Logo"
+          },
           "contactPoint": [
             {
               "@type": "ContactPoint",
@@ -63,26 +67,185 @@
           "@id": "https://cashappagent.com/#website",
           "url": "https://cashappagent.com/",
           "name": "CashappAgent",
+          "description": "Buy 100% Verified Cash App Accounts (BTC & Non-BTC Enabled) with Instant Delivery",
           "publisher": {
             "@id": "https://cashappagent.com/#organization"
           }
         },
         {
-          "@type": "Product",
-          "name": "Buy Verified Cash App Accounts",
-          "description": "Verified personal and business Cash App accounts with BTC enabled/non-BTC options, full verification documents, bank linkage, email and phone access.",
-          "brand": {
-            "@type": "Brand",
-            "name": "CashappAgent"
-          },
-          "offers": {
-            "@type": "AggregateOffer",
-            "priceCurrency": "USD",
-            "lowPrice": "189",
-            "highPrice": "499",
-            "offerCount": "6",
-            "availability": "https://schema.org/InStock"
-          }
+          "@type": "BreadcrumbList",
+          "@id": "https://cashappagent.com/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://cashappagent.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Buy Verified Cash App Accounts",
+              "item": "https://cashappagent.com/buy-verified-cashapp-accounts"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Buy BTC Enabled Cash App Accounts",
+              "item": "https://cashappagent.com/buy-btc-enabled-cashapp-accounts"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Buy Non-BTC Cash App Accounts",
+              "item": "https://cashappagent.com/buy-non-btc-cashapp-accounts"
+            }
+          ]
+        },
+        {
+          "@type": "ItemList",
+          "@id": "https://cashappagent.com/#product-catalog",
+          "name": "Verified Cash App Accounts Catalog",
+          "itemListElement": [
+            {
+              "@type": "Product",
+              "position": 1,
+              "name": "BTC Enable 4k Cash App Account",
+              "description": "Fully verified personal Cash App account with Bitcoin buy/sell and external wallet withdrawal enabled. $4,000 weekly limit.",
+              "sku": "CAA-BTC-4K",
+              "url": "https://cashappagent.com/buy-btc-enabled-cashapp-accounts#btc-4k",
+              "brand": { "@type": "Brand", "name": "CashappAgent" },
+              "offers": {
+                "@type": "Offer",
+                "price": "249",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://cashappagent.com/buy-btc-enabled-cashapp-accounts#btc-4k"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "342",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            },
+            {
+              "@type": "Product",
+              "position": 2,
+              "name": "BTC Enable 10k Cash App Account",
+              "description": "Aged high-tier verified Cash App account with enhanced Bitcoin transaction limits and $10,000 weekly volume capability.",
+              "sku": "CAA-BTC-10K",
+              "url": "https://cashappagent.com/buy-btc-enabled-cashapp-accounts#btc-10k",
+              "brand": { "@type": "Brand", "name": "CashappAgent" },
+              "offers": {
+                "@type": "Offer",
+                "price": "349",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://cashappagent.com/buy-btc-enabled-cashapp-accounts#btc-10k"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "518",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            },
+            {
+              "@type": "Product",
+              "position": 3,
+              "name": "BTC Enable 25k Cash App Account",
+              "description": "Premium institutional tier verified Cash App account with maximum $25,000 weekly limits and unlimited BTC trading.",
+              "sku": "CAA-BTC-25K",
+              "url": "https://cashappagent.com/buy-btc-enabled-cashapp-accounts#btc-25k",
+              "brand": { "@type": "Brand", "name": "CashappAgent" },
+              "offers": {
+                "@type": "Offer",
+                "price": "499",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://cashappagent.com/buy-btc-enabled-cashapp-accounts#btc-25k"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "reviewCount": "290",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            },
+            {
+              "@type": "Product",
+              "position": 4,
+              "name": "Non BTC Enable 4k Cash App Account",
+              "description": "Fully verified personal Cash App account with $4k weekly sending limit for standard USD peer-to-peer transfers.",
+              "sku": "CAA-USD-4K",
+              "url": "https://cashappagent.com/buy-non-btc-cashapp-accounts#non-btc-4k",
+              "brand": { "@type": "Brand", "name": "CashappAgent" },
+              "offers": {
+                "@type": "Offer",
+                "price": "189",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://cashappagent.com/buy-non-btc-cashapp-accounts#non-btc-4k"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "194",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            },
+            {
+              "@type": "Product",
+              "position": 5,
+              "name": "Non BTC Enable 10k Cash App Account",
+              "description": "Aged USD verified Cash App account with expanded $10,000 weekly volume limit for high-frequency transfers.",
+              "sku": "CAA-USD-10K",
+              "url": "https://cashappagent.com/buy-non-btc-cashapp-accounts#non-btc-10k",
+              "brand": { "@type": "Brand", "name": "CashappAgent" },
+              "offers": {
+                "@type": "Offer",
+                "price": "229",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://cashappagent.com/buy-non-btc-cashapp-accounts#non-btc-10k"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "215",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            },
+            {
+              "@type": "Product",
+              "position": 6,
+              "name": "Non BTC Enable 15k Cash App Account",
+              "description": "Maximum limit Non-BTC verified Cash App account supporting up to $15,000 weekly turnover for seamless money transfers.",
+              "sku": "CAA-USD-15K",
+              "url": "https://cashappagent.com/buy-non-btc-cashapp-accounts#non-btc-15k",
+              "brand": { "@type": "Brand", "name": "CashappAgent" },
+              "offers": {
+                "@type": "Offer",
+                "price": "259",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://cashappagent.com/buy-non-btc-cashapp-accounts#non-btc-15k"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "172",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            }
+          ]
         },
         {
           "@type": "FAQPage",
