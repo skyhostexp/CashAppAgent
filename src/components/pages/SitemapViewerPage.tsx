@@ -8,9 +8,13 @@ import {
   ArrowLeft, 
   CheckCircle2, 
   Copy,
-  Table,
-  Check,
-  Zap
+  Zap,
+  Globe,
+  Search,
+  Sparkles,
+  Send,
+  ShieldCheck,
+  Check
 } from 'lucide-react';
 import { PageView } from '../../types';
 
@@ -24,6 +28,7 @@ interface SubSitemap {
   url: string;
   lastmod: string;
   itemsCount: number;
+  description: string;
 }
 
 const SUB_SITEMAPS: SubSitemap[] = [
@@ -32,21 +37,24 @@ const SUB_SITEMAPS: SubSitemap[] = [
     name: 'product-sitemap.xml',
     url: 'https://cashappagent.com/product-sitemap.xml',
     lastmod: '2026-08-28T12:00:00+00:00',
-    itemsCount: 6
+    itemsCount: 6,
+    description: 'All 6 BTC & Non-BTC verified Cash App account tiers with image tags & pricing'
   },
   {
     id: 'page',
     name: 'page-sitemap.xml',
     url: 'https://cashappagent.com/page-sitemap.xml',
     lastmod: '2026-08-28T12:00:00+00:00',
-    itemsCount: 8
+    itemsCount: 8,
+    description: 'Core landing pages, catalog, safety blueprint, FAQ, bulk orders & contact desk'
   },
   {
     id: 'post',
     name: 'post-sitemap.xml',
     url: 'https://cashappagent.com/post-sitemap.xml',
     lastmod: '2026-08-28T12:00:00+00:00',
-    itemsCount: 5
+    itemsCount: 5,
+    description: 'Guides on safe login, crypto checkout, limit warm-up & account longevity'
   }
 ];
 
@@ -242,11 +250,19 @@ const ALL_URLS: SitemapUrlEntry[] = [
 export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate }) => {
   const [selectedView, setSelectedView] = useState<'index' | 'products' | 'pages' | 'posts' | 'all'>('index');
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
+  const [pinged, setPinged] = useState(false);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopiedUrl(text);
     setTimeout(() => setCopiedUrl(null), 2000);
+  };
+
+  const handlePingGoogle = () => {
+    const pingUrl = 'https://www.google.com/ping?sitemap=https://cashappagent.com/sitemap_index.xml';
+    window.open(pingUrl, '_blank', 'noopener,noreferrer');
+    setPinged(true);
+    setTimeout(() => setPinged(false), 5000);
   };
 
   const getFilteredUrls = () => {
@@ -257,24 +273,48 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
   };
 
   return (
-    <div className="min-h-screen py-10 px-3 sm:px-6 lg:px-8 font-['Plus_Jakarta_Sans',sans-serif] bg-slate-900/60">
-      <div className="max-w-4xl mx-auto space-y-4">
+    <div className="min-h-screen py-10 px-3 sm:px-6 lg:px-8 font-['Plus_Jakarta_Sans',sans-serif] bg-[#0b0f14]">
+      <div className="max-w-5xl mx-auto space-y-6">
 
-        {/* Back Link */}
-        <div className="flex items-center justify-between px-1">
+        {/* Top Breadcrumb & Controls */}
+        <div className="flex flex-wrap items-center justify-between gap-3 px-1">
           <button
             onClick={() => onNavigate('home')}
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700 px-3.5 py-2 rounded-xl border border-slate-700 transition-all cursor-pointer shadow-sm"
           >
             <ArrowLeft className="w-4 h-4 text-[#00D632]" />
-            <span>Back to CashappAgent.com</span>
+            <span>Back to CashappAgent Catalog</span>
           </button>
-          <span className="text-[11px] text-slate-500 font-mono">
-            Googlebot Sitemaps Protocol 0.9
-          </span>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleCopy('https://cashappagent.com/sitemap_index.xml')}
+              className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer"
+            >
+              {copiedUrl === 'https://cashappagent.com/sitemap_index.xml' ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-emerald-400">Copied Index URL!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 text-slate-400" />
+                  <span>Copy Sitemap URL</span>
+                </>
+              )}
+            </button>
+
+            <button
+              onClick={handlePingGoogle}
+              className="inline-flex items-center gap-1.5 text-xs font-black px-3.5 py-2 rounded-xl bg-[#00D632] hover:bg-[#00c02d] text-black transition-all cursor-pointer shadow-lg shadow-[#00D632]/20 active:scale-95"
+            >
+              <Zap className="w-3.5 h-3.5 fill-black" />
+              <span>{pinged ? 'Googlebot Pinged!' : 'Ping Googlebot'}</span>
+            </button>
+          </div>
         </div>
 
-        {/* Exact Rank Math Theme Card Container */}
+        {/* EXACT RANK MATH THEME CARD CONTAINER (Matches user screenshot) */}
         <div className="bg-[#ffffff] rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-slate-800">
           
           {/* Rank Math Dark Top Banner */}
@@ -287,7 +327,7 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
                 RANK MATH SEO
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl font-normal">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl font-normal">
               Generated by Rank Math SEO standard schema for <a href="https://cashappagent.com/" className="text-[#38bdf8] font-bold hover:underline">CashappAgent.com</a> to index all verified Cash App (BTC &amp; Non-BTC) accounts.
             </p>
           </div>
@@ -299,7 +339,7 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
             </div>
 
             {/* Quick Links Menu */}
-            <div className="flex items-center gap-2 sm:gap-3 text-xs font-bold text-[#2563eb]">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-bold text-[#2563eb]">
               <button
                 onClick={() => setSelectedView('index')}
                 className={`hover:underline cursor-pointer ${selectedView === 'index' ? 'text-slate-900 font-black' : ''}`}
@@ -311,21 +351,28 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
                 onClick={() => setSelectedView('products')}
                 className={`hover:underline cursor-pointer ${selectedView === 'products' ? 'text-slate-900 font-black' : ''}`}
               >
-                Products XML ({SUB_SITEMAPS[0].itemsCount})
+                Products XML
               </button>
               <span className="text-slate-300">|</span>
               <button
                 onClick={() => setSelectedView('pages')}
                 className={`hover:underline cursor-pointer ${selectedView === 'pages' ? 'text-slate-900 font-black' : ''}`}
               >
-                Pages XML ({SUB_SITEMAPS[1].itemsCount})
+                Pages XML
+              </button>
+              <span className="text-slate-300">|</span>
+              <button
+                onClick={() => setSelectedView('posts')}
+                className={`hover:underline cursor-pointer ${selectedView === 'posts' ? 'text-slate-900 font-black' : ''}`}
+              >
+                Posts XML
               </button>
               <span className="text-slate-300">|</span>
               <button
                 onClick={() => setSelectedView('all')}
                 className={`hover:underline cursor-pointer ${selectedView === 'all' ? 'text-slate-900 font-black' : ''}`}
               >
-                All URLs ({ALL_URLS.length})
+                HTML Sitemap
               </button>
             </div>
           </div>
@@ -333,7 +380,7 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
           {/* Table Content Area */}
           <div className="p-4 sm:p-8">
             
-            {/* VIEW 1: Master Index Table (Matches user screenshot) */}
+            {/* VIEW 1: Master Index Table (Matches screenshot directly) */}
             {selectedView === 'index' && (
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs sm:text-sm border-collapse">
@@ -357,16 +404,19 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
                       >
                         <td className="py-3.5 px-4 text-slate-400 font-semibold">{idx + 1}</td>
                         <td className="py-3.5 px-4">
-                          <div className="flex items-center gap-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-1.5">
                             <span className="font-bold text-slate-900 group-hover:text-[#2563eb] transition-colors">
                               {sitemap.url}
                             </span>
-                            <span className="hidden sm:inline text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-600 border border-blue-100">
+                            <span className="inline-block text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-600 border border-blue-100 w-fit">
                               {sitemap.itemsCount} URLs
                             </span>
                           </div>
+                          <div className="text-[11px] text-slate-400 mt-0.5">
+                            {sitemap.description}
+                          </div>
                         </td>
-                        <td className="py-3.5 px-4 font-mono text-xs text-slate-500">
+                        <td className="py-3.5 px-4 font-mono text-xs text-slate-500 whitespace-nowrap">
                           {sitemap.lastmod}
                         </td>
                       </tr>
@@ -450,6 +500,84 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
           {/* Bottom Card Footer - Exact Match */}
           <div className="bg-[#f8fafc] border-t border-slate-200 px-6 py-4 text-center text-xs text-slate-500">
             CashappAgent.com &bull; 100% Verified Cash App Accounts (BTC &amp; Non-BTC) &bull; Sitemaps.org Protocol 0.9 Compliant
+          </div>
+
+        </div>
+
+        {/* GOOGLE #1 RANK & SEARCH ENGINE INDEXATION SUITE */}
+        <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/90 border border-emerald-900/40 text-slate-300 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-xl bg-[#00D632]/10 border border-[#00D632]/30">
+              <Globe className="w-5 h-5 text-[#00D632]" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white font-['Outfit',sans-serif]">
+                Googlebot Fast-Indexation &amp; Top SERP Ranking Protocol
+              </h2>
+              <p className="text-xs text-slate-400">
+                Automated protocols embedded into CashappAgent to ensure top #1 rankings for key search terms.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+              <div className="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>Rank Math Schema.org Graph</span>
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Full JSON-LD structured data with 6 verified product schemas, AggregateRatings (4.9/5.0), ItemList, and FAQPage rich snippets.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+              <div className="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>XML Sitemaps Protocol 0.9</span>
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Automated index with product-sitemap, page-sitemap, and post-sitemap with Google Image tags and priority weighting up to 1.0.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+              <div className="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>Robots.txt &amp; Meta Robots</span>
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Full crawl allowance with zero crawl-delay for Googlebot, Bingbot, Yandex, and Applebot with max-snippet &amp; max-image-preview.
+              </p>
+            </div>
+          </div>
+
+          {/* Targeted High-Intent SERP Keywords */}
+          <div className="pt-4 border-t border-slate-800/80 space-y-3">
+            <div className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+              Targeted Top-Ranking Google Keywords:
+            </div>
+            <div className="flex flex-wrap gap-2 text-xs">
+              {[
+                'Buy Verified Cash App Accounts',
+                'Buy BTC Enabled Cash App Accounts',
+                'Verified Cash App Accounts for Sale',
+                'Cash App 4k limit account',
+                'Cash App 10k limit account',
+                'Cash App 25k limit account',
+                'Non-BTC Cash App Accounts',
+                'Buy Aged Cash App Accounts',
+                'Instant Bitcoin Withdrawal Cash App',
+                'CashappAgent.com'
+              ].map((kw, i) => (
+                <span 
+                  key={i} 
+                  className="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 font-medium text-[11px]"
+                >
+                  {kw}
+                </span>
+              ))}
+            </div>
           </div>
 
         </div>
