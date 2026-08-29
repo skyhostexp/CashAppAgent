@@ -1,9 +1,30 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /*?*checkout=true
+Disallow: /*?*cart=true
 
+# Googlebot specific directives
+User-agent: Googlebot
+Allow: /
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.svg$
+Allow: /*.png$
+Allow: /*.xml$
+Allow: /*.xsl$
+
+# Bingbot specific directives
+User-agent: Bingbot
+Allow: /
+
+# Host
+Host: https://cashappagent.com
+
+# Rank Math Primary Sitemap Index
 Sitemap: https://cashappagent.com/sitemap_index.xml
-Sitemap: https://cashappagent.com/sitemap.xml
-Sitemap: https://cashappagent.com/page-sitemap.xml
 Sitemap: https://cashappagent.com/product-sitemap.xml
+Sitemap: https://cashappagent.com/page-sitemap.xml
 Sitemap: https://cashappagent.com/post-sitemap.xml
 Sitemap: https://cashappagent.com/category-sitemap.xml
+Sitemap: https://cashappagent.com/sitemap.xml

@@ -35,12 +35,18 @@ import { SitemapPage } from './components/pages/SitemapPage';
 import { NotFoundPage } from './components/pages/NotFoundPage';
 
 import { getPageFromLocation, setBrowserPage } from './utils/navigation';
+import { applySeoMetadata } from './utils/seo';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageView>(() => getPageFromLocation());
   const [isReloading, setIsReloading] = useState(false);
   const [targetLoadingPage, setTargetLoadingPage] = useState<PageView>(currentPage);
   const [loadingProgress, setLoadingProgress] = useState(0);
+
+  // Dynamically update Rank Math SEO metadata, titles, canonicals, OpenGraph & JSON-LD
+  useEffect(() => {
+    applySeoMetadata(currentPage);
+  }, [currentPage]);
 
   const [selectedCategory, setSelectedCategory] = useState<'all' | AccountCategory>('all');
   
