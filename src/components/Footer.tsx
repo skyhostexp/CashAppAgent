@@ -266,17 +266,6 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
                   <span>Contact 24/7 Desk</span>
                 </a>
               </li>
-              <li>
-                <a 
-                  href="/sitemap_index.xml"
-                  data-full-url="https://cashappagent.com/sitemap_index.xml"
-                  onClick={(e) => handleLinkClick('sitemap', e)} 
-                  className="hover:text-[#00D632] transition-colors flex items-center gap-1.5 text-left w-full cursor-pointer group"
-                >
-                  <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-[#00D632] group-hover:translate-x-0.5 transition-all" />
-                  <span>XML Sitemap (Rank Math)</span>
-                </a>
-              </li>
             </ul>
           </div>
         </div>

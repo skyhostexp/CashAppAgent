@@ -1,28 +1,4 @@
-# robots.txt for CashappAgent.com - High-Performance Google Indexing
 User-agent: *
 Allow: /
-Disallow: /api/
 
-User-agent: Googlebot
-Allow: /
-
-User-agent: Googlebot-Image
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Applebot
-Allow: /
-
-# Canonical Sitemaps for Search Engines
-Sitemap: https://cashappagent.com/sitemap_index.xml
-Sitemap: https://cashappagent.com/product-sitemap.xml
-Sitemap: https://cashappagent.com/page-sitemap.xml
-Sitemap: https://cashappagent.com/post-sitemap.xml
+Sitemap: https://cashappagent.com/sitemap.xml

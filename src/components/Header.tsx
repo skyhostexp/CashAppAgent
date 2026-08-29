@@ -65,7 +65,6 @@ export const Header: React.FC<HeaderProps> = ({
     { label: 'All Accounts', page: 'all-accounts' },
     { label: 'BTC Enabled', page: 'btc-accounts', badge: 'Hot' },
     { label: 'Non-BTC', page: 'non-btc-accounts' },
-    { label: 'Sitemap', page: 'sitemap' },
     { label: 'Contact', page: 'contact' },
   ];
 

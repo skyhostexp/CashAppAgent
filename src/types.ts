@@ -9,9 +9,7 @@ export type PageView =
   | 'faq' 
   | 'contact' 
   | 'safety-guide' 
-  | 'bulk-orders'
-  | 'sitemap'
-  | '404';
+  | 'bulk-orders';
 
 export interface AccountProduct {
   id: string;
