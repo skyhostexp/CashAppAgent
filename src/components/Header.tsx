@@ -25,7 +25,6 @@ interface HeaderProps {
   onNavigate: (page: PageView) => void;
   onOpenCart: () => void;
   onOpenOrderLookup: () => void;
-  onOpenSearch?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -34,8 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
   currentPage = 'home',
   onNavigate,
   onOpenCart,
-  onOpenOrderLookup,
-  onOpenSearch
+  onOpenOrderLookup
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -188,25 +186,8 @@ export const Header: React.FC<HeaderProps> = ({
           })}
         </nav>
 
-        {/* Action Controls (Search, Cart & Mobile Toggle) */}
+        {/* Action Controls (Cart & Mobile Toggle) */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Site Search Button */}
-          {onOpenSearch && (
-            <button
-              id="header-site-search-btn"
-              onClick={onOpenSearch}
-              aria-label="Search pages and accounts"
-              title="Search pages, products & guides (Ctrl+K)"
-              className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 hover:border-[#00D632]/50 text-slate-300 hover:text-white transition-all text-xs font-semibold cursor-pointer group shadow-sm active:scale-95"
-            >
-              <Search className="w-4 h-4 text-[#00D632] group-hover:scale-110 transition-transform" />
-              <span className="hidden md:inline">Search...</span>
-              <span className="hidden xl:inline-block text-[10px] font-mono text-slate-500 bg-slate-800 px-1.5 py-0.5 rounded border border-slate-700">
-                ⌘K
-              </span>
-            </button>
-          )}
-
           {/* High-Tech Cart Button */}
           <button
             id="header-cart-button"
@@ -241,29 +222,16 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="lg:hidden bg-[#0a0f14]/98 backdrop-blur-2xl border-b border-emerald-900/40 px-4 py-5 space-y-4 animate-in slide-in-from-top-2 shadow-2xl">
           {/* Mobile Fast Action Buttons */}
           <div className="grid grid-cols-2 gap-2">
-            {onOpenSearch ? (
-              <button
-                onClick={() => {
-                  onOpenSearch();
-                  setMobileMenuOpen(false);
-                }}
-                className="flex items-center justify-center gap-2 p-3 rounded-xl bg-slate-900 border border-slate-700 text-xs font-bold text-slate-200 hover:bg-slate-800 transition-colors cursor-pointer"
-              >
-                <Search className="w-4 h-4 text-[#00D632]" />
-                <span>Search Pages</span>
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  onOpenOrderLookup();
-                  setMobileMenuOpen(false);
-                }}
-                className="flex items-center justify-center gap-2 p-3 rounded-xl bg-emerald-950/60 border border-emerald-700/50 text-xs font-bold text-emerald-300 hover:bg-emerald-900/60 transition-colors"
-              >
-                <Search className="w-4 h-4 text-emerald-400" />
-                <span>Track Order</span>
-              </button>
-            )}
+            <button
+              onClick={() => {
+                onOpenOrderLookup();
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center justify-center gap-2 p-3 rounded-xl bg-emerald-950/60 border border-emerald-700/50 text-xs font-bold text-emerald-300 hover:bg-emerald-900/60 transition-colors"
+            >
+              <Search className="w-4 h-4 text-emerald-400" />
+              <span>Track Order</span>
+            </button>
             <a
               href={CONTACT_INFO.telegramUrl}
               target="_blank"

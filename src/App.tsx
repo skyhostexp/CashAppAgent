@@ -31,8 +31,6 @@ import { FaqPage } from './components/pages/FaqPage';
 import { SafetyGuidePage } from './components/pages/SafetyGuidePage';
 import { BulkOrdersPage } from './components/pages/BulkOrdersPage';
 import { ContactPage } from './components/pages/ContactPage';
-import { NotFoundPage } from './components/pages/NotFoundPage';
-import { SiteSearchModal } from './components/SiteSearchModal';
 
 import { getPageFromLocation, setBrowserPage } from './utils/navigation';
 
@@ -43,7 +41,6 @@ export default function App() {
   const [loadingProgress, setLoadingProgress] = useState(0);
 
   const [selectedCategory, setSelectedCategory] = useState<'all' | AccountCategory>('all');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
@@ -81,18 +78,6 @@ export default function App() {
       window.removeEventListener('popstate', handleLocationChange);
       window.removeEventListener('hashchange', handleLocationChange);
     };
-  }, []);
-
-  // Global hotkey for quick search modal (Ctrl+K or Cmd+K)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        setIsSearchOpen(prev => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   // Sync cart to local storage
@@ -233,19 +218,9 @@ export default function App() {
         onNavigate={navigateTo}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
-        onOpenSearch={() => setIsSearchOpen(true)}
       />
 
       <main className="flex-grow">
-        {/* VIEW 0: 404 Not Found Page */}
-        {currentPage === 'not-found' && (
-          <NotFoundPage
-            onNavigate={navigateTo}
-            onBuyNow={handleBuyNow}
-            onAddToCart={handleAddToCart}
-          />
-        )}
-
         {/* VIEW 1: Dedicated All Accounts Page (/Buy-Verified-CashApp-Accounts) */}
         {currentPage === 'all-accounts' && (
           <AllAccountsPage
@@ -417,14 +392,6 @@ export default function App() {
       {/* Real-time Live Order Notification (Bottom Left) */}
       <LiveOrderNotification
         onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
-      />
-
-      {/* Global Interactive Site & Page Search Modal */}
-      <SiteSearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-        onNavigate={navigateTo}
-        onBuyNow={handleBuyNow}
       />
     </div>
   );
