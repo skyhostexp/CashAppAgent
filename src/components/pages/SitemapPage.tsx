@@ -3,6 +3,7 @@ import { PageView, AccountProduct } from '../../types';
 import { PAGE_ROUTES, SITE_ORIGIN } from '../../utils/navigation';
 import { ACCOUNT_PRODUCTS } from '../../data/products';
 import { BLOG_POSTS } from '../../data/blogPosts';
+import { RankMathInstantIndexConsole } from '../seo/RankMathInstantIndexConsole';
 import {
   ExternalLink,
   Copy,
@@ -12,7 +13,8 @@ import {
   ArrowRight,
   Sparkles,
   FileCode2,
-  Filter
+  Filter,
+  Zap,
 } from 'lucide-react';
 
 interface SitemapPageProps {
@@ -21,7 +23,7 @@ interface SitemapPageProps {
   onOpenOrderLookup: () => void;
 }
 
-type TabMode = 'index' | 'products' | 'vintage' | 'pages' | 'posts' | 'html';
+type TabMode = 'index' | 'products' | 'vintage' | 'pages' | 'posts' | 'html' | 'instant-index';
 
 interface TableRowItem {
   id: string | number;
@@ -666,7 +668,11 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
         <div className="bg-[#141f32] p-6 sm:p-10 text-white relative">
           <div className="flex flex-wrap items-center gap-3 mb-2">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              {activeTab === 'index' ? 'XML Sitemap Index' : 'XML Sitemap'}
+              {activeTab === 'instant-index'
+                ? 'Instant Indexing Console'
+                : activeTab === 'index'
+                ? 'XML Sitemap Index'
+                : 'XML Sitemap'}
             </h1>
             <span className="bg-[#2563eb] text-white text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md shadow-sm">
               RANK MATH SEO
@@ -690,7 +696,12 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
         {/* Subbar with Quick Links and Counter (Screenshot Match) */}
         <div className="bg-white px-6 sm:px-10 py-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 text-sm">
           <div className="text-slate-500 font-medium">
-            {activeTab === 'index' ? (
+            {activeTab === 'instant-index' ? (
+              <span className="text-emerald-700 font-bold flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Instant Indexing Protocol: Google &amp; Bing/Yandex Ready</span>
+              </span>
+            ) : activeTab === 'index' ? (
               <span>
                 Sitemaps in this index: <strong className="text-slate-900 font-bold">{filteredRows.length}</strong>
               </span>
@@ -761,54 +772,74 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
             >
               HTML Sitemap
             </button>
+            <span className="text-slate-300">|</span>
+
+            <button
+              onClick={() => { setActiveTab('instant-index'); setSearchQuery(''); }}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-bold transition-all cursor-pointer ${
+                activeTab === 'instant-index'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'
+              }`}
+            >
+              <Zap className="w-3.5 h-3.5 fill-current" />
+              <span>Instant Index</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            </button>
           </div>
         </div>
 
-        {/* Interactive Search Bar & Raw XML Open Actions */}
-        <div className="bg-slate-50/70 px-6 sm:px-10 py-3 border-b border-slate-200/80 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="relative flex-1 min-w-[240px] max-w-md">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search indexed URLs, endpoints, or priority..."
-              className="w-full pl-8 pr-7 py-1.5 rounded-lg bg-white border border-slate-300 text-slate-800 placeholder-slate-400 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 shadow-xs"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 font-bold"
-              >
-                &times;
-              </button>
-            )}
+        {activeTab === 'instant-index' ? (
+          <div className="p-4 sm:p-6 bg-slate-100/50">
+            <RankMathInstantIndexConsole onNavigateToSitemapTab={(t) => setActiveTab(t as TabMode)} />
           </div>
+        ) : (
+          <>
+            {/* Interactive Search Bar & Raw XML Open Actions */}
+            <div className="bg-slate-50/70 px-6 sm:px-10 py-3 border-b border-slate-200/80 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div className="relative flex-1 min-w-[240px] max-w-md">
+                <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search indexed URLs, endpoints, or priority..."
+                  className="w-full pl-8 pr-7 py-1.5 rounded-lg bg-white border border-slate-300 text-slate-800 placeholder-slate-400 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 shadow-xs"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 font-bold"
+                  >
+                    &times;
+                  </button>
+                )}
+              </div>
 
-          <div className="flex items-center gap-2 font-mono">
-            <a
-              href="/sitemap_index.xml"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white hover:bg-blue-50 text-blue-600 border border-slate-200 text-[11px] font-semibold transition-colors"
-            >
-              <span>sitemap_index.xml</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
-            <a
-              href="/product-sitemap.xml"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white hover:bg-blue-50 text-blue-600 border border-slate-200 text-[11px] font-semibold transition-colors"
-            >
-              <span>product-sitemap.xml</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          </div>
-        </div>
+              <div className="flex items-center gap-2 font-mono">
+                <a
+                  href="/sitemap_index.xml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white hover:bg-blue-50 text-blue-600 border border-slate-200 text-[11px] font-semibold transition-colors"
+                >
+                  <span>sitemap_index.xml</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                <a
+                  href="/product-sitemap.xml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white hover:bg-blue-50 text-blue-600 border border-slate-200 text-[11px] font-semibold transition-colors"
+                >
+                  <span>product-sitemap.xml</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
 
-        {/* Data Table (Pixel-perfect match to Screenshots) */}
-        <div className="w-full overflow-x-auto">
+            {/* Data Table (Pixel-perfect match to Screenshots) */}
+            <div className="w-full overflow-x-auto">
           {activeTab === 'index' ? (
             /* SITEMAP INDEX TABLE (Screenshot 1 & 2) */
             <table className="w-full border-collapse text-left text-sm">
@@ -998,6 +1029,8 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
               Clear search filter
             </button>
           </div>
+        )}
+          </>
         )}
 
         {/* Footer Bar (Screenshot Match) */}

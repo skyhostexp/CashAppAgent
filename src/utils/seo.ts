@@ -380,16 +380,16 @@ export function getSeoMetadata(page: PageView): SeoMetaTags {
 
     case 'sitemap':
       return {
-        title: 'Rank Math XML Sitemap & Product Directory Index - CashappAgent',
-        description: 'Complete Rank Math SEO XML sitemap index and interactive site directory. Discover all verified Cash App product tiers, Bitcoin limits, security blueprints, and articles.',
-        keywords: 'cashappagent sitemap, sitemap_index.xml, product-sitemap.xml, page-sitemap.xml, post-sitemap.xml, rank math xml sitemap cash app',
+        title: 'Rank Math XML Sitemap & Instant Indexing Hub - CashappAgent',
+        description: 'Complete Rank Math SEO XML sitemap index and Instant Indexing Console for Google Indexing API & IndexNow. Discover all verified Cash App product tiers, Bitcoin limits, and feeds.',
+        keywords: 'rank math instant index, cashappagent sitemap, google indexing api, indexnow, sitemap_index.xml, product-sitemap.xml, vintage-sitemap.xml, page-sitemap.xml, post-sitemap.xml, rank math seo',
         canonical: canonicalUrl,
-        ogTitle: 'Rank Math XML Sitemap & Product Directory - CashappAgent',
-        ogDescription: 'Explore the full indexed architecture of cashappagent.com including product feeds, security guides, and XML crawler endpoints.',
+        ogTitle: 'Rank Math XML Sitemap & Instant Indexing Console - CashappAgent',
+        ogDescription: 'Explore the full indexed architecture and trigger instant crawling for Google & Bing via IndexNow and Google Indexing API.',
         ogUrl: canonicalUrl,
         ogType: 'website',
-        twitterTitle: 'Rank Math XML Sitemap - CashappAgent',
-        twitterDescription: 'Interactive directory and crawler feeds for all verified accounts, products, and safety articles.',
+        twitterTitle: 'Rank Math Instant Index & Sitemap - CashappAgent',
+        twitterDescription: 'Instant Indexing console and crawler feeds for all verified accounts, products, and safety articles.',
         jsonLd: [
           baseOrganization,
           baseWebSite,

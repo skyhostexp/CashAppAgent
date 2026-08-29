@@ -13,6 +13,7 @@ Allow: /*.svg$
 Allow: /*.png$
 Allow: /*.xml$
 Allow: /*.xsl$
+Allow: /*.txt$
 
 # Bingbot specific directives
 User-agent: Bingbot
