@@ -322,33 +322,6 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <a
-              href="/sitemap"
-              data-full-url="https://cashappagent.com/sitemap"
-              onClick={(e) => handleLinkClick('sitemap', e)}
-              className="text-slate-400 hover:text-[#00D632] transition-colors cursor-pointer"
-            >
-              HTML Sitemap
-            </a>
-            <span className="text-slate-700">&bull;</span>
-            <a
-              href="/sitemap_index.xml"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-[#00D632] transition-colors"
-            >
-              sitemap_index.xml
-            </a>
-            <span className="text-slate-700">&bull;</span>
-            <a
-              href="/product-sitemap.xml"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-amber-400 transition-colors"
-            >
-              Product Sitemap
-            </a>
-            <span className="text-slate-700">&bull;</span>
             <span className="flex items-center gap-1 text-slate-300">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00D632]" />
               100% Encrypted &bull; 30-Day Guarantee
