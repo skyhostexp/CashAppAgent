@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/main-sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Homepage -->
+  <url>
+    <loc>https://cashappagent.com/</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Buy Verified Cash App Accounts - CashappAgent</image:title>
+      <image:caption>Instant delivery verified Cash App accounts with BTC enabled, SSN ID verification, and 30-day warranty.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- All Accounts Catalog Hub -->
+  <url>
+    <loc>https://cashappagent.com/buy-verified-cashapp-accounts</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Buy Verified Cash App Accounts - Full Catalog</image:title>
+      <image:caption>Browse complete verified inventory of $4k, $10k, and $25k limit Cash App accounts.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- BTC Enabled Hub -->
+  <url>
+    <loc>https://cashappagent.com/buy-btc-enabled-cashapp-accounts</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Buy BTC Enabled Cash App Accounts</image:title>
+      <image:caption>Cash App accounts unlocked for on-chain Bitcoin trading, deposits, and cold storage withdrawals.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Non-BTC USD Accounts Hub -->
+  <url>
+    <loc>https://cashappagent.com/buy-non-btc-cashapp-accounts</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Buy Non-BTC Verified Cash App Accounts</image:title>
+      <image:caption>Budget-friendly verified Cash App accounts for standard USD peer-to-peer sending and debit card cashouts.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Bulk Orders & Wholesale -->
+  <url>
+    <loc>https://cashappagent.com/bulk-orders</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Wholesale Bulk Verified Cash App Accounts</image:title>
+      <image:caption>Discounted agency packages with up to 30% savings for bulk buyers and businesses.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 7-Day Anti-Ban Safety Guide -->
+  <url>
+    <loc>https://cashappagent.com/safety-guide</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>7-Day Anti-Ban Safety &amp; Warm-up Guide</image:title>
+      <image:caption>Comprehensive security blueprint covering residential proxy configuration and login protocols.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- FAQ & Warranty Policy -->
+  <url>
+    <loc>https://cashappagent.com/faq</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Frequently Asked Questions &amp; 30-Day Guarantee</image:title>
+      <image:caption>Detailed answers about delivery times, crypto checkout, escrow guarantees, and replacement terms.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Blog & Insights -->
+  <url>
+    <loc>https://cashappagent.com/blog</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>CashappAgent Research &amp; Security Blog</image:title>
+      <image:caption>Guides on transfer limits, Bitcoin withdrawal fees, routing numbers, and account management.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Contact & 24/7 Desk -->
+  <url>
+    <loc>https://cashappagent.com/contact</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>24/7 Agent Support Desk &amp; Concierge</image:title>
+      <image:caption>Live support via Telegram and WhatsApp for order inquiries and custom inventory requests.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- HTML Sitemap -->
+  <url>
+    <loc>https://cashappagent.com/sitemap</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>CashappAgent HTML &amp; XML Sitemap Index</image:title>
+      <image:caption>Interactive site directory and comprehensive URL architecture index.</image:caption>
+    </image:image>
+  </url>
+</urlset>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/main-sitemap.xsl"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<sitemap>
+		<loc>https://cashappagent.com/page-sitemap.xml</loc>
+		<lastmod>2026-08-29T01:40:00+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>https://cashappagent.com/product-sitemap.xml</loc>
+		<lastmod>2026-08-29T01:40:00+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>https://cashappagent.com/post-sitemap.xml</loc>
+		<lastmod>2026-08-29T01:40:00+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>https://cashappagent.com/category-sitemap.xml</loc>
+		<lastmod>2026-08-29T01:40:00+00:00</lastmod>
+	</sitemap>
+</sitemapindex>

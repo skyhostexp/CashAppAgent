@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/main-sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Blog Post 1: Warm Up Guide -->
+  <url>
+    <loc>https://cashappagent.com/blog#how-to-safely-warm-up-verified-cash-app-account</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>How to Safely Warm Up a New Verified Cash App Account (Anti-Ban Blueprint)</image:title>
+      <image:caption>Step-by-step guidance on establishing device trust, configuring US residential proxies, and scaling limits without flags.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Blog Post 2: BTC Limits Guide -->
+  <url>
+    <loc>https://cashappagent.com/blog#bitcoin-withdrawal-limits-cash-app-guide</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Cash App Bitcoin Withdrawal Limits: Everything You Need to Know in 2026</image:title>
+      <image:caption>Understand on-chain limits, zero-fee standard settlement, priority mempool broadcast, and wallet verification requirements.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Blog Post 3: Sutton Bank Routing Guide -->
+  <url>
+    <loc>https://cashappagent.com/blog#sutton-bank-routing-direct-deposit-cash-app</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>How Sutton Bank US Routing Works for Cash App Direct Deposits</image:title>
+      <image:caption>A comprehensive technical overview of routing numbers, ACH settlements, and employer direct payroll deposits.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Blog Post 4: Limit Tiers Comparison Guide -->
+  <url>
+    <loc>https://cashappagent.com/blog#understanding-4k-10k-25k-limit-tiers</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Comparing 4k, 10k, and 25k Limit Accounts: Which Tier Fits Your Business?</image:title>
+      <image:caption>Break down daily velocity, monthly volume ceilings, and price-to-volume ROI across beginner, scaling, and high-frequency merchant accounts.</image:caption>
+    </image:image>
+  </url>
+</urlset>

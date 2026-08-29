@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/main-sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- BTC Enabled Category -->
+  <url>
+    <loc>https://cashappagent.com/buy-btc-enabled-cashapp-accounts</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>BTC Enabled Cash App Accounts Category</image:title>
+      <image:caption>Complete collection of Bitcoin enabled verified Cash App accounts.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Non-BTC USD Category -->
+  <url>
+    <loc>https://cashappagent.com/buy-non-btc-cashapp-accounts</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Non-BTC USD Cash App Accounts Category</image:title>
+      <image:caption>Verified personal and business accounts for USD peer-to-peer transfers.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Bulk Wholesale Category -->
+  <url>
+    <loc>https://cashappagent.com/bulk-orders</loc>
+    <lastmod>2026-08-29T01:40:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://cashappagent.com/favicon.svg</image:loc>
+      <image:title>Wholesale Bulk Orders Category</image:title>
+      <image:caption>Agency packages and wholesale discounts for verified Cash App accounts.</image:caption>
+    </image:image>
+  </url>
+</urlset>

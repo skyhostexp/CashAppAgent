@@ -124,7 +124,7 @@ export function getPageFromLocation(): PageView {
   if (rawPath === '/bulk-orders' || rawPath === '/bulk') return 'bulk-orders';
   if (rawPath === '/faq' || rawPath === '/help') return 'faq';
   if (rawPath === '/contact' || rawPath === '/support') return 'contact';
-  if (rawPath === '/sitemap' || rawPath === '/sitemap.html') return 'sitemap';
+  if (rawPath === '/sitemap' || rawPath === '/sitemap.html' || rawPath === '/sitemap_index' || rawPath === '/sitemap_index.html') return 'sitemap';
 
   // If path is not root and did not match any known route above, show 404
   if (!isRoot) {
@@ -141,7 +141,7 @@ export function getPageFromLocation(): PageView {
     if (['bulk-orders', 'bulk'].includes(rawHash)) return 'bulk-orders';
     if (['faq', 'help'].includes(rawHash)) return 'faq';
     if (['contact', 'support'].includes(rawHash)) return 'contact';
-    if (['sitemap', 'sitemap.html'].includes(rawHash)) return 'sitemap';
+    if (['sitemap', 'sitemap.html', 'sitemap_index', 'sitemap_index.html'].includes(rawHash)) return 'sitemap';
 
     // Allowed in-page anchor IDs on homepage
     const homeSectionAnchors = [

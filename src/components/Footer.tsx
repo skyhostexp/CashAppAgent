@@ -309,7 +309,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
             &copy; {new Date().getFullYear()} <strong className="text-white">CashappAgent</strong> (cashappagent.com). All rights reserved.
           </div>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3">
             <a
               href="/sitemap"
               data-full-url="https://cashappagent.com/sitemap"
@@ -320,12 +320,21 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
             </a>
             <span className="text-slate-700">&bull;</span>
             <a
-              href="/sitemap.xml"
+              href="/sitemap_index.xml"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-[#00D632] transition-colors"
             >
-              XML Sitemap
+              sitemap_index.xml
+            </a>
+            <span className="text-slate-700">&bull;</span>
+            <a
+              href="/product-sitemap.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-amber-400 transition-colors"
+            >
+              Product Sitemap
             </a>
             <span className="text-slate-700">&bull;</span>
             <span className="flex items-center gap-1 text-slate-300">
