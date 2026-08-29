@@ -31,6 +31,7 @@ import { FaqPage } from './components/pages/FaqPage';
 import { SafetyGuidePage } from './components/pages/SafetyGuidePage';
 import { BulkOrdersPage } from './components/pages/BulkOrdersPage';
 import { ContactPage } from './components/pages/ContactPage';
+import { NotFoundPage } from './components/pages/NotFoundPage';
 
 import { getPageFromLocation, setBrowserPage } from './utils/navigation';
 
@@ -291,7 +292,16 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 9: Primary Home Overview (/) */}
+        {/* VIEW 9: 404 Not Found Page */}
+        {currentPage === 'not-found' && (
+          <NotFoundPage
+            onNavigateHome={() => navigateTo('home')}
+            onNavigate={(page) => navigateTo(page)}
+            onOpenOrderLookup={() => setIsOrderLookupOpen(true)}
+          />
+        )}
+
+        {/* VIEW 10: Primary Home Overview (/) */}
         {currentPage === 'home' && (
           <>
             {/* Hero Section */}

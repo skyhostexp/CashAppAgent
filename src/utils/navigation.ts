@@ -73,27 +73,93 @@ export const PAGE_ROUTES: Record<PageView, PageRouteInfo> = {
     fullUrl: `${SITE_ORIGIN}/contact`,
     title: 'Official 24/7 Support Desk | CashappAgent',
     label: 'Contact'
+  },
+  'not-found': {
+    page: 'not-found',
+    path: '/404',
+    fullUrl: `${SITE_ORIGIN}/404`,
+    title: '404 - Page Not Found | CashappAgent',
+    label: '404 Not Found'
   }
 };
 
 /**
- * Determine page from pathname or hash
+ * Determine page from pathname or hash. If path or hash is not recognized, return 'not-found' (404).
  */
 export function getPageFromLocation(): PageView {
   if (typeof window === 'undefined') return 'home';
 
-  const pathname = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
-  const hash = window.location.hash.toLowerCase().replace(/^#\/?/, '').replace(/\/$/, '');
+  let rawPath = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
+  const rawHash = window.location.hash.toLowerCase().replace(/^#\/?/, '').replace(/\/$/, '');
 
-  // Check path matches
-  if (pathname === '/blog' || hash === 'blog') return 'blog';
-  if (pathname === '/buy-verified-cashapp-accounts' || pathname === '/accounts' || pathname === '/all-accounts' || hash === 'buy-verified-cashapp-accounts' || hash === 'all-accounts' || hash === 'accounts' || hash === 'catalog') return 'all-accounts';
-  if (pathname === '/buy-btc-enabled-cashapp-accounts' || pathname === '/btc-accounts' || pathname === '/btc' || hash === 'buy-btc-enabled-cashapp-accounts' || hash === 'btc-accounts' || hash === 'btc-enabled' || hash === 'btc') return 'btc-accounts';
-  if (pathname === '/buy-non-btc-cashapp-accounts' || pathname === '/non-btc-accounts' || pathname === '/non-btc' || hash === 'buy-non-btc-cashapp-accounts' || hash === 'non-btc-accounts' || hash === 'non-btc') return 'non-btc-accounts';
-  if (pathname === '/safety-guide' || pathname === '/safety' || hash === 'safety-guide' || hash === 'safety') return 'safety-guide';
-  if (pathname === '/bulk-orders' || pathname === '/bulk' || hash === 'bulk-orders' || hash === 'bulk') return 'bulk-orders';
-  if (pathname === '/faq' || pathname === '/help' || hash === 'faq' || hash === 'help') return 'faq';
-  if (pathname === '/contact' || pathname === '/support' || hash === 'contact' || hash === 'support') return 'contact';
+  // Support SPA redirect query parameters (e.g. /?/some-page)
+  if (window.location.search && window.location.search.startsWith('?/')) {
+    const queryPath = window.location.search.slice(1).split('&')[0];
+    if (queryPath) {
+      rawPath = ('/' + queryPath.replace(/^\//, '')).toLowerCase().replace(/\/$/, '');
+    }
+  }
+
+  // Explicit 404 / not-found checks
+  if (rawPath === '/404' || rawPath === '/not-found' || rawHash === '404' || rawHash === 'not-found') {
+    return 'not-found';
+  }
+
+  // Known root or empty path
+  const isRoot = rawPath === '' || rawPath === '/' || rawPath === '/index.html';
+
+  // Check pathname routes
+  if (rawPath === '/blog') return 'blog';
+  if (rawPath === '/buy-verified-cashapp-accounts' || rawPath === '/accounts' || rawPath === '/all-accounts') return 'all-accounts';
+  if (rawPath === '/buy-btc-enabled-cashapp-accounts' || rawPath === '/btc-accounts' || rawPath === '/btc') return 'btc-accounts';
+  if (rawPath === '/buy-non-btc-cashapp-accounts' || rawPath === '/non-btc-accounts' || rawPath === '/non-btc') return 'non-btc-accounts';
+  if (rawPath === '/safety-guide' || rawPath === '/safety') return 'safety-guide';
+  if (rawPath === '/bulk-orders' || rawPath === '/bulk') return 'bulk-orders';
+  if (rawPath === '/faq' || rawPath === '/help') return 'faq';
+  if (rawPath === '/contact' || rawPath === '/support') return 'contact';
+
+  // If path is not root and did not match any known route above, show 404
+  if (!isRoot) {
+    return 'not-found';
+  }
+
+  // If at root path, check hash
+  if (rawHash) {
+    if (rawHash === 'blog') return 'blog';
+    if (['buy-verified-cashapp-accounts', 'all-accounts', 'accounts', 'catalog'].includes(rawHash)) return 'all-accounts';
+    if (['buy-btc-enabled-cashapp-accounts', 'btc-accounts', 'btc-enabled', 'btc'].includes(rawHash)) return 'btc-accounts';
+    if (['buy-non-btc-cashapp-accounts', 'non-btc-accounts', 'non-btc'].includes(rawHash)) return 'non-btc-accounts';
+    if (['safety-guide', 'safety'].includes(rawHash)) return 'safety-guide';
+    if (['bulk-orders', 'bulk'].includes(rawHash)) return 'bulk-orders';
+    if (['faq', 'help'].includes(rawHash)) return 'faq';
+    if (['contact', 'support'].includes(rawHash)) return 'contact';
+
+    // Allowed in-page anchor IDs on homepage
+    const homeSectionAnchors = [
+      '',
+      'home',
+      'hero',
+      'accounts',
+      'products',
+      'calculator',
+      'virtual-preview',
+      'comparison',
+      'rates',
+      'warmup',
+      'agency',
+      'features',
+      'article',
+      'reviews',
+      'testimonials',
+      'faq-section',
+      'contact-section'
+    ];
+
+    if (!homeSectionAnchors.includes(rawHash)) {
+      // Unrecognized anchor/hash on website -> show 404
+      return 'not-found';
+    }
+  }
 
   return 'home';
 }
