@@ -24,6 +24,7 @@ Host: https://cashappagent.com
 # Rank Math Primary Sitemap Index
 Sitemap: https://cashappagent.com/sitemap_index.xml
 Sitemap: https://cashappagent.com/product-sitemap.xml
+Sitemap: https://cashappagent.com/vintage-sitemap.xml
 Sitemap: https://cashappagent.com/page-sitemap.xml
 Sitemap: https://cashappagent.com/post-sitemap.xml
 Sitemap: https://cashappagent.com/category-sitemap.xml
