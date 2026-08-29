@@ -90,6 +90,15 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({
       bgColor: 'bg-amber-500/10',
       borderColor: 'border-amber-500/30',
     },
+    {
+      page: 'sitemap' as PageView,
+      title: 'Website Sitemap & Index',
+      desc: 'Explore complete structural index of all pages, guides, and XML feeds',
+      icon: Compass,
+      color: 'text-[#00D632]',
+      bgColor: 'bg-[#00D632]/10',
+      borderColor: 'border-[#00D632]/30',
+    },
   ];
 
   return (

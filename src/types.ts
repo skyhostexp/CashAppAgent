@@ -10,6 +10,7 @@ export type PageView =
   | 'contact' 
   | 'safety-guide' 
   | 'bulk-orders'
+  | 'sitemap'
   | 'not-found';
 
 export interface AccountProduct {
