@@ -12,9 +12,13 @@ import {
   Globe,
   Search,
   Sparkles,
-  Send,
   ShieldCheck,
-  Check
+  Check,
+  PlusCircle,
+  HelpCircle,
+  TrendingUp,
+  SlidersHorizontal,
+  ChevronRight
 } from 'lucide-react';
 import { PageView } from '../../types';
 
@@ -255,7 +259,7 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopiedUrl(text);
-    setTimeout(() => setCopiedUrl(null), 2000);
+    setTimeout(() => setCopiedUrl(null), 2500);
   };
 
   const handlePingGoogle = () => {
@@ -314,7 +318,7 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
           </div>
         </div>
 
-        {/* EXACT RANK MATH THEME CARD CONTAINER (Matches user screenshot) */}
+        {/* EXACT RANK MATH THEME CARD CONTAINER */}
         <div className="bg-[#ffffff] rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-slate-800">
           
           {/* Rank Math Dark Top Banner */}
@@ -380,7 +384,7 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
           {/* Table Content Area */}
           <div className="p-4 sm:p-8">
             
-            {/* VIEW 1: Master Index Table (Matches screenshot directly) */}
+            {/* VIEW 1: Master Index Table */}
             {selectedView === 'index' && (
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs sm:text-sm border-collapse">
@@ -497,15 +501,162 @@ export const SitemapViewerPage: React.FC<SitemapViewerPageProps> = ({ onNavigate
 
           </div>
 
-          {/* Bottom Card Footer - Exact Match */}
+          {/* Bottom Card Footer */}
           <div className="bg-[#f8fafc] border-t border-slate-200 px-6 py-4 text-center text-xs text-slate-500">
             CashappAgent.com &bull; 100% Verified Cash App Accounts (BTC &amp; Non-BTC) &bull; Sitemaps.org Protocol 0.9 Compliant
           </div>
 
         </div>
 
+        {/* STEP-BY-STEP GOOGLE SEARCH CONSOLE SETUP & VERIFICATION ASSISTANT */}
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#111822] border border-blue-900/40 text-slate-300 space-y-6 shadow-2xl">
+          
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2.5">
+                <span className="p-2 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                  <Search className="w-5 h-5" />
+                </span>
+                <h2 className="text-xl font-bold text-white font-['Outfit',sans-serif]">
+                  Google Search Console Setup &amp; Indexation Guide
+                </h2>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-400">
+                Follow these 3 simple steps to add <strong className="text-white">CashappAgent.com</strong> to Google Search Console and start ranking on Google.
+              </p>
+            </div>
+
+            <a
+              href="https://search.google.com/search-console"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black shadow-lg shadow-blue-500/20 transition-all cursor-pointer self-start sm:self-auto shrink-0"
+            >
+              <span>Open Google Search Console</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* 3 Step Interactive Walkthrough */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            {/* Step 1 */}
+            <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 relative">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-black uppercase px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  Step 1
+                </span>
+                <span className="text-xs text-slate-500 font-bold">Add Property</span>
+              </div>
+              <h3 className="text-sm font-bold text-white">Add Website Property</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                In Google Search Console, select <strong>URL prefix</strong> and enter your full website address:
+              </p>
+              <div className="p-2.5 rounded-xl bg-black/60 border border-slate-700/60 flex items-center justify-between gap-2">
+                <span className="text-xs font-mono text-emerald-400 truncate">https://cashappagent.com</span>
+                <button
+                  onClick={() => handleCopy('https://cashappagent.com')}
+                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  title="Copy URL"
+                >
+                  {copiedUrl === 'https://cashappagent.com' ? (
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 relative">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-black uppercase px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  Step 2
+                </span>
+                <span className="text-xs text-slate-500 font-bold">Verify</span>
+              </div>
+              <h3 className="text-sm font-bold text-white">Verify Ownership</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Choose <strong>HTML Tag</strong> verification method. The meta tag is pre-embedded in the website header:
+              </p>
+              <div className="p-2.5 rounded-xl bg-black/60 border border-slate-700/60 flex items-center justify-between gap-2">
+                <span className="text-[11px] font-mono text-blue-400 truncate">&lt;meta name="google-site-verification"...&gt;</span>
+                <button
+                  onClick={() => handleCopy('<meta name="google-site-verification" content="google-site-verification-cashappagent-2026" />')}
+                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  title="Copy Meta Tag"
+                >
+                  {copiedUrl === '<meta name="google-site-verification" content="google-site-verification-cashappagent-2026" />' ? (
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 relative">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-black uppercase px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                  Step 3
+                </span>
+                <span className="text-xs text-slate-500 font-bold">Submit Sitemap</span>
+              </div>
+              <h3 className="text-sm font-bold text-white">Submit XML Sitemaps</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Click <strong>Sitemaps</strong> in the left sidebar of Google Search Console and enter:
+              </p>
+              <div className="p-2.5 rounded-xl bg-black/60 border border-slate-700/60 flex items-center justify-between gap-2">
+                <span className="text-xs font-mono text-[#00D632] truncate">sitemap_index.xml</span>
+                <button
+                  onClick={() => handleCopy('sitemap_index.xml')}
+                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  title="Copy Sitemap Filename"
+                >
+                  {copiedUrl === 'sitemap_index.xml' ? (
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Direct Actions & Quick Links */}
+          <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2 text-slate-400">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>All 19 product, post &amp; page URLs are ready for Googlebot indexing.</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <a
+                href="https://www.bing.com/webmasters"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-slate-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 transition-colors"
+              >
+                <span>Bing Webmaster Tools</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+              <button
+                onClick={handlePingGoogle}
+                className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-500/30 transition-colors cursor-pointer font-bold"
+              >
+                <Zap className="w-3 h-3" />
+                <span>Instant Googlebot Ping</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
         {/* GOOGLE #1 RANK & SEARCH ENGINE INDEXATION SUITE */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/90 border border-emerald-900/40 text-slate-300 space-y-6">
+        <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-emerald-900/40 text-slate-300 space-y-6">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-xl bg-[#00D632]/10 border border-[#00D632]/30">
               <Globe className="w-5 h-5 text-[#00D632]" />
