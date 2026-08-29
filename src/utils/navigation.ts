@@ -143,7 +143,7 @@ export function getPageFromLocation(): PageView {
     if (['contact', 'support'].includes(rawHash)) return 'contact';
     if (['sitemap', 'sitemap.html', 'sitemap_index', 'sitemap_index.html'].includes(rawHash)) return 'sitemap';
 
-    // Allowed in-page anchor IDs on homepage
+    // Allowed in-page anchor IDs on homepage and catalog targets
     const homeSectionAnchors = [
       '',
       'home',
@@ -156,12 +156,22 @@ export function getPageFromLocation(): PageView {
       'rates',
       'warmup',
       'agency',
+      'bulk',
       'features',
       'article',
       'reviews',
       'testimonials',
       'faq-section',
-      'contact-section'
+      'contact-section',
+      'btc-4k',
+      'btc-10k',
+      'btc-25k',
+      'non-btc-4k',
+      'non-btc-10k',
+      'non-btc-15k',
+      'tier-starter',
+      'tier-scaling',
+      'tier-enterprise'
     ];
 
     if (!homeSectionAnchors.includes(rawHash)) {

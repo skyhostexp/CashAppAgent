@@ -30,8 +30,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div
-      id={`product-card-${product.id}`}
-      className={`relative rounded-3xl transition-all duration-300 flex flex-col justify-between overflow-hidden group ${
+      id={product.id}
+      data-card-id={`product-card-${product.id}`}
+      className={`relative rounded-3xl transition-all duration-300 flex flex-col justify-between overflow-hidden group scroll-mt-28 ${
         product.isPopular
           ? 'bg-gradient-to-b from-[#14231b] via-[#0e161c] to-[#0a0f13] border-2 border-[#00D632] shadow-2xl shadow-[#00D632]/20 ring-1 ring-[#00D632]/40'
           : 'bg-[#0d141b] border border-slate-800 hover:border-emerald-700/60 shadow-xl hover:shadow-2xl'

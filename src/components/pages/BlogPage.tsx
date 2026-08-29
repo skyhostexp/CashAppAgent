@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BLOG_POSTS, BlogPost } from '../../data/blogPosts';
 import { 
   BookOpen, 
@@ -25,10 +25,49 @@ export const BlogPage: React.FC<BlogPageProps> = ({
   onNavigateHome,
   onExploreAccounts
 }) => {
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hashSlug = window.location.hash.replace(/^#/, '');
+      return BLOG_POSTS.find((p) => p.slug === hashSlug) || null;
+    }
+    return null;
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+
+  // Sync hash on mount or when hash changes
+  useEffect(() => {
+    const handleHashSync = () => {
+      const hashSlug = window.location.hash.replace(/^#/, '');
+      if (hashSlug) {
+        const found = BLOG_POSTS.find((p) => p.slug === hashSlug);
+        if (found) {
+          setSelectedPost(found);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashSync);
+    return () => window.removeEventListener('hashchange', handleHashSync);
+  }, []);
+
+  const handleSelectPost = (post: BlogPost) => {
+    setSelectedPost(post);
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', `/blog#${post.slug}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleBackToList = () => {
+    setSelectedPost(null);
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', '/blog');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const categories = ['All', 'Guides', 'Bitcoin', 'Limits', 'Security'];
 
@@ -56,7 +95,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
       {/* Breadcrumb Navigation */}
       <div className="flex items-center justify-between">
         <button
-          onClick={selectedPost ? () => setSelectedPost(null) : onNavigateHome}
+          onClick={selectedPost ? handleBackToList : onNavigateHome}
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-[#00D632] transition-colors bg-slate-900/80 px-3.5 py-2 rounded-xl border border-slate-800 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -245,7 +284,8 @@ export const BlogPage: React.FC<BlogPageProps> = ({
             {filteredPosts.map((post) => (
               <div
                 key={post.id}
-                onClick={() => setSelectedPost(post)}
+                id={post.slug}
+                onClick={() => handleSelectPost(post)}
                 className="group p-6 sm:p-8 rounded-3xl bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-emerald-950/30 flex flex-col justify-between space-y-4 cursor-pointer"
               >
                 <div className="space-y-3">

@@ -69,6 +69,37 @@ export const BulkOrderConfigurator: React.FC<BulkOrderConfiguratorProps> = ({ on
     }
   };
 
+  const applyPreset = (preset: 'starter' | 'scaling' | 'enterprise') => {
+    if (preset === 'starter') {
+      setQuantities({
+        'btc-4k': 2,
+        'non-btc-4k': 1,
+        'btc-10k': 0,
+        'btc-25k': 0,
+        'non-btc-10k': 0,
+        'non-btc-15k': 0,
+      });
+    } else if (preset === 'scaling') {
+      setQuantities({
+        'btc-10k': 4,
+        'non-btc-10k': 2,
+        'btc-4k': 0,
+        'btc-25k': 0,
+        'non-btc-4k': 0,
+        'non-btc-15k': 0,
+      });
+    } else if (preset === 'enterprise') {
+      setQuantities({
+        'btc-25k': 6,
+        'btc-10k': 4,
+        'non-btc-15k': 2,
+        'btc-4k': 0,
+        'non-btc-4k': 0,
+        'non-btc-10k': 0,
+      });
+    }
+  };
+
   return (
     <section id="bulk" className="py-16 sm:py-20 bg-[#090d10] border-y border-slate-800 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,6 +114,45 @@ export const BulkOrderConfigurator: React.FC<BulkOrderConfiguratorProps> = ({ on
           <p className="text-sm sm:text-base text-slate-300">
             Mix and match verified BTC &amp; Non-BTC Cash App accounts with automatic progressive tier discounts up to 15% off.
           </p>
+
+          {/* Quick Preset Packs */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 text-left">
+            <div
+              id="tier-starter"
+              onClick={() => applyPreset('starter')}
+              className="p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800/90 border border-slate-700/80 hover:border-emerald-500/50 cursor-pointer transition-all space-y-1.5 scroll-mt-28"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-black text-white">Starter Pack</span>
+                <span className="text-[10px] font-bold text-[#00D632] bg-emerald-950 px-2 py-0.5 rounded">3 Accounts (5% Off)</span>
+              </div>
+              <p className="text-[11px] text-slate-400">2x BTC 4k + 1x Non-BTC 4k</p>
+            </div>
+
+            <div
+              id="tier-scaling"
+              onClick={() => applyPreset('scaling')}
+              className="p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800/90 border border-slate-700/80 hover:border-emerald-500/50 cursor-pointer transition-all space-y-1.5 scroll-mt-28"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-black text-white">Scaling Pack</span>
+                <span className="text-[10px] font-bold text-[#00D632] bg-emerald-950 px-2 py-0.5 rounded">6 Accounts (10% Off)</span>
+              </div>
+              <p className="text-[11px] text-slate-400">4x BTC 10k + 2x Non-BTC 10k</p>
+            </div>
+
+            <div
+              id="tier-enterprise"
+              onClick={() => applyPreset('enterprise')}
+              className="p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800/90 border border-slate-700/80 hover:border-emerald-500/50 cursor-pointer transition-all space-y-1.5 scroll-mt-28"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-black text-white">Enterprise Desk</span>
+                <span className="text-[10px] font-bold text-[#00D632] bg-emerald-950 px-2 py-0.5 rounded">12 Accounts (15% Off)</span>
+              </div>
+              <p className="text-[11px] text-slate-400">6x BTC 25k + 4x BTC 10k + 2x Non-BTC 15k</p>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
