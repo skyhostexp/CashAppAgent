@@ -124,6 +124,17 @@ const LIVE_ORDERS_POOL: LiveOrder[] = [
     cryptoColor: '#26A17B',
     timeAgoMinutes: 4,
     txHash: '9f04...aa33'
+  },
+  {
+    id: 'CA-94831',
+    customer: 'Justin P.',
+    location: 'San Diego, CA',
+    productName: 'BTC Enabled Cash App (Tier 2 - $10k Limit)',
+    price: 349,
+    crypto: 'Skrill (USD)',
+    cryptoColor: '#811245',
+    timeAgoMinutes: 2,
+    txHash: 'SKR-84920'
   }
 ];
 

@@ -93,7 +93,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onSelectBtc }) => {
               </span>
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-[#00D632]" />
-                Zero Chargeback Crypto Checkout
+                Crypto &amp; Skrill Secure Checkout
               </span>
               <span className="flex items-center gap-1.5">
                 <Lock className="w-4 h-4 text-[#00D632]" />

@@ -57,8 +57,8 @@ export const AccountFeatures: React.FC = () => {
     },
     {
       step: '02',
-      title: 'Complete Instant Crypto Payment',
-      desc: 'Pay using BSC, TRX, ETH, SOL, BTC, LTC, or DOGE with zero transaction fees and instant block confirmation.'
+      title: 'Complete Crypto or Skrill Payment',
+      desc: 'Pay using BSC, TRX, ETH, SOL, BTC, LTC, DOGE, or Skrill E-Wallet (onlinespay247@gmail.com) with zero delays and instant confirmation.'
     },
     {
       step: '03',

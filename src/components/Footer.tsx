@@ -46,10 +46,10 @@ export const Footer: React.FC<FooterProps> = ({ onSelectProduct, onOpenOrderLook
                 <div className="p-1 rounded-lg bg-[#00D632]/10 border border-[#00D632]/30">
                   <Lock className="w-4 h-4 text-[#00D632]" />
                 </div>
-                <span>Accepted 100% Encrypted Crypto Gateways</span>
+                <span>Accepted Payment Gateways: Crypto &amp; Skrill</span>
               </div>
               <p className="text-xs text-slate-400 max-w-lg">
-                Zero merchant processing fees, instant on-chain block confirmation, and privacy-first automated credential dispatch.
+                Zero merchant processing delays, instant verification via Crypto &amp; Skrill E-Wallet, and privacy-first automated credential dispatch.
               </p>
             </div>
 

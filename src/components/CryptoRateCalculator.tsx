@@ -22,9 +22,11 @@ export const CryptoRateCalculator: React.FC = () => {
   const gateway = CRYPTO_GATEWAYS[selectedCrypto];
   
   // Calculate crypto conversion
-  const cryptoEquivalent = (usdAmount / gateway.rateUsd).toFixed(
-    selectedCrypto === 'BTC' ? 6 : selectedCrypto === 'ETH' ? 5 : selectedCrypto === 'SOL' ? 4 : selectedCrypto === 'BSC' ? 4 : 2
-  );
+  const cryptoEquivalent = selectedCrypto === 'SKRILL'
+    ? `$${usdAmount.toFixed(2)}`
+    : (usdAmount / gateway.rateUsd).toFixed(
+        selectedCrypto === 'BTC' ? 6 : selectedCrypto === 'ETH' ? 5 : selectedCrypto === 'SOL' ? 4 : selectedCrypto === 'BSC' ? 4 : 2
+      );
 
   const handleCopy = () => {
     navigator.clipboard.writeText(gateway.address);
@@ -40,13 +42,13 @@ export const CryptoRateCalculator: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-600/40 text-emerald-300 text-xs font-bold uppercase tracking-wider">
             <Coins className="w-3.5 h-3.5 text-[#00D632]" />
-            Live Crypto Gateway &amp; Fee Estimator
+            Live Crypto &amp; Skrill Gateway Estimator
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight font-['Outfit',sans-serif]">
-            Instant Crypto <span className="text-[#00D632]">Rate &amp; Network Calculator</span>
+            Instant Payment <span className="text-[#00D632]">Rate &amp; Gateway Calculator</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            Check exact crypto equivalents, estimated blockchain network confirmation times, and zero-fee gateway addresses across all supported blockchains.
+            Check exact crypto equivalents or Skrill direct transfer details, network confirmation times, and verified gateway addresses across all supported methods.
           </p>
         </div>
 
@@ -90,19 +92,22 @@ export const CryptoRateCalculator: React.FC = () => {
           {/* Crypto Currency Selection Pills */}
           <div className="space-y-3">
             <label className="text-xs font-bold text-slate-300">
-              Select Blockchain Network:
+              Select Payment Method / Network:
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
               {(Object.keys(CRYPTO_GATEWAYS) as CryptoCurrency[]).map((cKey) => {
                 const gw = CRYPTO_GATEWAYS[cKey];
                 const isSelected = selectedCrypto === cKey;
+                const isSkrill = cKey === 'SKRILL';
                 return (
                   <button
                     key={cKey}
                     onClick={() => setSelectedCrypto(cKey)}
                     className={`p-3 rounded-2xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-1.5 ${
                       isSelected
-                        ? 'bg-emerald-950/70 border-[#00D632] shadow-lg shadow-emerald-950/50'
+                        ? isSkrill
+                          ? 'bg-[#811245]/40 border-[#811245] shadow-lg shadow-[#811245]/30'
+                          : 'bg-emerald-950/70 border-[#00D632] shadow-lg shadow-emerald-950/50'
                         : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700'
                     }`}
                   >
@@ -110,7 +115,7 @@ export const CryptoRateCalculator: React.FC = () => {
                       className="w-3 h-3 rounded-full"
                       style={{ backgroundColor: gw.iconColor }}
                     />
-                    <span className={`text-xs font-black ${isSelected ? 'text-white' : 'text-slate-300'}`}>
+                    <span className={`text-xs font-black ${isSelected ? (isSkrill ? 'text-pink-300' : 'text-white') : 'text-slate-300'}`}>
                       {cKey}
                     </span>
                   </button>
@@ -128,7 +133,7 @@ export const CryptoRateCalculator: React.FC = () => {
                 </div>
                 <div className="text-3xl sm:text-4xl font-black text-white font-mono flex items-center gap-2">
                   <span className="text-[#00D632]">{cryptoEquivalent}</span>
-                  <span className="text-lg text-slate-300 font-sans">{selectedCrypto}</span>
+                  <span className="text-lg text-slate-300 font-sans">{selectedCrypto === 'SKRILL' ? 'USD' : selectedCrypto}</span>
                 </div>
                 <div className="text-xs text-slate-400">
                   Equivalent to <strong className="text-white">${usdAmount} USD</strong> at current market rates
@@ -139,11 +144,11 @@ export const CryptoRateCalculator: React.FC = () => {
               <div className="flex flex-col gap-2 shrink-0">
                 <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300">
                   <Zap className="w-3.5 h-3.5 text-[#00D632]" />
-                  <span>Network Gas: <strong>&lt; $0.05</strong></span>
+                  <span>Fee / Charge: <strong>{selectedCrypto === 'SKRILL' ? 'Standard Skrill' : '< $0.05'}</strong></span>
                 </div>
                 <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300">
                   <Clock className="w-3.5 h-3.5 text-sky-400" />
-                  <span>Confirmation: <strong>~1 - 3 Mins</strong></span>
+                  <span>Confirmation: <strong>{selectedCrypto === 'SKRILL' ? 'Instant (< 5 Mins)' : '~1 - 3 Mins'}</strong></span>
                 </div>
               </div>
             </div>
@@ -151,7 +156,7 @@ export const CryptoRateCalculator: React.FC = () => {
             {/* Official Wallet Address & QR Code */}
             <div className="space-y-3">
               <div className="flex items-center justify-between text-xs font-bold text-slate-300">
-                <span>Official {gateway.id} Gateway Wallet:</span>
+                <span>{selectedCrypto === 'SKRILL' ? 'Official Recipient Skrill Email:' : `Official ${gateway.id} Gateway Wallet:`}</span>
                 <button
                   onClick={() => setShowQr(!showQr)}
                   className="text-[#00D632] hover:underline flex items-center gap-1 cursor-pointer"
@@ -161,15 +166,23 @@ export const CryptoRateCalculator: React.FC = () => {
                 </button>
               </div>
 
-              <div className="p-3 bg-slate-900 rounded-2xl border border-slate-800 flex items-center justify-between gap-3">
-                <span className="text-xs font-mono text-emerald-300 break-all select-all">
+              <div className={`p-3 rounded-2xl border flex items-center justify-between gap-3 ${
+                selectedCrypto === 'SKRILL' ? 'bg-slate-900/90 border-[#811245]' : 'bg-slate-900 border-slate-800'
+              }`}>
+                <span className={`text-xs font-mono break-all select-all font-bold ${
+                  selectedCrypto === 'SKRILL' ? 'text-pink-300' : 'text-emerald-300'
+                }`}>
                   {gateway.address}
                 </span>
 
                 <button
                   id="crypto-calc-copy-btn"
                   onClick={handleCopy}
-                  className="px-4 py-2 rounded-xl bg-emerald-950 hover:bg-emerald-900 border border-emerald-700/50 text-[#00D632] text-xs font-bold flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer"
+                  className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer ${
+                    selectedCrypto === 'SKRILL'
+                      ? 'bg-[#811245] hover:bg-[#9e1655] text-white'
+                      : 'bg-emerald-950 hover:bg-emerald-900 border border-emerald-700/50 text-[#00D632]'
+                  }`}
                 >
                   {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   <span>{copied ? 'Copied!' : 'Copy'}</span>
@@ -187,7 +200,7 @@ export const CryptoRateCalculator: React.FC = () => {
               )}
 
               <p className="text-[11px] text-slate-400 leading-relaxed text-center sm:text-left">
-                ℹ️ {gateway.instruction} After sending, you can complete your instant order via our checkout modal or send your TXID to Telegram <strong>{CONTACT_INFO.telegram}</strong>.
+                ℹ️ {gateway.instruction} After sending, you can complete your instant order via our checkout modal or send your reference to Telegram <strong>{CONTACT_INFO.telegram}</strong>.
               </p>
             </div>
           </div>

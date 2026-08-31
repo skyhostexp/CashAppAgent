@@ -82,7 +82,19 @@ export const CRYPTO_GATEWAYS: Record<CryptoCurrency, CryptoGateway> = {
     rateUsd: 0.25, // 1 DOGE approx
     iconColor: '#C2A633',
     badge: 'Instant Doge Transfer',
-    instruction: 'Send DOGE to the Dogecoin address below.'
+    instruction: 'Send DOGE to the Dogecoin address below.',
+    type: 'crypto'
+  },
+  SKRILL: {
+    id: 'SKRILL',
+    name: 'Skrill (USD / EUR / GBP E-Wallet & Cards)',
+    network: 'Skrill Direct Transfer',
+    address: 'onlinespay247@gmail.com',
+    rateUsd: 1.0, // 1:1 USD
+    iconColor: '#811245',
+    badge: 'Official Skrill Account • Instant Transfer',
+    instruction: 'Send USD to our verified Skrill account email: onlinespay247@gmail.com. In transaction note/reference, include your delivery email.',
+    type: 'fiat-wallet'
   }
 };
 
@@ -149,8 +161,8 @@ export const FAQS: FaqItem[] = [
   {
     id: 'faq-3',
     category: 'Payments',
-    question: 'How does the Crypto Payment Gateway work?',
-    answer: 'We exclusively process payments via leading cryptocurrencies for maximum privacy, speed, and zero chargeback risks. You can choose from BSC (BNB/BEP-20), TRX (TRC-20 USDT), ETH (ERC-20), SOL (Solana), BTC (Bitcoin), LTC (Litecoin), or DOGE. Simply scan the generated QR code or copy our official wallet address, send the exact USD equivalent, enter your Transaction Hash (TXID), and our automated dispatch prepares your account in 5-15 minutes.'
+    question: 'How do the Crypto & Skrill Payment Gateways work?',
+    answer: 'We process payments via leading cryptocurrencies (BSC, TRX, ETH, SOL, BTC, LTC, DOGE) as well as Skrill E-Wallet (onlinespay247@gmail.com) for maximum privacy, speed, and security. For Crypto, simply scan the generated QR code or copy our official wallet address, send the exact amount, and provide your TXID. For Skrill, send USD to onlinespay247@gmail.com and enter your transaction reference number. Our automated dispatch system prepares your account credentials within 5-15 minutes.'
   },
   {
     id: 'faq-4',

@@ -162,13 +162,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00A827] via-[#00D632] to-[#00FF44] hover:from-[#00B82B] text-black font-black text-sm shadow-xl shadow-[#00D632]/25 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Zap className="w-4 h-4 fill-black" />
-                <span>Proceed to Crypto Payment (${totalUsd})</span>
+                <span>Proceed to Instant Checkout (${totalUsd})</span>
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
 
-              <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400">
+              <div className="flex flex-wrap items-center justify-center gap-1.5 text-[10px] text-slate-400">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#00D632]" />
-                <span>BSC &bull; TRX &bull; ETH &bull; SOL &bull; BTC &bull; LTC &bull; DOGE</span>
+                <span>BSC &bull; TRX &bull; ETH &bull; SOL &bull; BTC &bull; LTC &bull; DOGE &bull; <strong className="text-pink-300">SKRILL</strong></span>
               </div>
             </div>
           )}

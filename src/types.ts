@@ -36,7 +36,7 @@ export interface AccountProduct {
   };
 }
 
-export type CryptoCurrency = 'BSC' | 'TRX' | 'ETH' | 'SOL' | 'BTC' | 'LTC' | 'DOGE';
+export type CryptoCurrency = 'BSC' | 'TRX' | 'ETH' | 'SOL' | 'BTC' | 'LTC' | 'DOGE' | 'SKRILL';
 
 export interface CryptoGateway {
   id: CryptoCurrency;
@@ -48,6 +48,7 @@ export interface CryptoGateway {
   badge: string;
   memoRequired?: boolean;
   instruction: string;
+  type?: 'crypto' | 'fiat-wallet';
 }
 
 export interface CartItem {

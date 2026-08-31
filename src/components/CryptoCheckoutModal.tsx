@@ -51,6 +51,9 @@ export const CryptoCheckoutModal: React.FC<CryptoCheckoutModalProps> = ({
   // Calculate estimated crypto amount
   const calculateCryptoAmount = (crypto: CryptoCurrency, usd: number) => {
     const gw = CRYPTO_GATEWAYS[crypto];
+    if (crypto === 'SKRILL') {
+      return `$${usd.toFixed(2)} USD (1:1 Skrill Direct Transfer)`;
+    }
     if (crypto === 'TRX' || crypto === 'BSC' || crypto === 'ETH') {
       // Often paid as 1:1 USDT or exact coin
       if (crypto === 'TRX') return `${usd.toFixed(2)} USDT / ${(usd * 4.2).toFixed(1)} TRX`;
@@ -140,6 +143,7 @@ export const CryptoCheckoutModal: React.FC<CryptoCheckoutModalProps> = ({
 
   const downloadReceipt = () => {
     if (!confirmedOrder) return;
+    const isSkrill = confirmedOrder.cryptoCurrency === 'SKRILL';
     const content = `=====================================================
 CASHAPPAGENT - OFFICIAL ORDER INVOICE & RECEIPT
 Domain: cashappagent.com
@@ -161,9 +165,9 @@ ${confirmedOrder.items
   .join('\n')}
 -----------------------------------------------------
 TOTAL AMOUNT: $${confirmedOrder.totalAmountUsd} USD
-PAYMENT GATEWAY: ${confirmedOrder.cryptoCurrency}
-OUR WALLET: ${confirmedOrder.walletAddress}
-TX HASH / SENDER: ${confirmedOrder.txHash}
+PAYMENT METHOD: ${isSkrill ? 'Skrill (E-Wallet)' : confirmedOrder.cryptoCurrency}
+${isSkrill ? `OUR SKRILL ACCOUNT: onlinespay247@gmail.com` : `OUR WALLET: ${confirmedOrder.walletAddress}`}
+${isSkrill ? 'SKRILL TRANSACTION / SENDER:' : 'TX HASH / SENDER:'} ${confirmedOrder.txHash}
 STATUS: Payment Submitted & Queued for Instant Dispatch
 DELIVERY ETA: 5 - 15 Minutes
 =====================================================
@@ -189,6 +193,8 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
 
   if (!isOpen) return null;
 
+  const isSelectedSkrill = selectedCrypto === 'SKRILL';
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
       <div className="relative w-full max-w-2xl bg-[#0e151c] border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-8 animate-in fade-in zoom-in-95">
@@ -200,7 +206,7 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
             </div>
             <div>
               <div className="text-sm font-black text-white flex items-center gap-2">
-                <span>CashappAgent Crypto Checkout</span>
+                <span>CashappAgent Secure Checkout</span>
                 <span className="bg-[#00D632]/20 text-[#00D632] border border-[#00D632]/30 text-[10px] font-bold px-2 py-0.5 rounded-full">
                   Instant Dispatch
                 </span>
@@ -224,7 +230,7 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
           </span>
           <span className="text-slate-600">&rarr;</span>
           <span className={step >= 2 ? 'text-[#00D632] flex items-center gap-1' : ''}>
-            2. Send Crypto
+            2. Payment
           </span>
           <span className="text-slate-600">&rarr;</span>
           <span className={step >= 3 ? 'text-[#00D632] flex items-center gap-1' : ''}>
@@ -301,24 +307,28 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
                 id="checkout-continue-to-payment-btn"
                 className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00A827] via-[#00D632] to-[#00FF44] hover:from-[#00B82B] text-black font-black text-sm shadow-xl shadow-[#00D632]/25 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>Select Crypto &amp; Pay ${totalUsd}</span>
+                <span>Select Payment Method &amp; Pay ${totalUsd}</span>
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
             </form>
           )}
 
-          {/* STEP 2: CRYPTO GATEWAY SELECTION & QR ADDRESS */}
+          {/* STEP 2: PAYMENT GATEWAY SELECTION & QR ADDRESS */}
           {step === 2 && (
             <div className="space-y-6">
-              {/* Crypto selector tabs */}
+              {/* Payment selector tabs */}
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-2">
-                  Select Cryptocurrency Gateway:
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-xs font-bold text-slate-300">
+                    Select Payment Method:
+                  </label>
+                  <span className="text-[11px] text-emerald-400 font-medium">Crypto &amp; Skrill Supported</span>
+                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {(Object.keys(CRYPTO_GATEWAYS) as CryptoCurrency[]).map((cKey) => {
                     const gw = CRYPTO_GATEWAYS[cKey];
                     const isSel = selectedCrypto === cKey;
+                    const isSkrill = cKey === 'SKRILL';
                     return (
                       <button
                         key={cKey}
@@ -327,23 +337,36 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
                         onClick={() => setSelectedCrypto(cKey)}
                         className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                           isSel
-                            ? 'bg-emerald-950/80 border-[#00D632] ring-1 ring-[#00D632]'
+                            ? isSkrill
+                              ? 'bg-[#811245]/40 border-[#811245] ring-2 ring-[#a01657]'
+                              : 'bg-emerald-950/80 border-[#00D632] ring-1 ring-[#00D632]'
                             : 'bg-slate-900 border-slate-800 hover:bg-slate-800/80'
                         }`}
                       >
                         <div className="text-xs font-black text-white flex items-center justify-between">
-                          <span>{cKey}</span>
-                          {isSel && <Check className="w-3.5 h-3.5 text-[#00D632]" />}
+                          <span className={isSkrill ? 'text-pink-300 font-extrabold flex items-center gap-1' : ''}>
+                            {isSkrill && <span className="w-2 h-2 rounded-full bg-[#811245] ring-1 ring-pink-400" />}
+                            {cKey}
+                          </span>
+                          {isSel && (
+                            <Check className={`w-3.5 h-3.5 ${isSkrill ? 'text-pink-400' : 'text-[#00D632]'}`} />
+                          )}
                         </div>
-                        <div className="text-[10px] text-slate-400 truncate mt-0.5">{gw.network.split(' ')[0]}</div>
+                        <div className="text-[10px] text-slate-400 truncate mt-0.5">
+                          {isSkrill ? 'Skrill E-Wallet' : gw.network.split(' ')[0]}
+                        </div>
                       </button>
                     );
                   })}
                 </div>
               </div>
 
-              {/* QR Code & Wallet Details Box */}
-              <div className="p-5 rounded-2xl bg-black/50 border border-slate-800 space-y-4">
+              {/* QR Code & Account/Wallet Details Box */}
+              <div className={`p-5 rounded-2xl border space-y-4 ${
+                isSelectedSkrill 
+                  ? 'bg-gradient-to-br from-[#200513] to-slate-950 border-[#811245]/70 shadow-lg shadow-[#811245]/20' 
+                  : 'bg-black/50 border border-slate-800'
+              }`}>
                 <div className="flex flex-col sm:flex-row items-center gap-5">
                   {/* Visual QR Code */}
                   <div
@@ -353,60 +376,103 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
 
                   {/* Payment specs */}
                   <div className="space-y-2 text-center sm:text-left flex-1 min-w-0">
-                    <div className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-900/60 text-emerald-300 border border-emerald-700/40">
+                    <div className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${
+                      isSelectedSkrill 
+                        ? 'bg-[#811245]/50 text-pink-200 border-[#a01657]' 
+                        : 'bg-emerald-900/60 text-emerald-300 border border-emerald-700/40'
+                    }`}>
                       {gateway.badge}
                     </div>
                     <div className="text-xs text-slate-300">
                       Amount to Send: <strong className="text-white font-black text-sm">${totalUsd} USD</strong>
                     </div>
-                    <div className="text-[11px] text-emerald-400 font-mono">
-                      Approx: {calculateCryptoAmount(selectedCrypto, totalUsd)}
+                    <div className={`text-[11px] font-mono font-bold ${
+                      isSelectedSkrill ? 'text-pink-300' : 'text-emerald-400'
+                    }`}>
+                      {calculateCryptoAmount(selectedCrypto, totalUsd)}
                     </div>
                     <div className="text-[11px] text-slate-400">
-                      Network: <strong className="text-slate-200">{gateway.network}</strong>
+                      Method: <strong className="text-slate-200">{gateway.network}</strong>
                     </div>
                   </div>
                 </div>
 
-                {/* Wallet Address Box with 1-click Copy */}
+                {/* Account Email / Wallet Address Box with 1-click Copy */}
                 <div className="space-y-1.5 pt-2">
                   <div className="flex items-center justify-between text-[11px] text-slate-400 font-medium">
-                    <span>Deposit Address ({selectedCrypto}):</span>
-                    {copied && <span className="text-[#00D632] font-bold flex items-center gap-1"><Check className="w-3 h-3" /> Copied to Clipboard</span>}
+                    <span>
+                      {isSelectedSkrill ? 'Official Recipient Skrill Email:' : `Deposit Address (${selectedCrypto}):`}
+                    </span>
+                    {copied && (
+                      <span className={`font-bold flex items-center gap-1 ${isSelectedSkrill ? 'text-pink-400' : 'text-[#00D632]'}`}>
+                        <Check className="w-3 h-3" /> {isSelectedSkrill ? 'Copied Skrill Email!' : 'Copied to Clipboard'}
+                      </span>
+                    )}
                   </div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-900 border border-slate-700 font-mono text-xs text-emerald-300 break-all">
+                  <div className={`flex items-center gap-2 p-3 rounded-xl border font-mono text-xs break-all ${
+                    isSelectedSkrill 
+                      ? 'bg-slate-900/90 border-[#811245] text-pink-200 font-bold' 
+                      : 'bg-slate-900 border-slate-700 text-emerald-300'
+                  }`}>
                     <span className="flex-1 select-all">{gateway.address}</span>
                     <button
-                      id="copy-wallet-address-btn"
+                      id={isSelectedSkrill ? "copy-skrill-email-btn" : "copy-wallet-address-btn"}
                       onClick={handleCopyAddress}
-                      className="p-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-black font-bold shrink-0 transition-all cursor-pointer"
-                      title="Copy Address"
+                      className={`p-2 rounded-lg font-bold shrink-0 transition-all cursor-pointer ${
+                        isSelectedSkrill
+                          ? 'bg-[#811245] hover:bg-[#a01657] text-white'
+                          : 'bg-emerald-600 hover:bg-emerald-500 text-black'
+                      }`}
+                      title={isSelectedSkrill ? "Copy Skrill Email" : "Copy Address"}
                     >
                       {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                     </button>
                   </div>
                 </div>
 
+                {isSelectedSkrill && (
+                  <div className="pt-1 flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-[11px] text-pink-200 font-semibold flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-ping" />
+                      Skrill to Skrill Email: <strong className="text-white">onlinespay247@gmail.com</strong>
+                    </span>
+                    <a
+                      href="https://account.skrill.com/wallet/account/login"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-[#811245] hover:bg-[#991552] text-white text-[11px] font-bold transition-colors"
+                    >
+                      <span>Open Skrill</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                )}
+
                 <div className="text-[11px] text-slate-400 italic">
                   {gateway.instruction}
                 </div>
               </div>
 
-              {/* TXID Input */}
+              {/* TXID / Reference Input */}
               <div className="space-y-2">
                 <label className="block text-xs font-bold text-slate-300">
-                  Enter Transaction Hash (TXID) or Sender Address <span className="text-red-400">*</span>
+                  {isSelectedSkrill 
+                    ? 'Enter Skrill Transaction ID / Reference Number or Sender Email ' 
+                    : 'Enter Transaction Hash (TXID) or Sender Address '}
+                  <span className="text-red-400">*</span>
                 </label>
                 <input
                   id="checkout-txid-input"
                   type="text"
-                  placeholder="e.g. 0x8f2c... or TSez... or btc txid"
+                  placeholder={isSelectedSkrill ? "e.g. 394829103 or your-skrill-email@domain.com" : "e.g. 0x8f2c... or TSez... or btc txid"}
                   value={txHash}
                   onChange={(e) => setTxHash(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white font-mono text-xs focus:outline-none focus:border-[#00D632] placeholder:text-slate-600"
                 />
                 <span className="text-[11px] text-slate-400 block">
-                  Paste the transaction hash from your wallet after broadcasting the payment.
+                  {isSelectedSkrill 
+                    ? 'Paste the Skrill transaction reference ID or sender email after sending payment.' 
+                    : 'Paste the transaction hash from your wallet after broadcasting the payment.'}
                 </span>
               </div>
 
@@ -425,13 +491,13 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
                   className="w-2/3 py-3 rounded-xl bg-gradient-to-r from-[#00A827] via-[#00D632] to-[#00FF44] hover:from-[#00B82B] text-black font-black text-xs sm:text-sm shadow-xl shadow-[#00D632]/25 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <CheckCircle2 className="w-4 h-4 stroke-[2.5]" />
-                  <span>I Have Transferred &bull; Verify</span>
+                  <span>I Have Sent Payment &bull; Verify</span>
                 </button>
               </div>
             </div>
           )}
 
-          {/* STEP 3: SIMULATED BLOCKCHAIN VERIFICATION */}
+          {/* STEP 3: SIMULATED VERIFICATION */}
           {step === 3 && (
             <div className="text-center py-10 space-y-6">
               <div className="relative w-20 h-20 mx-auto flex items-center justify-center">
@@ -443,10 +509,14 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
 
               <div className="space-y-2">
                 <h3 className="text-xl font-black text-white font-['Outfit',sans-serif]">
-                  Broadcasting &amp; Confirming on {selectedCrypto}...
+                  {selectedCrypto === 'SKRILL' 
+                    ? 'Verifying Skrill Payment Reference...' 
+                    : `Broadcasting & Confirming on ${selectedCrypto}...`}
                 </h3>
                 <p className="text-xs text-slate-400 max-w-md mx-auto">
-                  Connecting to node network. Verifying transaction hash and matching against order total of ${totalUsd} USD.
+                  {selectedCrypto === 'SKRILL'
+                    ? `Verifying Skrill transaction reference for recipient onlinespay247@gmail.com and matching against order total of $${totalUsd} USD.`
+                    : `Connecting to node network. Verifying transaction hash and matching against order total of $${totalUsd} USD.`}
                 </p>
               </div>
 
@@ -458,7 +528,7 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
                   />
                 </div>
                 <div className="text-[11px] text-emerald-400 font-mono font-bold">
-                  {verifyProgress}% - Synced with blockchain node
+                  {verifyProgress}% - {selectedCrypto === 'SKRILL' ? 'Matched with Skrill Gateway' : 'Synced with blockchain node'}
                 </div>
               </div>
             </div>
@@ -484,6 +554,12 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
 
               {/* Order Info Specs */}
               <div className="p-4 rounded-xl bg-black/40 border border-slate-800 space-y-2 text-xs">
+                <div className="flex justify-between border-b border-slate-800 pb-1.5">
+                  <span className="text-slate-400">Payment Gateway:</span>
+                  <span className="text-white font-bold">
+                    {confirmedOrder.cryptoCurrency === 'SKRILL' ? 'Skrill E-Wallet (onlinespay247@gmail.com)' : confirmedOrder.cryptoCurrency}
+                  </span>
+                </div>
                 <div className="flex justify-between border-b border-slate-800 pb-1.5">
                   <span className="text-slate-400">Delivery Target:</span>
                   <span className="text-white font-bold">{confirmedOrder.customerEmail}</span>
@@ -515,7 +591,7 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
 
                 <a
                   id="order-telegram-dispatch-btn"
-                  href={`${CONTACT_INFO.telegramUrl}?text=Hello,%20I%20just%20placed%20Order%20${confirmedOrder.orderId}%20on%20CashappAgent.%20Please%20expedite%20my%20delivery.`}
+                  href={`${CONTACT_INFO.telegramUrl}?text=Hello,%20I%20just%20placed%20Order%20${confirmedOrder.orderId}%20on%20CashappAgent.%20Payment%20Method:%20${confirmedOrder.cryptoCurrency}.%20Please%20expedite%20my%20delivery.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="py-3 px-4 rounded-xl bg-sky-900/60 hover:bg-sky-800/80 border border-sky-600/50 text-sky-200 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
