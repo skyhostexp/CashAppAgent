@@ -169,8 +169,8 @@ export const BulkOrderConfigurator: React.FC<BulkOrderConfiguratorProps> = ({ on
                       : 'bg-[#0c1217] border-slate-800/80 hover:border-slate-700'
                   }`}
                 >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
+                  <div className="space-y-1.5 flex-1 pr-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-sm font-black text-white font-['Outfit',sans-serif]">
                         {prod.name}
                       </span>
@@ -183,9 +183,23 @@ export const BulkOrderConfigurator: React.FC<BulkOrderConfiguratorProps> = ({ on
                           USD Only
                         </span>
                       )}
+                      {prod.tag && (
+                        <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-700/30">
+                          {prod.tag}
+                        </span>
+                      )}
                     </div>
-                    <div className="text-xs text-slate-400">
-                      Limit: <strong className="text-slate-200">{prod.limitDisplay}</strong> &bull; ${prod.price} each
+                    <p className="text-[11px] text-slate-400 leading-snug line-clamp-1">
+                      {prod.shortDesc}
+                    </p>
+                    <div className="flex items-center gap-3 text-xs text-slate-400 flex-wrap">
+                      <span>Limit: <strong className="text-slate-200 font-mono">{prod.limitDisplay}</strong></span>
+                      <span>Unit: <strong className="text-white font-mono">${prod.price}</strong></span>
+                      {prod.tags && prod.tags.length > 0 && (
+                        <span className="text-[10px] text-slate-500 font-medium">
+                          #{prod.tags[0].replace(/\s+/g, '-')}
+                        </span>
+                      )}
                     </div>
                   </div>
 

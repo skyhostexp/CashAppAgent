@@ -103,7 +103,9 @@ export function getSeoMetadata(page: PageView): SeoMetaTags {
               item: {
                 '@type': 'Product',
                 name: prod.name,
-                description: prod.shortDesc,
+                description: prod.description,
+                disambiguatingDescription: prod.shortDesc,
+                keywords: `${prod.focusKeyword}, ${prod.tags.join(', ')}`,
                 url: `${SITE_ORIGIN}/${prod.btcEnabled ? 'buy-btc-enabled-cashapp-accounts' : 'buy-non-btc-cashapp-accounts'}#${prod.id}`,
                 brand: { '@type': 'Brand', name: 'CashappAgent' },
                 offers: {

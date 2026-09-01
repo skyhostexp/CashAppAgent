@@ -21,9 +21,12 @@ export interface AccountProduct {
   limitDisplay: string;
   limitValue: number;
   btcEnabled: boolean;
-  tag?: string;
+  tag?: string; // Product Primary Tag (e.g. 'Popular Starter', 'Best Value')
+  tags: string[]; // Product Tags array (e.g. ['BTC Enabled', '4k Limit', 'SSN Verified', 'Aged US Account'])
+  focusKeyword: string; // Product Focus Keyword for SEO & catalog classification
+  shortDesc: string; // Product Short Description
+  description: string; // Product Full Description
   isPopular?: boolean;
-  shortDesc: string;
   features: string[];
   specs: {
     dailyLimit: string;
