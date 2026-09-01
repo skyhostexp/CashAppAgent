@@ -95,6 +95,97 @@ export const CRYPTO_GATEWAYS: Record<CryptoCurrency, CryptoGateway> = {
     badge: 'Official Skrill Account • Instant Transfer',
     instruction: 'Send USD to our verified Skrill account email: onlinespay247@gmail.com. In transaction note/reference, include your delivery email.',
     type: 'fiat-wallet'
+  },
+  BANK_USD_ACH: {
+    id: 'BANK_USD_ACH',
+    name: 'Bank Transfer (USA Domestic ACH & Wire)',
+    network: 'US Domestic ACH / FedWire',
+    address: '30000002977421',
+    rateUsd: 1.0,
+    iconColor: '#0070BA',
+    badge: 'USA Domestic Bank • ACH (028000024) / Wire (021000021)',
+    instruction: 'Transfer USD via domestic ACH or FedWire to Md Sayrul Islam at JP Morgan Chase NA. Include your delivery email or Order ID in the reference note.',
+    type: 'bank-transfer',
+    bankDetails: {
+      accountTitle: 'Md Sayrul Islam',
+      accountType: 'Checking',
+      currency: 'USD',
+      accountNumber: '30000002977421',
+      routingAch: '028000024',
+      routingWire: '021000021',
+      bankName: 'JP Morgan Chase NA',
+      bankAddress: '270 Park Avenue, New York, NY 10017, US',
+      notes: 'Routing 028000024 is for domestic ACH; Routing 021000021 is for domestic Wire transfers.'
+    }
+  },
+  BANK_USD_SWIFT: {
+    id: 'BANK_USD_SWIFT',
+    name: 'Bank Transfer (International SWIFT USD)',
+    network: 'SWIFT International Wire',
+    address: 'GB77 CLRB 0428 1200 0776 25',
+    rateUsd: 1.0,
+    iconColor: '#0A84FF',
+    badge: 'International SWIFT Wire • Clear Bank & JPMorgan Chase',
+    instruction: 'Send international USD SWIFT wire to Md Sayrul Islam at Clear Bank / JPMorgan Chase Bank, N.A. using IBAN GB77 CLRB 0428 1200 0776 25 and SWIFT/BIC CLRBGB22XXX.',
+    type: 'bank-transfer',
+    bankDetails: {
+      accountTitle: 'Md Sayrul Islam',
+      accountType: 'Checking (Current)',
+      currency: 'USD',
+      iban: 'GB77 CLRB 0428 1200 0776 25',
+      swiftBic: 'CLRBGB22XXX',
+      sortCode: '042812',
+      bankName: 'Clear Bank',
+      bankAddress: 'Borough Yards, 13 Dirty Lane, London, SE1 9PA, UK',
+      partnerBankName: 'JPMorgan Chase Bank, N.A.',
+      partnerBankAddress: 'New York, USA',
+      partnerSwiftBic: 'CHASUS33',
+      notes: 'SWIFT/BIC CLRBGB22XXX is only used for international SWIFT transfers.'
+    }
+  },
+  BANK_EUR: {
+    id: 'BANK_EUR',
+    name: 'Bank Transfer (Euro SEPA / Clear Bank)',
+    network: 'SEPA / Euro Bank Transfer',
+    address: 'GB36CLRB04281271577257',
+    rateUsd: 1.08,
+    iconColor: '#003399',
+    badge: 'EUR SEPA Transfer • Clear Bank London',
+    instruction: 'Send EUR SEPA payment to Md Sayrul Islam using IBAN GB36CLRB04281271577257 and BIC CLRBGB22XXX at Clear Bank London.',
+    type: 'bank-transfer',
+    bankDetails: {
+      accountTitle: 'Md Sayrul Islam',
+      accountType: 'Checking (Current)',
+      currency: 'EUR',
+      iban: 'GB36CLRB04281271577257',
+      swiftBic: 'CLRBGB22XXX',
+      accountNumber: '71577257',
+      sortCode: '042812',
+      bankName: 'Clear Bank (Based in GB)',
+      bankAddress: '133 Houndsditch, LONDON, EC3A 7BX'
+    }
+  },
+  BANK_GBP: {
+    id: 'BANK_GBP',
+    name: 'Bank Transfer (UK Faster Payments / GBP)',
+    network: 'UK Faster Payments / BACS',
+    address: 'GB73CLRB04097200937068',
+    rateUsd: 1.28,
+    iconColor: '#C8102E',
+    badge: 'UK Faster Payments & BACS • Sort: 040972',
+    instruction: 'Send GBP transfer via UK Faster Payments to Md Sayrul Islam. Sort Code: 040972, Account Number: 00937068, Bank: Clear Bank London.',
+    type: 'bank-transfer',
+    bankDetails: {
+      accountTitle: 'Md Sayrul Islam',
+      accountType: 'Checking (Current)',
+      currency: 'GBP',
+      iban: 'GB73CLRB04097200937068',
+      swiftBic: 'CLRBGB22XXX',
+      accountNumber: '00937068',
+      sortCode: '040972',
+      bankName: 'Clear Bank (Based in GB)',
+      bankAddress: '133 Houndsditch, LONDON, EC3A 7BX'
+    }
   }
 };
 
@@ -161,8 +252,8 @@ export const FAQS: FaqItem[] = [
   {
     id: 'faq-3',
     category: 'Payments',
-    question: 'How do the Crypto & Skrill Payment Gateways work?',
-    answer: 'We process payments via leading cryptocurrencies (BSC, TRX, ETH, SOL, BTC, LTC, DOGE) as well as Skrill E-Wallet (onlinespay247@gmail.com) for maximum privacy, speed, and security. For Crypto, simply scan the generated QR code or copy our official wallet address, send the exact amount, and provide your TXID. For Skrill, send USD to onlinespay247@gmail.com and enter your transaction reference number. Our automated dispatch system prepares your account credentials within 5-15 minutes.'
+    question: 'How do the Crypto, Skrill, & Bank Transfer payment gateways work?',
+    answer: 'We process payments via leading Cryptocurrencies (BSC, TRX, ETH, SOL, BTC, LTC, DOGE), Skrill E-Wallet (onlinespay247@gmail.com), and Direct Bank Transfers (USA Domestic ACH & Wire, International SWIFT USD, Euro SEPA, and UK Faster Payments/GBP). For Crypto, send exact coins or USDT to our official address and provide your TXID. For Skrill, transfer to onlinespay247@gmail.com and input your reference. For Bank Transfers, use our provided bank details for Md Sayrul Islam and enter your transfer reference. Automated credential dispatch takes only 5-15 minutes.'
   },
   {
     id: 'faq-4',

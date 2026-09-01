@@ -36,7 +36,37 @@ export interface AccountProduct {
   };
 }
 
-export type CryptoCurrency = 'BSC' | 'TRX' | 'ETH' | 'SOL' | 'BTC' | 'LTC' | 'DOGE' | 'SKRILL';
+export type CryptoCurrency = 
+  | 'BSC' 
+  | 'TRX' 
+  | 'ETH' 
+  | 'SOL' 
+  | 'BTC' 
+  | 'LTC' 
+  | 'DOGE' 
+  | 'SKRILL'
+  | 'BANK_USD_ACH'
+  | 'BANK_USD_SWIFT'
+  | 'BANK_EUR'
+  | 'BANK_GBP';
+
+export interface BankTransferDetails {
+  accountTitle: string;
+  accountType: string;
+  currency: 'USD' | 'EUR' | 'GBP';
+  iban?: string;
+  swiftBic?: string;
+  sortCode?: string;
+  accountNumber?: string;
+  routingAch?: string;
+  routingWire?: string;
+  bankName: string;
+  bankAddress: string;
+  partnerBankName?: string;
+  partnerBankAddress?: string;
+  partnerSwiftBic?: string;
+  notes?: string;
+}
 
 export interface CryptoGateway {
   id: CryptoCurrency;
@@ -48,7 +78,8 @@ export interface CryptoGateway {
   badge: string;
   memoRequired?: boolean;
   instruction: string;
-  type?: 'crypto' | 'fiat-wallet';
+  type?: 'crypto' | 'fiat-wallet' | 'bank-transfer';
+  bankDetails?: BankTransferDetails;
 }
 
 export interface CartItem {
