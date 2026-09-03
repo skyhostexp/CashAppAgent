@@ -93,37 +93,40 @@ function recordLocalEvent(name: string, params: Record<string, any>): void {
 export function initGoogleAnalytics(customId?: string): void {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
-  const gaId = customId || getActiveMeasurementId();
+  try {
+    const gaId = customId || getActiveMeasurementId();
 
-  // Initialize dataLayer
-  window.dataLayer = window.dataLayer || [];
-  if (!window.gtag) {
-    window.gtag = function () {
-      window.dataLayer.push(arguments);
-    };
-  }
+    // Initialize dataLayer safely
+    window.dataLayer = window.dataLayer || [];
+    if (!window.gtag) {
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+    }
 
-  // Check if GTAG script is already present
-  const existingScript = document.getElementById('google-analytics-gtag');
-  if (!existingScript) {
-    const script = document.createElement('script');
-    script.id = 'google-analytics-gtag';
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-    document.head.appendChild(script);
+    // Check if GTAG script is already present
+    const existingScript = document.getElementById('google-analytics-gtag');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.id = 'google-analytics-gtag';
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+      document.head.appendChild(script);
 
-    window.gtag('js', new Date());
-    window.gtag('config', gaId, {
-      send_page_view: false, // Managed manually for SPA route changes
-      site_speed_sample_rate: 100,
-      cookie_flags: 'SameSite=None;Secure',
-    });
-  } else {
-    // Reconfigure existing tag if ID changed
-    existingScript.setAttribute('src', `https://www.googletagmanager.com/gtag/js?id=${gaId}`);
-    window.gtag('config', gaId, {
-      send_page_view: false,
-    });
+      window.gtag('js', new Date());
+      window.gtag('config', gaId, {
+        send_page_view: false, // Managed manually for SPA route changes
+        site_speed_sample_rate: 100,
+      });
+    } else {
+      // Reconfigure existing tag if ID changed
+      existingScript.setAttribute('src', `https://www.googletagmanager.com/gtag/js?id=${gaId}`);
+      window.gtag('config', gaId, {
+        send_page_view: false,
+      });
+    }
+  } catch {
+    // Gracefully handle browser/network blockages
   }
 }
 
@@ -133,24 +136,28 @@ export function initGoogleAnalytics(customId?: string): void {
 export function trackPageView(pagePath: string, pageTitle?: string): void {
   if (typeof window === 'undefined') return;
 
-  const gaId = getActiveMeasurementId();
-  const title = pageTitle || document.title || 'CashappAgent';
-  const location = window.location.href;
+  try {
+    const gaId = getActiveMeasurementId();
+    const title = pageTitle || document.title || 'CashappAgent';
+    const location = window.location.href;
 
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', 'page_view', {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'page_view', {
+        page_title: title,
+        page_location: location,
+        page_path: pagePath,
+        send_to: gaId,
+      });
+    }
+
+    recordLocalEvent('page_view', {
+      page_path: pagePath,
       page_title: title,
       page_location: location,
-      page_path: pagePath,
-      send_to: gaId,
     });
+  } catch {
+    // safe fallback
   }
-
-  recordLocalEvent('page_view', {
-    page_path: pagePath,
-    page_title: title,
-    page_location: location,
-  });
 }
 
 /**
@@ -159,16 +166,20 @@ export function trackPageView(pagePath: string, pageTitle?: string): void {
 export function trackEvent(eventName: string, eventParams: Record<string, any> = {}): void {
   if (typeof window === 'undefined') return;
 
-  const gaId = getActiveMeasurementId();
+  try {
+    const gaId = getActiveMeasurementId();
 
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', eventName, {
-      ...eventParams,
-      send_to: gaId,
-    });
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, {
+        ...eventParams,
+        send_to: gaId,
+      });
+    }
+
+    recordLocalEvent(eventName, eventParams);
+  } catch {
+    // safe fallback
   }
-
-  recordLocalEvent(eventName, eventParams);
 }
 
 /**

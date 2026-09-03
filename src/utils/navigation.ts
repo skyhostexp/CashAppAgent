@@ -91,96 +91,56 @@ export const PAGE_ROUTES: Record<PageView, PageRouteInfo> = {
 };
 
 /**
- * Determine page from pathname or hash. If path or hash is not recognized, return 'not-found' (404).
+ * Determine page from pathname or hash. If path or hash is not recognized, safely defaults to 'home'.
  */
 export function getPageFromLocation(): PageView {
   if (typeof window === 'undefined') return 'home';
 
-  let rawPath = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
-  const rawHash = window.location.hash.toLowerCase().replace(/^#\/?/, '').replace(/\/$/, '');
+  try {
+    let rawPath = (window.location.pathname || '/').toLowerCase().replace(/\/$/, '') || '/';
+    const rawHash = (window.location.hash || '').toLowerCase().replace(/^#\/?/, '').replace(/\/$/, '');
 
-  // Support SPA redirect query parameters (e.g. /?/some-page)
-  if (window.location.search && window.location.search.startsWith('?/')) {
-    const queryPath = window.location.search.slice(1).split('&')[0];
-    if (queryPath) {
-      rawPath = ('/' + queryPath.replace(/^\//, '')).toLowerCase().replace(/\/$/, '');
+    // Support SPA redirect query parameters (e.g. /?/some-page)
+    if (window.location.search && window.location.search.startsWith('?/')) {
+      const queryPath = window.location.search.slice(1).split('&')[0];
+      if (queryPath) {
+        rawPath = ('/' + queryPath.replace(/^\//, '')).toLowerCase().replace(/\/$/, '');
+      }
     }
-  }
 
-  // Explicit 404 / not-found checks
-  if (rawPath === '/404' || rawPath === '/not-found' || rawHash === '404' || rawHash === 'not-found') {
-    return 'not-found';
-  }
-
-  // Known root or empty path
-  const isRoot = rawPath === '' || rawPath === '/' || rawPath === '/index.html';
-
-  // Check pathname routes
-  if (rawPath === '/blog') return 'blog';
-  if (rawPath === '/buy-verified-cashapp-accounts' || rawPath === '/accounts' || rawPath === '/all-accounts') return 'all-accounts';
-  if (rawPath === '/buy-btc-enabled-cashapp-accounts' || rawPath === '/btc-accounts' || rawPath === '/btc') return 'btc-accounts';
-  if (rawPath === '/buy-non-btc-cashapp-accounts' || rawPath === '/non-btc-accounts' || rawPath === '/non-btc') return 'non-btc-accounts';
-  if (rawPath === '/safety-guide' || rawPath === '/safety') return 'safety-guide';
-  if (rawPath === '/bulk-orders' || rawPath === '/bulk') return 'bulk-orders';
-  if (rawPath === '/faq' || rawPath === '/help') return 'faq';
-  if (rawPath === '/contact' || rawPath === '/support') return 'contact';
-  if (rawPath === '/sitemap' || rawPath === '/sitemap.html' || rawPath === '/sitemap_index' || rawPath === '/sitemap_index.html') return 'sitemap';
-
-  // If path is not root and did not match any known route above, show 404
-  if (!isRoot) {
-    return 'not-found';
-  }
-
-  // If at root path, check hash
-  if (rawHash) {
-    if (rawHash === 'blog') return 'blog';
-    if (['buy-verified-cashapp-accounts', 'all-accounts', 'accounts', 'catalog'].includes(rawHash)) return 'all-accounts';
-    if (['buy-btc-enabled-cashapp-accounts', 'btc-accounts', 'btc-enabled', 'btc'].includes(rawHash)) return 'btc-accounts';
-    if (['buy-non-btc-cashapp-accounts', 'non-btc-accounts', 'non-btc'].includes(rawHash)) return 'non-btc-accounts';
-    if (['safety-guide', 'safety'].includes(rawHash)) return 'safety-guide';
-    if (['bulk-orders', 'bulk'].includes(rawHash)) return 'bulk-orders';
-    if (['faq', 'help'].includes(rawHash)) return 'faq';
-    if (['contact', 'support'].includes(rawHash)) return 'contact';
-    if (['sitemap', 'sitemap.html', 'sitemap_index', 'sitemap_index.html'].includes(rawHash)) return 'sitemap';
-
-    // Allowed in-page anchor IDs on homepage and catalog targets
-    const homeSectionAnchors = [
-      '',
-      'home',
-      'hero',
-      'accounts',
-      'products',
-      'calculator',
-      'virtual-preview',
-      'comparison',
-      'rates',
-      'warmup',
-      'agency',
-      'bulk',
-      'features',
-      'article',
-      'reviews',
-      'testimonials',
-      'faq-section',
-      'contact-section',
-      'btc-4k',
-      'btc-10k',
-      'btc-25k',
-      'non-btc-4k',
-      'non-btc-10k',
-      'non-btc-15k',
-      'tier-starter',
-      'tier-scaling',
-      'tier-enterprise'
-    ];
-
-    if (!homeSectionAnchors.includes(rawHash)) {
-      // Unrecognized anchor/hash on website -> show 404
+    // Explicit 404 / not-found checks
+    if (rawPath === '/404' || rawPath === '/not-found' || rawHash === '404' || rawHash === 'not-found') {
       return 'not-found';
     }
-  }
 
-  return 'home';
+    // Check pathname routes
+    if (rawPath === '/blog' || rawPath.endsWith('/blog')) return 'blog';
+    if (rawPath.includes('buy-verified-cashapp-accounts') || rawPath.includes('all-accounts')) return 'all-accounts';
+    if (rawPath.includes('buy-btc-enabled-cashapp-accounts') || rawPath.includes('btc-accounts')) return 'btc-accounts';
+    if (rawPath.includes('buy-non-btc-cashapp-accounts') || rawPath.includes('non-btc-accounts')) return 'non-btc-accounts';
+    if (rawPath.includes('safety-guide') || rawPath.includes('safety')) return 'safety-guide';
+    if (rawPath.includes('bulk-orders') || rawPath.includes('bulk')) return 'bulk-orders';
+    if (rawPath.includes('faq') || rawPath.includes('help')) return 'faq';
+    if (rawPath.includes('contact') || rawPath.includes('support')) return 'contact';
+    if (rawPath.includes('sitemap')) return 'sitemap';
+
+    // Check hash routes
+    if (rawHash) {
+      if (rawHash === 'blog') return 'blog';
+      if (['buy-verified-cashapp-accounts', 'all-accounts', 'accounts', 'catalog'].includes(rawHash)) return 'all-accounts';
+      if (['buy-btc-enabled-cashapp-accounts', 'btc-accounts', 'btc-enabled', 'btc'].includes(rawHash)) return 'btc-accounts';
+      if (['buy-non-btc-cashapp-accounts', 'non-btc-accounts', 'non-btc'].includes(rawHash)) return 'non-btc-accounts';
+      if (['safety-guide', 'safety'].includes(rawHash)) return 'safety-guide';
+      if (['bulk-orders', 'bulk'].includes(rawHash)) return 'bulk-orders';
+      if (['faq', 'help'].includes(rawHash)) return 'faq';
+      if (['contact', 'support'].includes(rawHash)) return 'contact';
+      if (['sitemap', 'sitemap.html', 'sitemap_index', 'sitemap_index.html'].includes(rawHash)) return 'sitemap';
+    }
+
+    return 'home';
+  } catch {
+    return 'home';
+  }
 }
 
 /**

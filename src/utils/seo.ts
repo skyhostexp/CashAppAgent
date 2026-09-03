@@ -473,64 +473,68 @@ export function getSeoMetadata(page: PageView): SeoMetaTags {
 export function applySeoMetadata(page: PageView): void {
   if (typeof document === 'undefined') return;
 
-  const meta = getSeoMetadata(page);
+  try {
+    const meta = getSeoMetadata(page);
 
-  // Update Page Title
-  document.title = meta.title;
+    // Update Page Title
+    document.title = meta.title;
 
-  // Helper function to update or create meta tag
-  const setMetaTag = (attrName: string, attrVal: string, content: string) => {
-    let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-    if (!el) {
-      el = document.createElement('meta');
-      el.setAttribute(attrName, attrVal);
-      document.head.appendChild(el);
+    // Helper function to update or create meta tag
+    const setMetaTag = (attrName: string, attrVal: string, content: string) => {
+      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attrName, attrVal);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    };
+
+    // Standard Meta Tags
+    setMetaTag('name', 'description', meta.description);
+    setMetaTag('name', 'keywords', meta.keywords);
+    setMetaTag('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+
+    // Open Graph Meta Tags
+    setMetaTag('property', 'og:title', meta.ogTitle);
+    setMetaTag('property', 'og:description', meta.ogDescription);
+    setMetaTag('property', 'og:url', meta.ogUrl);
+    setMetaTag('property', 'og:type', meta.ogType);
+    setMetaTag('property', 'og:site_name', 'CashappAgent');
+    setMetaTag('property', 'og:image', `${SITE_ORIGIN}/favicon.svg`);
+
+    // Twitter Meta Tags
+    setMetaTag('property', 'twitter:title', meta.twitterTitle);
+    setMetaTag('property', 'twitter:description', meta.twitterDescription);
+    setMetaTag('property', 'twitter:url', meta.ogUrl);
+    setMetaTag('property', 'twitter:card', 'summary_large_image');
+    setMetaTag('property', 'twitter:image', `${SITE_ORIGIN}/favicon.svg`);
+
+    // Canonical Link Tag
+    let canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (!canonicalEl) {
+      canonicalEl = document.createElement('link');
+      canonicalEl.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalEl);
     }
-    el.setAttribute('content', content);
-  };
+    canonicalEl.setAttribute('href', meta.canonical);
 
-  // Standard Meta Tags
-  setMetaTag('name', 'description', meta.description);
-  setMetaTag('name', 'keywords', meta.keywords);
-  setMetaTag('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    // Update Schema.org JSON-LD Script
+    let jsonLdEl = document.getElementById('rankmath-jsonld-schema');
+    if (!jsonLdEl) {
+      jsonLdEl = document.createElement('script');
+      jsonLdEl.setAttribute('type', 'application/ld+json');
+      jsonLdEl.setAttribute('id', 'rankmath-jsonld-schema');
+      document.head.appendChild(jsonLdEl);
+    }
 
-  // Open Graph Meta Tags
-  setMetaTag('property', 'og:title', meta.ogTitle);
-  setMetaTag('property', 'og:description', meta.ogDescription);
-  setMetaTag('property', 'og:url', meta.ogUrl);
-  setMetaTag('property', 'og:type', meta.ogType);
-  setMetaTag('property', 'og:site_name', 'CashappAgent');
-  setMetaTag('property', 'og:image', `${SITE_ORIGIN}/favicon.svg`);
+    const structuredDataGraph = {
+      '@context': 'https://schema.org',
+      '@graph': meta.jsonLd,
+    };
 
-  // Twitter Meta Tags
-  setMetaTag('property', 'twitter:title', meta.twitterTitle);
-  setMetaTag('property', 'twitter:description', meta.twitterDescription);
-  setMetaTag('property', 'twitter:url', meta.ogUrl);
-  setMetaTag('property', 'twitter:card', 'summary_large_image');
-  setMetaTag('property', 'twitter:image', `${SITE_ORIGIN}/favicon.svg`);
-
-  // Canonical Link Tag
-  let canonicalEl = document.querySelector('link[rel="canonical"]');
-  if (!canonicalEl) {
-    canonicalEl = document.createElement('link');
-    canonicalEl.setAttribute('rel', 'canonical');
-    document.head.appendChild(canonicalEl);
+    jsonLdEl.textContent = JSON.stringify(structuredDataGraph, null, 2);
+  } catch {
+    // safe fallback
   }
-  canonicalEl.setAttribute('href', meta.canonical);
-
-  // Update Schema.org JSON-LD Script
-  let jsonLdEl = document.getElementById('rankmath-jsonld-schema');
-  if (!jsonLdEl) {
-    jsonLdEl = document.createElement('script');
-    jsonLdEl.setAttribute('type', 'application/ld+json');
-    jsonLdEl.setAttribute('id', 'rankmath-jsonld-schema');
-    document.head.appendChild(jsonLdEl);
-  }
-
-  const structuredDataGraph = {
-    '@context': 'https://schema.org',
-    '@graph': meta.jsonLd,
-  };
-
-  jsonLdEl.textContent = JSON.stringify(structuredDataGraph, null, 2);
 }
