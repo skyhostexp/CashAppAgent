@@ -49,6 +49,31 @@ export const CryptoCheckoutModal: React.FC<CryptoCheckoutModalProps> = ({
   const [confirmedOrder, setConfirmedOrder] = useState<OrderDetails | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
 
+  // Reset modal state for fresh ordering
+  const resetModalState = () => {
+    setStep(1);
+    setTxHash('');
+    setConfirmedOrder(null);
+    setErrorMsg('');
+    setIsVerifying(false);
+    setVerifyProgress(0);
+    setCopiedField(null);
+  };
+
+  const handleClose = () => {
+    resetModalState();
+    onClose();
+  };
+
+  // Whenever modal opens afresh, reset if it was left on completed step
+  useEffect(() => {
+    if (isOpen) {
+      if (step === 4 || confirmedOrder) {
+        resetModalState();
+      }
+    }
+  }, [isOpen]);
+
   const totalUsd = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const gateway = CRYPTO_GATEWAYS[selectedCrypto];
 
@@ -262,7 +287,14 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
   const bankKeys: CryptoCurrency[] = ['BANK_USD_ACH', 'BANK_USD_SWIFT', 'BANK_EUR', 'BANK_GBP'];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          handleClose();
+        }
+      }}
+    >
       <div className="relative w-full max-w-2xl bg-[#0e151c] border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-8 animate-in fade-in zoom-in-95">
         {/* Header Strip */}
         <div className="bg-gradient-to-r from-emerald-950 via-[#0d2217] to-slate-900 px-6 py-4 border-b border-emerald-800/40 flex items-center justify-between">
@@ -282,7 +314,7 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
           </div>
 
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="p-2 rounded-xl bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
@@ -991,9 +1023,21 @@ Need urgent dispatch? Message us on Telegram: ${CONTACT_INFO.telegram}
                 </a>
               </div>
 
-              <div className="text-center pt-2">
+              {/* Order Again Primary Action */}
+              <button
+                id="order-more-accounts-btn"
+                type="button"
+                onClick={handleClose}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00A827] via-[#00D632] to-[#00FF44] hover:from-[#00B82B] text-black font-black text-sm shadow-xl shadow-[#00D632]/25 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Zap className="w-4 h-4 fill-black" />
+                <span>Order More Accounts / Place Another Order</span>
+              </button>
+
+              <div className="text-center pt-1">
                 <button
-                  onClick={onClose}
+                  type="button"
+                  onClick={handleClose}
                   className="text-xs text-slate-400 hover:text-white underline cursor-pointer"
                 >
                   Close &amp; Return to Store
