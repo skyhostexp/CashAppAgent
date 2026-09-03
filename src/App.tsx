@@ -34,8 +34,15 @@ import { ContactPage } from './components/pages/ContactPage';
 import { SitemapPage } from './components/pages/SitemapPage';
 import { NotFoundPage } from './components/pages/NotFoundPage';
 
-import { getPageFromLocation, setBrowserPage } from './utils/navigation';
+import { getPageFromLocation, setBrowserPage, PAGE_ROUTES } from './utils/navigation';
 import { applySeoMetadata } from './utils/seo';
+import { 
+  initGoogleAnalytics, 
+  trackPageView, 
+  trackAddToCart, 
+  trackBeginCheckout, 
+  trackPurchase 
+} from './utils/analytics';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageView>(() => getPageFromLocation());
@@ -43,9 +50,16 @@ export default function App() {
   const [targetLoadingPage, setTargetLoadingPage] = useState<PageView>(currentPage);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
-  // Dynamically update Rank Math SEO metadata, titles, canonicals, OpenGraph & JSON-LD
+  // Initialize Google Analytics on mount
+  useEffect(() => {
+    initGoogleAnalytics();
+  }, []);
+
+  // Dynamically update Rank Math SEO metadata, titles, canonicals, OpenGraph & JSON-LD + Google Analytics Page Views
   useEffect(() => {
     applySeoMetadata(currentPage);
+    const route = PAGE_ROUTES[currentPage] || PAGE_ROUTES.home;
+    trackPageView(route.path, document.title);
   }, [currentPage]);
 
   const [selectedCategory, setSelectedCategory] = useState<'all' | AccountCategory>('all');
@@ -110,6 +124,7 @@ export default function App() {
   const totalCartAmount = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
 
   const handleAddToCart = (product: AccountProduct) => {
+    trackAddToCart(product, 1);
     setCart((prev) => {
       const exists = prev.find((i) => i.product.id === product.id);
       if (exists) {
@@ -137,17 +152,21 @@ export default function App() {
   };
 
   const handleBuyNow = (product: AccountProduct) => {
-    setCheckoutItems([{ product, quantity: 1 }]);
+    const items = [{ product, quantity: 1 }];
+    trackBeginCheckout(items, product.price);
+    setCheckoutItems(items);
     setIsCheckoutOpen(true);
   };
 
   const handleProceedCartToCheckout = () => {
     if (cart.length === 0) return;
+    trackBeginCheckout(cart, totalCartAmount);
     setCheckoutItems([...cart]);
     setIsCheckoutOpen(true);
   };
 
   const handleOrderCreated = (order: OrderDetails) => {
+    trackPurchase(order);
     setSavedOrders((prev) => [order, ...prev]);
     setCart([]);
   };

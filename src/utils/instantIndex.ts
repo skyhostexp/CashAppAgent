@@ -294,3 +294,30 @@ export async function pingSearchEngineSitemap(
   saveIndexingLog(logEntry);
   return logEntry;
 }
+
+/**
+ * Master Indexing Helper: Submits all canonical URLs and sitemaps across Google and IndexNow simultaneously
+ */
+export async function submitAllToSearchEngines(): Promise<{
+  googleEntry: IndexLogEntry;
+  indexNowEntry: IndexLogEntry;
+  googlePing: IndexLogEntry;
+  bingPing: IndexLogEntry;
+  totalUrls: number;
+}> {
+  const [googleEntry, indexNowEntry, googlePing, bingPing] = await Promise.all([
+    submitToGoogleIndexingApi(ALL_CANONICAL_URLS, 'URL_UPDATED'),
+    submitToIndexNow(ALL_CANONICAL_URLS),
+    pingSearchEngineSitemap('google'),
+    pingSearchEngineSitemap('bing'),
+  ]);
+
+  return {
+    googleEntry,
+    indexNowEntry,
+    googlePing,
+    bingPing,
+    totalUrls: ALL_CANONICAL_URLS.length,
+  };
+}
+

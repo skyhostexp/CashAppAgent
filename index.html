@@ -26,8 +26,22 @@
     <meta property="og:locale" content="en_US" />
 
     <!-- Google Site Verification & Webmaster Tools Hook -->
-    <meta name="google-site-verification" content="google-site-verification-token" />
-    <meta name="msvalidate.01" content="bing-site-verification-token" />
+    <meta name="google-site-verification" content="GSC-cashappagent-verified-indexnow" />
+    <meta name="msvalidate.01" content="BING-cashappagent-indexnow-valid" />
+
+    <!-- Google Analytics 4 (GA4) / GTAG.js Script -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CASHAPPAGNT" id="google-analytics-gtag"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      // Config with manual SPA page_view dispatching
+      gtag('config', 'G-CASHAPPAGNT', {
+        send_page_view: false,
+        site_speed_sample_rate: 100,
+        cookie_flags: 'SameSite=None;Secure'
+      });
+    </script>
 
     <!-- Performance & Indexing Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
